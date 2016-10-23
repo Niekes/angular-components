@@ -1,3 +1,5 @@
+'use strict';
+
 app.controller('masterCtrl', function($scope){
-    $scope.test = 'Hello World!!';
+    console.log('WORKS');
 });

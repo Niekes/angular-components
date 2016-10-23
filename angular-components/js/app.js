@@ -9,8 +9,9 @@ app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
     .state('home', {
         url: '/',
+        controller: 'masterCtrl',
         templateUrl: 'partials/home.html',
-        data : { pageTitle: 'Home' }
+        data : { pageTitle: 'Home' },
     });
 });
 
