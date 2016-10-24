@@ -29,7 +29,7 @@ gulp.task('scripts', function(){
 //-------------------------------------------------
 // HTML
 //-------------------------------------------------
-var htmlSrc = ['index.html', 'partials/**/*.html'];
+var htmlSrc = ['index.html', 'partials/**/*.html', 'templates/**/*.html'];
 gulp.task('html', function(){
     gulp.src(htmlSrc)
     .pipe(livereload());

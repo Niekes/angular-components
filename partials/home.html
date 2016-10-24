@@ -1,1 +1,6 @@
-test
+<ul>
+	<li data-ng-repeat="site in homeCtrl.sites">
+		<a href="/#/{{site.name | lowercase}}"><span data-ng-bind="site.name"></span></a>
+		<em><span data-ng-bind="site.description"></span></em>
+	</li>
+</ul>
