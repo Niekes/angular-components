@@ -5,7 +5,7 @@ app.controller('switchCtrl', function(){
 
     this.switchOptions = { 
     	// add inner text here 
-    	activated: '', 
-    	desactivated: '' 
+    	// activated: 'ON', 
+    	// desactivated: 'OFF' 
     };
 });

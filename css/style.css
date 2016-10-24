@@ -1,4 +1,17 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,900);
+* {
+  font-family: 'Helvetica Neue'; }
+
+nav ul {
+  padding: 0;
+  list-style: none;
+  text-transform: uppercase; }
+  nav ul li {
+    display: inline; }
+    nav ul li a {
+      text-decoration: none; }
+      nav ul li a:hover {
+        color: teal; }
+
 label.toggle {
   font-family: sans-serif;
   text-transform: uppercase;
