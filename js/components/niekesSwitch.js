@@ -4,7 +4,7 @@ app.component('niekesSwitch', {
 	bindings: {
     	options: '='
   	},
-  	templateUrl: 'https://niekes.github.io/angular-components/templates/niekes-switch.html',
+  	templateUrl: './templates/niekes-switch.html',
   	controllerAs: 'niekesSwitchCtrl',
 	controller: function(){
 
