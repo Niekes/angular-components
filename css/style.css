@@ -56,3 +56,46 @@ label.toggle {
         left: 5px; }
       label.toggle input:checked + .toggle-control:after {
         left: 2.5em; }
+
+div.blurElement {
+  height: 1000px;
+  width: 100%;
+  background-image: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  position: relative; }
+
+div.blurElementTemplate {
+  box-shadow: 0px 5px 10px #0f0802;
+  color: white;
+  height: 60px;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  overflow: hidden; }
+  div.blurElementTemplate div.blurElementTemplateInside {
+    position: relative;
+    z-index: 2;
+    background-color: transparent; }
+    div.blurElementTemplate div.blurElementTemplateInside ul {
+      margin: 0;
+      padding: 5px 5px; }
+      div.blurElementTemplate div.blurElementTemplateInside ul li {
+        color: white;
+        font-weight: bolder;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 15px 25px;
+        text-transform: uppercase; }
+  div.blurElementTemplate div.blurElementTemplateBG {
+    height: 60px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-image: url("../img/bg.jpg");
+    position: absolute;
+    filter: blur(5px);
+    -webkit-filter: blur(5px); }

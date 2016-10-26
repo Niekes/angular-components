@@ -4,8 +4,6 @@ var app = angular.module('app', ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 
-	$urlRouterProvider.otherwise('/');
-
     $stateProvider
     .state('home', {
         url: '/',
@@ -20,7 +18,16 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'switchCtrl',
         templateUrl: 'partials/switch.html',
         data : { pageTitle: 'Switch' },
+    })
+    .state('blurelement', {
+        url: '/blurelement',
+        controller: 'blurElementCtrl',
+        controllerAs: 'blurElementCtrl',
+        templateUrl: 'partials/blur-element.html',
+        data : { pageTitle: 'Blur Element' },
     });
+
+    $urlRouterProvider.otherwise('/');
 });
 
 app.run(function ($rootScope, $state){
