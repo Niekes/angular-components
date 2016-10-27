@@ -34,21 +34,17 @@ div.blurElementTemplate{
 				display: inline-block;
 				padding: 15px 25px;
 				text-transform: uppercase;
-				// text-shadow: 1px 1px 5px rgba(255, 128, 128, 1);
-				// background-color: rgba(255, 255, 255, 0.1)
 			}
 		}
 	}
 	div.blurElementTemplateBG{
 		height: 60px;
 		width: 100%;
-		// position: absolute;
 		top: 0;
 		left: 0;
+		opacity: 0;
 		background-repeat: no-repeat;
 		background-image: url('../img/bg.jpg');
-		// background-size: 1307px 880px;
-		// background-position: -400px -200px;
 		position: absolute;
 		filter: blur(5px);
 		-webkit-filter: blur(5px);

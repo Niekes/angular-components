@@ -94,6 +94,7 @@ div.blurElementTemplate {
     width: 100%;
     top: 0;
     left: 0;
+    opacity: 0;
     background-repeat: no-repeat;
     background-image: url("../img/bg.jpg");
     position: absolute;
