@@ -14,7 +14,7 @@ app.component('niekesBlurElement', {
 			var box = document.querySelector('div.blurElementTemplate');
 			var boxBg = document.querySelector('div.blurElementTemplateBG');
 			var image = new Image();
-	    	image.src = '../img/bg.jpg';
+	    	image.src = './../img2/bg.jpg';
 	    	var h = bg.offsetWidth/image.width * bg.offsetHeight;
 
 			var computedBg = {
