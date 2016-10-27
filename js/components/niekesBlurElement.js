@@ -6,7 +6,7 @@ app.component('niekesBlurElement', {
   	},
   	templateUrl: './templates/niekes-blur-element.html',
   	controllerAs: 'niekesBlurElementCtrl',
-	controller: function(){
+	controller: function($window){
 
 		function init(){
 
@@ -29,13 +29,11 @@ app.component('niekesBlurElement', {
 
 			boxBg.style.backgroundPosition = computedBox.left + 'px ' + computedBox.top +  'px';
 			boxBg.style.backgroundSize = computedBg.width + 'px ' + computedBg.height +  'px';
-
 		}
 
 		window.onresize = function() {
 			init();
 		};
-
-		init();
+		setTimeout(function() { init(); }, 1000);
 	}
 });
