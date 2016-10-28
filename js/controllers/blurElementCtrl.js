@@ -1,5 +1,3 @@
 'use strict';
 
-app.controller('blurElementCtrl', function(){
-	// Ctrl
- });
+app.controller('blurElementCtrl', function(){ });

@@ -2,7 +2,7 @@
 
 app.component('niekesBlurElement', {
 	bindings: {
-    	options: '='
+    	options: '<'
   	},
   	templateUrl: './templates/niekes-blur-element.html',
   	controllerAs: 'niekesBlurElementCtrl',

@@ -2,7 +2,7 @@
 
 app.component('niekesSwitch', {
 	bindings: {
-    	options: '='
+    	options: '<'
   	},
   	templateUrl: './templates/niekes-switch.html',
   	controllerAs: 'niekesSwitchCtrl',

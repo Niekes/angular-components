@@ -25,6 +25,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'blurElementCtrl',
         templateUrl: 'partials/blur-element.html',
         data : { pageTitle: 'Blur Element' },
+    })
+    .state('changelistener', {
+        url: '/changelistener',
+        controller: 'changeListenerCtrl',
+        controllerAs: 'changeListenerCtrl',
+        templateUrl: 'partials/change-listener.html',
+        data : { pageTitle: 'Change listener' },
     });
 
     $urlRouterProvider.otherwise('/');

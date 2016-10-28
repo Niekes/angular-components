@@ -98,5 +98,13 @@ div.blurElementTemplate {
     background-repeat: no-repeat;
     background-image: url("../img/bg.jpg");
     position: absolute;
-    filter: blur(5px);
-    -webkit-filter: blur(5px); }
+    filter: blur(3px);
+    -webkit-filter: blur(3px); }
+
+div.changeListenerCtrl {
+  background-color: teal;
+  padding: 5px; }
+
+div.niekesChangeListenerCtrl {
+  background-color: crimson;
+  padding: 5px; }
