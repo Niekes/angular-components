@@ -108,3 +108,9 @@ div.changeListenerCtrl {
 div.niekesChangeListenerCtrl {
   background-color: crimson;
   padding: 5px; }
+
+div.componentFunctionCtrl div.ctrl {
+  background-color: teal; }
+
+div.componentFunctionCtrl div.component {
+  background-color: coral; }

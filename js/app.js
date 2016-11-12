@@ -32,6 +32,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'changeListenerCtrl',
         templateUrl: 'partials/change-listener.html',
         data : { pageTitle: 'Change listener' },
+    })
+    .state('componentfunction', {
+        url: '/componentfunction',
+        controller: 'componentFunctionCtrl',
+        controllerAs: 'componentFunctionCtrl',
+        templateUrl: 'partials/component-function.html',
+        data : { pageTitle: 'Component Function' },
     });
 
     $urlRouterProvider.otherwise('/');
