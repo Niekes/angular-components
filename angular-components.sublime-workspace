@@ -1,0 +1,1842 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"comp",
+				"components\t(index.html)"
+			],
+			[
+				"com",
+				"componentFunctionCtrl\t(componentFunctionCtrl.js)"
+			],
+			[
+				"data-ng",
+				"data-ng-click"
+			],
+			[
+				"text",
+				"text-transform: "
+			],
+			[
+				"deat",
+				"detailCtrl"
+			],
+			[
+				"list",
+				"listCtrl"
+			],
+			[
+				"lsi",
+				"listCtrl"
+			],
+			[
+				"back",
+				"background-color: "
+			],
+			[
+				"opa",
+				"opacity: "
+			],
+			[
+				"op",
+				"opacity: "
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"off",
+				"offsetWidth"
+			],
+			[
+				"image",
+				"image.width"
+			],
+			[
+				"of",
+				"offsetLeft"
+			],
+			[
+				"box",
+				"boxBg"
+			],
+			[
+				"backg",
+				"background-repeat: "
+			],
+			[
+				"link",
+				"linkToHome\t(homeCtrl.js)"
+			],
+			[
+				"font-",
+				"font-size: "
+			],
+			[
+				"che",
+				"checked"
+			],
+			[
+				"ch",
+				"checked"
+			],
+			[
+				"home",
+				"homeCtrl\t(homeCtrl.js)"
+			],
+			[
+				"data-",
+				"data-ng-bind\t(index.html)"
+			],
+			[
+				"Agn",
+				"angular"
+			],
+			[
+				"req",
+				"require\t(app.php)"
+			],
+			[
+				"active",
+				"activeTH\t(main.css)"
+			],
+			[
+				"tabl",
+				"table"
+			],
+			[
+				"wid",
+				"width='100"
+			],
+			[
+				"tb",
+				"tb_header"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"prim",
+				"primary-bg"
+			],
+			[
+				"fonw",
+				"fontweight-bold"
+			],
+			[
+				"font",
+				"font-weight: "
+			],
+			[
+				"primary",
+				"primary-bg"
+			],
+			[
+				"paddin",
+				"padding"
+			],
+			[
+				"pad",
+				"padding-bottom: "
+			],
+			[
+				"padi",
+				"padding-top"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"acc",
+				"accountBar\t(_account.scss)"
+			],
+			[
+				"border",
+				"border-bottom: "
+			],
+			[
+				"pddin",
+				"padding\t(_base.scss)"
+			],
+			[
+				"angu",
+				"angular.element"
+			],
+			[
+				"edit",
+				"editBox"
+			],
+			[
+				"ang",
+				"angular.element"
+			],
+			[
+				"text-a",
+				"text-align: "
+			],
+			[
+				"account",
+				"accountCtrl\t(accountCtrl.js)"
+			],
+			[
+				"room",
+				"roomInfo"
+			],
+			[
+				"close",
+				"closeCodeResult"
+			],
+			[
+				"code",
+				"codeResult\t(editorCtrl.js)"
+			],
+			[
+				"err",
+				"errorMsg"
+			],
+			[
+				"in",
+				"invokeBtn\t(_menu.scss)"
+			],
+			[
+				"new",
+				"newItem"
+			],
+			[
+				"loca",
+				"localStorage"
+			],
+			[
+				"rmo",
+				"remove_tab"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"data",
+				"data-ng-click"
+			],
+			[
+				"sn",
+				"snippet_update"
+			],
+			[
+				"snipp",
+				"snippet"
+			],
+			[
+				"po",
+				"pointer"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"class",
+				"classroom"
+			],
+			[
+				"unde",
+				"underline"
+			],
+			[
+				"tab",
+				"tabStatus"
+			],
+			[
+				"Class",
+				"Classroom\t(LCDatabaseService.js)"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"edi",
+				"editorWrapper\t(_menu.scss)"
+			],
+			[
+				"chat",
+				"chatWrapper\t(_menu.scss)"
+			],
+			[
+				"get",
+				"getBoundingClientRect"
+			],
+			[
+				"wi",
+				"width\t(_menu.scss)"
+			],
+			[
+				"el",
+				"element"
+			],
+			[
+				"lo",
+				"location"
+			],
+			[
+				"roo",
+				"roomId"
+			],
+			[
+				"hide",
+				"hideEditor\t(editorCtrl.js)"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"hsma",
+				"hash_hmac"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"lib",
+				"libPath"
+			],
+			[
+				"gulp",
+				"gulp.task('scripts"
+			],
+			[
+				"src",
+				"sourcePath"
+			],
+			[
+				"dist",
+				"distPath"
+			],
+			[
+				"t",
+				"target"
+			],
+			[
+				"stop",
+				"stopPlayer"
+			],
+			[
+				"mo",
+				"mouseDirection"
+			],
+			[
+				"cl",
+				"clientWidth"
+			],
+			[
+				"sc",
+				"screenWidth\t(home.html)"
+			],
+			[
+				"tra",
+				"transition: "
+			],
+			[
+				"stroke",
+				"stroke"
+			],
+			[
+				"lock",
+				"lockToDome\t(home.html)"
+			],
+			[
+				"mou",
+				"mouseY"
+			],
+			[
+				"o",
+				"outerWidth"
+			],
+			[
+				"circle",
+				"circleX"
+			],
+			[
+				"mous",
+				"mouseX"
+			],
+			[
+				"rad",
+				"radiusScale"
+			],
+			[
+				"ra",
+				"radiusScale"
+			],
+			[
+				"zo",
+				"zCoord"
+			],
+			[
+				"coord",
+				"xCoord"
+			],
+			[
+				"con",
+				"connected"
+			],
+			[
+				"dis",
+				"disToM"
+			],
+			[
+				"y",
+				"yCoord"
+			],
+			[
+				"x",
+				"xCoord"
+			],
+			[
+				"sv",
+				"svgHeight"
+			],
+			[
+				"z",
+				"zCoord"
+			],
+			[
+				"clie",
+				"clientX"
+			],
+			[
+				"ligh",
+				"lighten\tSass-function"
+			],
+			[
+				"svg",
+				"svgHeight"
+			],
+			[
+				"e",
+				"element"
+			],
+			[
+				"height",
+				"height100"
+			],
+			[
+				"do",
+				"document"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 1497,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/controllers/componentFunctionCtrl.js",
+			"settings":
+			{
+				"buffer_size": 229,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/app.js",
+			"settings":
+			{
+				"buffer_size": 1441,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "partials/component-function.html",
+			"settings":
+			{
+				"buffer_size": 303,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nLaTeXTools\n----------\n\n  LaTeXTools Plugin version 3.12.7 (2016-11-10)\n  \n  Thank you for installing the LaTeXTools plugin!\n  \n  To learn about the features of this plugin, go to the Github page:\n  \n  https://github.com/SublimeText/LaTeXTools\n  \n  and scroll down to the README file. Actually, the Markdown source of that file is in the plugin directory, which you can open using \"Browse Packages...\" in Sublime Text.\n  \n  You can also check out Marciano's blog at\n  \n  tekonomist.wordpress.com\n  \n  Happy TeXing!\n  Ian Bacher, Marciano Siniscalchi, and Richard Stein\n",
+			"settings":
+			{
+				"buffer_size": 619,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "scss/modules/_componentfunction.scss",
+			"settings":
+			{
+				"buffer_size": 115,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scss/style.scss",
+			"settings":
+			{
+				"buffer_size": 290,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "partials/home.html",
+			"settings":
+			{
+				"buffer_size": 204,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/controllers/homeCtrl.js",
+			"settings":
+			{
+				"buffer_size": 479,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/niekes-component-function.html",
+			"settings":
+			{
+				"buffer_size": 77,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/components/niekesComponentFunction.js",
+			"settings":
+			{
+				"buffer_size": 258,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "insta",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"mater",
+				"Material Theme: Activate theme"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"lint",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"hint",
+				"jshintify: Run jshint"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"remoe",
+				"Package Control: Remove Package"
+			],
+			[
+				"jsh",
+				"JSHint: Clear Annotations"
+			],
+			[
+				"prefe",
+				"Preferences: Settings"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"linter",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"user",
+				"Preferences: SublimeLinter Settings – User"
+			],
+			[
+				"met",
+				"Material Theme: Activate theme"
+			],
+			[
+				"gutter",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"jshtin",
+				"JSHint: Set Plugin Options"
+			],
+			[
+				"clea",
+				"JSHint: Clear Annotations"
+			],
+			[
+				"clear",
+				"JSHint: Clear Annotations"
+			],
+			[
+				"gut",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"jshint",
+				"JSHint: Set Linting Preferences"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"jshin",
+				"JSHint"
+			],
+			[
+				"sett",
+				"Preferences: Settings - User"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"settin",
+				"Preferences: Settings - User"
+			],
+			[
+				"resour",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"snippe log",
+				"Snippet: snipptet_js_consolelog"
+			],
+			[
+				"Snippet: ",
+				"Snippet: CDATA"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"temrin",
+				"Terminal: Open in project folder"
+			],
+			[
+				"termin",
+				"Terminal: Open in project folder"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"GitGutter: Compare Against HEAD"
+			],
+			[
+				"rmeove",
+				"Package Control: Remove Package"
+			],
+			[
+				"ann",
+				"Git: Toggle Annotations"
+			],
+			[
+				"PackageResourceViewer",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"git an",
+				"Git: Toggle Annotations"
+			],
+			[
+				"git anno",
+				"Git: Toggle Annotations"
+			],
+			[
+				"git s",
+				"Git: Status"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"ls",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/nieke/Developer/angular_components"
+	],
+	"file_history":
+	[
+		"/Users/nieke/Developer/angular_components/templates/niekes-component-function.html",
+		"/Users/nieke/Developer/angular_components/templates/niekes-blur-element.html",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/niekes_blog/js/scripts.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/src/js/controllers/listCtrl.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/src/js/controllers/detailCtrl.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/src/js/filters/htmlFilter.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/gulpfile.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/src/js/app.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/src/js/services/postService.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/src/js/libs/angular.min.js",
+		"/Users/nieke/Developer/niekes_blog/src/scss/modules/_base.scss",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/public/js/app.js",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/src/scss/style.scss",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/angular-spa/templates/list.html",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/public/partials/game.html",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/public/js/controllers/gameCtrl.js",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/public/index.html",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/public/js/controllers/homeCtrl.js",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/angular-spa/functions.php",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/angular-spa/header.php",
+		"/Users/nieke/Developer/niekes_blog/wp-content/themes/angular-spa/templates/detail.html",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/libs/events/events_player.js",
+		"/Users/nieke/Downloads/firewall.sh",
+		"/Users/nieke/Downloads/untitled.sh",
+		"/Users/nieke/Developer/angular_components/partials/change-listener.html",
+		"/Users/nieke/Developer/angular_components/templates/niekes-change-listener.html",
+		"/Users/nieke/Developer/angular_components/js/controllers/blurElementCtrl.js",
+		"/Users/nieke/Developer/angular_components/js/components/niekesBlurElement.js",
+		"/Users/nieke/Developer/angular_components/partials/blur-element.html",
+		"/Users/nieke/Developer/angular_components/js/components/niekesSwitch.js",
+		"/Users/nieke/Developer/angular_components/scss/modules/_blurElement.scss",
+		"/Users/nieke/Developer/angular_components/js/app.js",
+		"/Users/nieke/Developer/angular_components/js/controllers/homeCtrl.js",
+		"/Users/nieke/Developer/angular_components/.gitignore",
+		"/Users/nieke/Developer/angular_components/.jshintrc",
+		"/Users/nieke/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
+		"/Users/nieke/Developer/angular_components/index.html",
+		"/Users/nieke/Developer/angular_components/scss/_base.scss",
+		"/Users/nieke/Developer/angular_components/scss/style.scss",
+		"/Users/nieke/Developer/angular_components/js/controllers/switchCtrl.js",
+		"/Users/nieke/Developer/angular_components/templates/niekes-switch.html",
+		"/Users/nieke/Developer/angular_components/partials/switch.html",
+		"/Users/nieke/Developer/angular_components/partials/home.html",
+		"/Users/nieke/Developer/angular_components/README.md",
+		"/Users/nieke/Developer/angular_components/scss/_variables.scss",
+		"/Users/nieke/Developer/angular_components/scss/modules/_nav.scss",
+		"/Users/nieke/Developer/angular_components/js/constants/constants.js",
+		"/Users/nieke/Developer/angular_components/js/controllers/masterCtrl.js",
+		"/Users/nieke/Developer/angular_components/scss/modules/_switch.scss",
+		"/Users/nieke/Developer/angular_components/gulpfile.js",
+		"/Users/nieke/Developer/angular_components/angular-components/partials/contact.html",
+		"/Users/nieke/Developer/angular_components/angular-components/index.html",
+		"/Users/nieke/Developer/angular_components/angular-components/js/app.js",
+		"/Users/nieke/Developer/angular_components/angular-components/js/controllers/masterCtrl.js",
+		"/Users/nieke/Developer/angular_components/partials/contact.html",
+		"/Users/nieke/Developer/angular_components/lib/angular.min.js",
+		"/Users/nieke/Developer/angular_components/lib/angular-ui-router.min.js",
+		"/Users/nieke/Developer/angular_components/scss/modules/_home.scss",
+		"/Users/nieke/Developer/angular_components/src/index.html",
+		"/Users/nieke/Developer/slim_auth/bootstrap/app.php",
+		"/Users/nieke/Developer/slim_auth/app/routes.php",
+		"/Users/nieke/Developer/slim_auth/resources/views/home.twig",
+		"/Users/nieke/Developer/slim_auth/public/index.php",
+		"/Users/nieke/Developer/slim_auth/public/.htaccess",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-1-kf-ewige-spielerstatistik.php",
+		"/Users/nieke/Downloads/font-awesome-4.6.3/fonts/fontawesome-webfont.svg",
+		"/Users/nieke/Downloads/font-awesome-4.6.3/css/font-awesome.css",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-1-kf-spielerstatistik-201617.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/css/main.css",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/js/tablesorter.js",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/functions.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/js/widget.js",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/js/jquery.sortElements.js",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/js/main.js",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-1-kf-ewige-spielerstatistik/.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-2-kf-spielberichte.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-1-kf-spielberichte.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-erste-spielberichte.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-frauen-spielberichte.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-ue32-spielberichte.php",
+		"/Users/nieke/Developer/thc_franiskaner_fc/!website_thc_franiskaner_fc/wp-content/themes/thc_theme/page-ue40-spielberichte.php",
+		"/Users/nieke/Library/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Users/nieke/Desktop/a.py",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/src/scss/_bootstrap.scss",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/src/scss/modules/home.scss",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/src/scss/modules/_base.scss",
+		"/Users/nieke/Developer/mp-full-dome-game-engine/backend/public/partials/home.html",
+		"/Users/nieke/Developer/live-coding/public/js/constants/constants.js",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_signup.scss",
+		"/Users/nieke/Developer/live-coding/public/partials/signupteacher.html",
+		"/Users/nieke/Developer/live-coding/public/js/directives/signupform.js",
+		"/Users/nieke/Developer/live-coding/public/templates/signupform.html",
+		"/Users/nieke/Developer/live-coding/public/partials/login.html",
+		"/Users/nieke/Developer/live-coding/public/partials/signupstudent.html",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_base.scss",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_login.scss",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_home.scss",
+		"/Users/nieke/Developer/live-coding/public/partials/account.html",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_account.scss",
+		"/Users/nieke/Developer/live-coding/public/js/app.js",
+		"/Users/nieke/Developer/live-coding/public/partials/home.html",
+		"/Users/nieke/Developer/live-coding/src/scss/style.scss",
+		"/Users/nieke/Developer/live-coding/app.js",
+		"/Users/nieke/Developer/live-coding/public/index.html",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_menu.scss",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_room.scss",
+		"/Users/nieke/Developer/live-coding/public/js/controllers/menuCtrl.js",
+		"/Users/nieke/Developer/live-coding/public/js/controllers/accountCtrl.js",
+		"/Users/nieke/Developer/live-coding/public/partials/room.html",
+		"/Users/nieke/Developer/live-coding/src/scss/bootstrap/_variables.scss",
+		"/Users/nieke/Developer/live-coding/gulpfile.js",
+		"/Users/nieke/Developer/live-coding/public/css/style.css",
+		"/Users/nieke/Developer/live-coding/public/js/libs/jump-to-line.js",
+		"/Users/nieke/Developer/live-coding/public/js/libs/dialog.js",
+		"/Users/nieke/Developer/live-coding/public/js/libs/search.js",
+		"/Users/nieke/Developer/live-coding/public/js/controllers/editorCtrl.js",
+		"/Users/nieke/Developer/live-coding/src/scss/modules/_editor.scss",
+		"/Users/nieke/Developer/live-coding/src/scss/_variables.scss",
+		"/Users/nieke/Developer/live-coding/libs/events/LCLiveTextEvents.js",
+		"/Users/nieke/Developer/live-coding/libs/events/LCLiveCompilerEvents.js",
+		"/Users/nieke/Developer/live-coding/libs/compiler/LCLiveCompiler.js",
+		"/Users/nieke/Developer/live-coding/libs/events/LCLiveEditorEvents.js",
+		"/Users/nieke/Developer/live-coding/public/js/controllers/chatCtrl.js",
+		"/Users/nieke/Developer/live-coding/libs/database/LCDatabaseService.js",
+		"/Users/nieke/Developer/live-coding/libs/events/LCLiveEvents.js",
+		"/Users/nieke/Developer/live-coding/public/js/controllers/loginCtrl.js",
+		"/Users/nieke/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/nieke/Developer/BundesligaExt/!ext_bundesliga/popup.html"
+	],
+	"find":
+	{
+		"height": 31.0
+	},
+	"find_in_files":
+	{
+		"height": 136.0,
+		"where_history":
+		[
+			"",
+			".html",
+			".js",
+			".scss",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"changeListenerCtrl",
+			"changelistener",
+			"none;",
+			"p>",
+			"p",
+			"div",
+			"h1",
+			"ListCtrl",
+			"to_trusted",
+			"wpApp",
+			"rightControl",
+			"document.querySelector('#rightControl')",
+			"document.querySelector('#leftControl')",
+			"controlPlayer",
+			"stop",
+			"100",
+			"5px",
+			"blur",
+			"blurElementOptions",
+			"blurElement",
+			"blurelement",
+			"background-color: red; left:0px; top:0px;",
+			"document.getElementById(\"myImg\")",
+			"true",
+			"false",
+			"255",
+			"../img/bg.jpg",
+			"5px",
+			"bg",
+			"BG",
+			"Bg",
+			"bg",
+			"'../img/bg.jpg'",
+			"(0)",
+			"7px",
+			"30px",
+			"5px",
+			"3px",
+			"500px",
+			"span",
+			"100px",
+			"3px",
+			"5px",
+			"600px",
+			"100px",
+			"switch",
+			"     \n",
+			"family",
+			"font",
+			"cbOne",
+			"15px",
+			"checkboxModel",
+			"3px",
+			"div",
+			"angular-components/",
+			"route",
+			"$state",
+			"src/",
+			"livereload",
+			"font>",
+			"custom",
+			"tablest",
+			"tableSt",
+			"table",
+			"stats",
+			"table",
+			"echo ",
+			"player",
+			"socket",
+			"console",
+			"form",
+			"emit",
+			"span",
+			"-12",
+			"lg-12",
+			"md-12",
+			"-12",
+			"Teach how to code. Live.",
+			"h2",
+			"td",
+			"12",
+			"span",
+			"time",
+			"fa-times",
+			"type",
+			"put[ty",
+			"12",
+			"-8",
+			"#chat-contr",
+			"chat",
+			"filter",
+			"two",
+			"        var node_two_hd = document.createElement('li');\n        var node_two = document.createElement('li');",
+			"desc",
+			"../../lib/",
+			"codemirror\"), require(\"../dialog/dialog\"));\n  else if (typeof",
+			"../../lib/",
+			"close",
+			"compile",
+			"localStorage",
+			"active_tab",
+			"add",
+			"insertNewTab",
+			"new_tab",
+			"emit",
+			"var",
+			"classroom_update",
+			"inputupdateClassroomName",
+			"classroom",
+			"title",
+			"name",
+			"classroom",
+			"body",
+			"\"",
+			"inputClassroomName",
+			"classroom",
+			"value",
+			"span",
+			";\n",
+			"description",
+			"body",
+			"inputPassword",
+			"inputAccount",
+			"-12",
+			"wrappe",
+			"50px",
+			"page",
+			".settingsBox"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"player"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1204,
+								1204
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 36.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/controllers/componentFunctionCtrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								222,
+								222
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1180,
+								1201
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 429.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "partials/component-function.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 303,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								303,
+								303
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 619,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								619,
+								619
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"default_dir": "/Users/nieke/Developer/angular_components",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "scss/modules/_componentfunction.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 115,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								67,
+								67
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "scss/style.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								289,
+								289
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "partials/home.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "js/controllers/homeCtrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 479,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								351,
+								351
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "templates/niekes-component-function.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 77,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50,
+								50
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "js/components/niekesComponentFunction.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 258,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								231,
+								231
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 116.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 118.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "angular-components.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"home",
+				"js/controllers/homeCtrl.js"
+			],
+			[
+				"ahome",
+				"partials/home.html"
+			],
+			[
+				"ap",
+				"js/app.js"
+			],
+			[
+				"ga",
+				"public/js/controllers/gameCtrl.js"
+			],
+			[
+				"app",
+				"public/js/app.js"
+			],
+			[
+				"gma",
+				"public/js/controllers/gameCtrl.js"
+			],
+			[
+				"fun",
+				"functions.php"
+			],
+			[
+				"det",
+				"templates/detail.html"
+			],
+			[
+				"blurel",
+				"js/components/niekesBlurElement.js"
+			],
+			[
+				"blur",
+				"js/controllers/blurElementCtrl.js"
+			],
+			[
+				"blue",
+				"js/components/niekesBlurElement.js"
+			],
+			[
+				"index",
+				"index.html"
+			],
+			[
+				"sw",
+				"js/components/niekesSwitch.js"
+			],
+			[
+				"swt",
+				"js/controllers/switchCtrl.js"
+			],
+			[
+				"neke",
+				"js/components/niekesSwitch.js"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"hm",
+				"partials/home.html"
+			],
+			[
+				"nav",
+				"scss/modules/_nav.scss"
+			],
+			[
+				"tables",
+				"wp-content/themes/thc_theme/js/tablesorter.js"
+			],
+			[
+				"main",
+				"wp-content/themes/thc_theme/css/main.css"
+			],
+			[
+				"main.css",
+				"wp-content/themes/thc_theme/css/main.css"
+			],
+			[
+				"roo",
+				"public/partials/room.html"
+			],
+			[
+				"const",
+				"public/js/constants/constants.js"
+			],
+			[
+				"signu",
+				"public/js/directives/signupform.js"
+			],
+			[
+				"menu",
+				"public/js/controllers/menuCtrl.js"
+			],
+			[
+				"chat",
+				"public/js/controllers/chatCtrl.js"
+			],
+			[
+				"room",
+				"public/partials/room.html"
+			],
+			[
+				"acc",
+				"public/js/controllers/accountCtrl.js"
+			],
+			[
+				"ac",
+				"public/js/controllers/accountCtrl.js"
+			],
+			[
+				"account",
+				"public/partials/account.html"
+			],
+			[
+				"login",
+				"src/scss/modules/_login.scss"
+			],
+			[
+				"sign",
+				"src/scss/modules/_signup.scss"
+			],
+			[
+				"accoun",
+				"public/partials/account.html"
+			],
+			[
+				"rom",
+				"src/scss/modules/_room.scss"
+			],
+			[
+				"base",
+				"src/scss/modules/_base.scss"
+			],
+			[
+				"vari",
+				"src/scss/bootstrap/_variables.scss"
+			],
+			[
+				"bas",
+				"src/scss/modules/_base.scss"
+			],
+			[
+				"acco",
+				"public/partials/account.html"
+			],
+			[
+				"meu",
+				"public/js/controllers/menuCtrl.js"
+			],
+			[
+				"edi",
+				"src/scss/modules/_editor.scss"
+			],
+			[
+				"event",
+				"libs/events/LCLiveTextEvents.js"
+			],
+			[
+				"compl",
+				"libs/events/LCLiveCompilerEvents.js"
+			],
+			[
+				"compi",
+				"libs/compiler/LCLiveCompiler.js"
+			],
+			[
+				"var",
+				"src/scss/_variables.scss"
+			],
+			[
+				"edit",
+				"public/js/controllers/editorCtrl.js"
+			],
+			[
+				"eve",
+				"libs/events/LCLiveTextEvents.js"
+			],
+			[
+				"ro",
+				"public/partials/room.html"
+			],
+			[
+				"con",
+				"public/js/constants/constants.js"
+			],
+			[
+				"lcdatabaseservice",
+				"libs/database/LCDatabaseService.js"
+			],
+			[
+				"text",
+				"libs/events/LCLiveTextEvents.js"
+			],
+			[
+				"compil",
+				"libs/events/LCLiveCompilerEvents.js"
+			],
+			[
+				"lcl",
+				"libs/events/LCLiveEvents.js"
+			],
+			[
+				"edio",
+				"public/js/controllers/editorCtrl.js"
+			],
+			[
+				"even",
+				"libs/events/LCLiveTextEvents.js"
+			],
+			[
+				"cha",
+				"public/js/controllers/chatCtrl.js"
+			],
+			[
+				"accon",
+				"public/js/controllers/accountCtrl.js"
+			],
+			[
+				"ed",
+				"public/js/controllers/editorCtrl.js"
+			],
+			[
+				"mas",
+				"src/js/controllers/masterCtrl.js"
+			],
+			[
+				"master",
+				"src/js/controllers/masterCtrl.js"
+			],
+			[
+				"hmo",
+				"src/partials/home.html"
+			],
+			[
+				"appp",
+				"src/api/vendor/slim/slim/Slim/App.php"
+			],
+			[
+				"inde",
+				"public/index.html"
+			],
+			[
+				"settings",
+				"~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+			],
+			[
+				"boot",
+				"src/scss/_bootstrap.scss"
+			],
+			[
+				"svg",
+				"src/scss/modules/_svg.scss"
+			],
+			[
+				"sty",
+				"public/css/style.css"
+			],
+			[
+				"stye",
+				"public/css/style.css"
+			],
+			[
+				"vair",
+				"src/scss/_variables.scss"
+			],
+			[
+				"events",
+				"libs/events/events_main.js"
+			],
+			[
+				"hom",
+				"public/partials/home.html"
+			],
+			[
+				"app.js",
+				"public/js/app.js"
+			],
+			[
+				"dome",
+				"src/scss/modules/_dome.scss"
+			],
+			[
+				"jsh",
+				".jshintrc"
+			],
+			[
+				"scss",
+				"src/scss/style.scss"
+			],
+			[
+				"app.",
+				"public/js/app.js"
+			],
+			[
+				"ctrl",
+				"public/js/controllers/homeCtrl.js"
+			],
+			[
+				"",
+				"~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Developer/niekes_blog/wp-content/themes/niekes_blog.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 201.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

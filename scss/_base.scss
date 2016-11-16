@@ -1,3 +1,19 @@
 *{
 	font-family: 'Helvetica Neue';
 }
+
+.height100, html, body, .container-fluid, niekes-scatter-plot{
+	height: 100%
+}
+
+niekes-scatter-plot{
+	display: block
+}
+
+.height90{
+	height: 90%
+}
+
+.height10{
+	height: 10%
+}

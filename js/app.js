@@ -39,6 +39,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'componentFunctionCtrl',
         templateUrl: 'partials/component-function.html',
         data : { pageTitle: 'Component Function' },
+    })
+    .state('scatterplot', {
+        url: '/scatterplot',
+        controller: 'scatterplotCtrl',
+        controllerAs: 'scatterplotCtrl',
+        templateUrl: 'partials/scatterplot.html',
+        data : { pageTitle: 'Scatterplot' },
     });
 
     $urlRouterProvider.otherwise('/');
