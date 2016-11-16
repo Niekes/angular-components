@@ -6,6 +6,7 @@ app.component('niekesScatterPlot', {
   	},
   	controllerAs: 'niekesScatterplotCtrl',
 	controller: function($element){
+
 		var niekesScatterplotCtrl = this;
 		var el = $element[0];
 		var svg;
