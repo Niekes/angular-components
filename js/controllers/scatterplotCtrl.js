@@ -32,5 +32,5 @@ app.controller('scatterplotCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 5000);
+	$interval(updateData, 3000);
 });

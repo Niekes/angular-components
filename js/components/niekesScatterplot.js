@@ -41,7 +41,13 @@ app.component('niekesScatterPlot', {
 				.attr('class', 'axis y');
 
 			svg.append('g')
+				.attr('class', 'minusBorder');
+
+			svg.append('g')
 				.attr('class', 'circles');
+
+			svg.append('g')
+				.attr('class', 'labels');
 		}
 
 		niekesScatterplotCtrl.$onChanges = function(changes){
@@ -75,12 +81,32 @@ app.component('niekesScatterPlot', {
 			svg.select('.x.axis').transition().duration(transitionTime).call(xAxis);
 			svg.select('.y.axis').transition().duration(transitionTime).call(yAxis);
 
-			var circle = svg.select('g.circles').selectAll('circle').data(data); // UPDATE SELECTION
+			var isMinus = yMin < 0 ? 1 : 0;
+			var rect = svg.select('g.minusBorder').selectAll('rect').data([isMinus]); // UPDATE SELECTION
 
-			circle.exit() // EXIT
+			rect.enter().append('rect') // ENTER
+				.style('fill', function(d){ return 'rgba(255,0,0,.1)' })
+				.attr('x', 0)
+				.attr('y', height)
+				.attr('width', width)
+				.attr('height', 0)
+			.merge(rect)
 				.transition().duration(transitionTime)
-				.attr('r', function( d ){ return 0; })
+				.attr('x', 0)
+				.attr('y', yScale(0))
+				.attr('width', width)
+				.attr('height', isMinus === 1 ? yScale(yMin) - yScale(0) : 0);
+
+			rect.exit() // EXIT
+				.transition().duration(transitionTime)
+				.attr('opacity', 0)
 				.remove();
+			///////////////////////////////////////////
+			///////////////////////////////////////////
+			////////////////CIRCLES////////////////////
+			///////////////////////////////////////////
+			///////////////////////////////////////////
+			var circle = svg.select('g.circles').selectAll('circle').data(data); // UPDATE SELECTION
 
 			circle.enter().append('circle') // ENTER
 				.style('fill', function(d){ return 'transparent' })
@@ -92,8 +118,39 @@ app.component('niekesScatterPlot', {
 				.attr('r', function( d ){ return d.radius; })
 				.attr('cx', function( d ){ return xScale(d.date); })
 				.attr('cy', function( d ){ return yScale(d.sum); })
-				.style('fill', function(d){ return color(d.group); });
-			};
+				.style('fill', function(d){ return color(d.group); })
+
+			circle.exit() // EXIT
+				.transition().duration(transitionTime)
+				.attr('r', function( d ){ return 0; })
+				.remove();
+
+			///////////////////////////////////////////
+			///////////////////////////////////////////
+			/////////////////LABELS////////////////////
+			///////////////////////////////////////////
+			///////////////////////////////////////////
+			var labels = svg.select('g.labels').selectAll('text').data(data); // UPDATE SELECTION
+
+			labels.enter().append('text')
+				.attr('opacity', 0)
+				.attr('x', function( d ){ return xScale(d.date); })
+				.attr('y', function( d ){ return yScale(d.sum); })
+				.attr('dy', - 10 )
+
+				.attr('text-anchor', 'middle' )
+				.text(function(d){ return d.name; })
+			.merge(labels)
+				.transition().duration(transitionTime)
+				.attr('opacity', 1)
+				.attr('x', function( d ){ return xScale(d.date); })
+				.attr('y', function( d ){ return yScale(d.sum); })
+
+			labels.exit() // EXIT
+				.transition().duration(transitionTime)
+				.attr('opacity', 0)
+				.remove();
+		};
 
 		niekesScatterplotCtrl.init();
 	}
