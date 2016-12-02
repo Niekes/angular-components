@@ -89,13 +89,16 @@ app.component('niekesScatterPlot', {
 				.attr('x', 0)
 				.attr('y', height)
 				.attr('width', width)
+				.attr('stroke-dasharray',  width + ',' + width*3)
+				.attr('stroke', 'red')
 				.attr('height', 0)
 			.merge(rect)
 				.transition().duration(transitionTime)
 				.attr('x', 0)
-				.attr('y', yScale(0))
+				.attr('y', yScale(0) + 0.5)
+				.attr('stroke-dasharray',  width + ',' + width*3)
 				.attr('width', width)
-				.attr('height', isMinus === 1 ? yScale(yMin) - yScale(0) : 0);
+				.attr('height', isMinus === 1 ? (yScale(yMin) - yScale(0)) - 0.5 : 0);
 
 			rect.exit() // EXIT
 				.transition().duration(transitionTime)
@@ -125,11 +128,11 @@ app.component('niekesScatterPlot', {
 				.attr('r', function( d ){ return 0; })
 				.remove();
 
-			///////////////////////////////////////////
-			///////////////////////////////////////////
-			/////////////////LABELS////////////////////
-			///////////////////////////////////////////
-			///////////////////////////////////////////
+			////////////////////////////////////////////
+			////////////////////////////////////////////
+			///////////////// LABELS ///////////////////
+			////////////////////////////////////////////
+			////////////////////////////////////////////
 			var labels = svg.select('g.labels').selectAll('text').data(data); // UPDATE SELECTION
 
 			labels.enter().append('text')
