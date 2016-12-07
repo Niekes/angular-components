@@ -16,6 +16,7 @@ app.component('niekesScatterPlot', {
 		var width;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
 		var transitionTime = 1000;
+		var strokeDasharrayWidth = 1;
 
 		niekesScatterplotCtrl.init = function(){
 
@@ -75,12 +76,29 @@ app.component('niekesScatterPlot', {
 			    .domain([yMin, yMax])
 			    .range([height, 0])
 
-			var xAxis = d3.axisBottom(xScale).ticks(20);
-			var yAxis = d3.axisLeft(yScale).ticks(10);
+			var divider = '1';
+			for (var i = 1; i <= yMax.toString().length - 1; i++) {
+				divider += '0';
+			}
+
+			var ticks = [yMin, 0, yMax];
+			for (var i = 1; i <= Math.floor(yMax / +divider); i++) {
+				if(i % 2 === 0){
+					ticks.push(i* (+divider));
+				}
+			}
+
+			var xAxis = d3.axisBottom(xScale).ticks(30);
+			var yAxis = d3.axisLeft(yScale).tickValues(ticks);
 
 			svg.select('.x.axis').transition().duration(transitionTime).call(xAxis);
 			svg.select('.y.axis').transition().duration(transitionTime).call(yAxis);
 
+			///////////////////////////////////////////
+			///////////////////////////////////////////
+			////////////// MINUS AREA /////////////////
+			///////////////////////////////////////////
+			///////////////////////////////////////////
 			var isMinus = yMin < 0 ? 1 : 0;
 			var rect = svg.select('g.minusBorder').selectAll('rect').data([isMinus]); // UPDATE SELECTION
 
@@ -89,43 +107,44 @@ app.component('niekesScatterPlot', {
 				.attr('x', 0)
 				.attr('y', height)
 				.attr('width', width)
-				.attr('stroke-dasharray',  width + ',' + width*3)
-				.attr('stroke', 'red')
 				.attr('height', 0)
 			.merge(rect)
 				.transition().duration(transitionTime)
 				.attr('x', 0)
-				.attr('y', yScale(0) + 0.5)
-				.attr('stroke-dasharray',  width + ',' + width*3)
+				.attr('y', yScale(0) + strokeDasharrayWidth/2)
+				.attr('stroke-dasharray', width + ',' + (width + Math.ceil((yScale(yMin) - yScale(0))*2)))
+				.attr('stroke-width', strokeDasharrayWidth + 'px')
+				.attr('stroke', 'coral')
 				.attr('width', width)
-				.attr('height', isMinus === 1 ? (yScale(yMin) - yScale(0)) - 0.5 : 0);
+				.attr('height', isMinus === 1 ? (yScale(yMin) - yScale(0)) - strokeDasharrayWidth/2 : 0);
 
 			rect.exit() // EXIT
 				.transition().duration(transitionTime)
 				.attr('opacity', 0)
 				.remove();
+
 			///////////////////////////////////////////
 			///////////////////////////////////////////
-			////////////////CIRCLES////////////////////
+			//////////////// CIRCLES //////////////////
 			///////////////////////////////////////////
 			///////////////////////////////////////////
 			var circle = svg.select('g.circles').selectAll('circle').data(data); // UPDATE SELECTION
 
 			circle.enter().append('circle') // ENTER
 				.style('fill', function(d){ return 'transparent' })
-				.attr('r', function( d ){ return 0; })
-				.attr('cx', function( d ){ return xScale(d.date); })
-				.attr('cy', function( d ){ return yScale(d.sum); })
+				.attr('r', function(d){ return 0; })
+				.attr('cx', function(d){ return xScale(d.date); })
+				.attr('cy', function(d){ return yScale(d.sum); })
 			.merge(circle) // ENTER + UPDATE
 				.transition().duration(transitionTime)
-				.attr('r', function( d ){ return d.radius; })
-				.attr('cx', function( d ){ return xScale(d.date); })
-				.attr('cy', function( d ){ return yScale(d.sum); })
+				.attr('r', function(d){ return d.radius; })
+				.attr('cx', function(d){ return xScale(d.date); })
+				.attr('cy', function(d){ return yScale(d.sum); })
 				.style('fill', function(d){ return color(d.group); })
 
 			circle.exit() // EXIT
 				.transition().duration(transitionTime)
-				.attr('r', function( d ){ return 0; })
+				.attr('r', function(d){ return 0; })
 				.remove();
 
 			////////////////////////////////////////////
@@ -137,8 +156,8 @@ app.component('niekesScatterPlot', {
 
 			labels.enter().append('text')
 				.attr('opacity', 0)
-				.attr('x', function( d ){ return xScale(d.date); })
-				.attr('y', function( d ){ return yScale(d.sum); })
+				.attr('x', function(d){ return xScale(d.date); })
+				.attr('y', function(d){ return yScale(d.sum); })
 				.attr('dy', - 10 )
 
 				.attr('text-anchor', 'middle' )
@@ -146,8 +165,8 @@ app.component('niekesScatterPlot', {
 			.merge(labels)
 				.transition().duration(transitionTime)
 				.attr('opacity', 1)
-				.attr('x', function( d ){ return xScale(d.date); })
-				.attr('y', function( d ){ return yScale(d.sum); })
+				.attr('x', function(d){ return xScale(d.date); })
+				.attr('y', function(d){ return yScale(d.sum); })
 
 			labels.exit() // EXIT
 				.transition().duration(transitionTime)

@@ -9,7 +9,7 @@ app.controller('scatterplotCtrl', function($interval){
 		return {
 			name: names[_randomIntBetweenMinMax(0, names.length-1)],
 			date: _randomDate(new Date(2010, 0, 1), new Date()),
-			sum:  _randomIntBetweenMinMax(-1000, 10000),
+			sum:  _randomIntBetweenMinMax(-2000, 10000),
 			radius: _randomIntBetweenMinMax(4, 10),
 			group: _randomIntBetweenMinMax(0, 2),
 		};
@@ -25,12 +25,12 @@ app.controller('scatterplotCtrl', function($interval){
 
 	function updateData(){
 		var users = [];
-		for (var i = _randomIntBetweenMinMax(0, 100); i >= 0; i--) {
+		for (var i = _randomIntBetweenMinMax(2, 100); i >= 0; i--) {
 			users.push(user());
 		}
 		$scatterplotCtrl.users = users;
 	}
 
 	updateData();
-	$interval(updateData, 3000);
+	$interval(updateData, 5000);
 });
