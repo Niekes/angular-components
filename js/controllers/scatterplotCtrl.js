@@ -3,7 +3,15 @@
 app.controller('scatterplotCtrl', function($interval){
 
 	var $scatterplotCtrl = this;
-	var names = ["Heath", "Almeta", "Marjorie", "Verdie", "Gudrun", "Rosaura", "Gerald", "Weldon", "Ocie", "Lan", "Yuko", "Basil", "Deb", "Treva", "Shae", "Irmgard", "Chanelle", "Nan", "Thomasena", "Dylan", "Janel", "Chanel", "Drucilla", "Cathleen", "Samara", "Emiko", "Sheree", "Roscoe", "Saul", "Angelique", "Nedra", "Jinny", "Stacey", "Judy", "Fae", "Carola", "Royce", "Veronika", "Tinisha", "Lupe", "Fannie", "Carly", "Sasha", "Lane", "Benita", "Trevor", "Hermina", "Monet", "Joshua", "Reba", "Woodrow", "Vergie", "Amiee", "Shannon", "Arturo", "Marlo", "Jeannetta", "Derek", "Jaleesa", "Eilene", "Albertina", "Harold", "Maryalice", "Sandee", "Monnie", "Akilah", "Cher", "Cami", "Shenika", "Nila", "Tinisha", "Remona", "Coleen", "Hui", "Rosella", "Seema", "Rea", "Jeanine", "Luanne", "Eli", "Johanna", "Homer", "Krystina", "Val", "Arianne", "Eleni", "Reynalda", "Joanna", "Sherlyn", "Cletus", "Verona", "Ardelia", "Daina", "Signe", "Betsy", "Beth", "Molly", "Adria", "Glennie"];
+	var names = ['Heath', 'Almeta', 'Marjorie', 'Verdie', 'Gudrun', 'Rosaura', 'Gerald', 'Weldon', 'Ocie', 'Lan', 'Yuko', 'Basil', 'Deb', 'Treva', 'Shae', 'Irmgard', 'Chanelle', 'Nan', 'Thomasena', 'Dylan', 'Janel', 'Chanel', 'Drucilla', 'Cathleen', 'Samara', 'Emiko', 'Sheree', 'Roscoe', 'Saul', 'Angelique', 'Nedra', 'Jinny', 'Stacey', 'Judy', 'Fae', 'Carola', 'Royce', 'Veronika', 'Tinisha', 'Lupe', 'Fannie', 'Carly', 'Sasha', 'Lane', 'Benita', 'Trevor', 'Hermina', 'Monet', 'Joshua', 'Reba', 'Woodrow', 'Vergie', 'Amiee', 'Shannon', 'Arturo', 'Marlo', 'Jeannetta', 'Derek', 'Jaleesa', 'Eilene', 'Albertina', 'Harold', 'Maryalice', 'Sandee', 'Monnie', 'Akilah', 'Cher', 'Cami', 'Shenika', 'Nila', 'Tinisha', 'Remona', 'Coleen', 'Hui', 'Rosella', 'Seema', 'Rea', 'Jeanine', 'Luanne', 'Eli', 'Johanna', 'Homer', 'Krystina', 'Val', 'Arianne', 'Eleni', 'Reynalda', 'Joanna', 'Sherlyn', 'Cletus', 'Verona', 'Ardelia', 'Daina', 'Signe', 'Betsy', 'Beth', 'Molly', 'Adria', 'Glennie'];
+
+	function _randomIntBetweenMinMax(min, max){
+    	return Math.floor(Math.random()*(max-min+1)+min);
+	}
+
+	function _randomDate(start, end) {
+    	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+	}
 
 	var user = function(){
 		return {
@@ -13,15 +21,7 @@ app.controller('scatterplotCtrl', function($interval){
 			radius: _randomIntBetweenMinMax(4, 10),
 			group: _randomIntBetweenMinMax(0, 2),
 		};
-	}
-
-	function _randomIntBetweenMinMax(min, max){
-    	return Math.floor(Math.random()*(max-min+1)+min);
-	}
-
-	function _randomDate(start, end) {
-    	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-	}
+	};
 
 	function updateData(){
 		var users = [];
@@ -32,5 +32,5 @@ app.controller('scatterplotCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 5000);
+	$interval(updateData, 15000);
 });

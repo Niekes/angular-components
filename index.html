@@ -20,35 +20,40 @@
         <!-- Scripts -->
         <script src="js/app.js"></script>
         <script src="js/constants/constants.js"></script>
+
         <!-- Controllers -->
         <script src="js/controllers/homeCtrl.js"></script>
-        <script src="js/controllers/switchCtrl.js"></script>
-        <script src="js/controllers/blurElementCtrl.js"></script>
-        <script src="js/controllers/changeListenerCtrl.js"></script>
-        <script src="js/controllers/componentFunctionCtrl.js"></script>
         <script src="js/controllers/scatterplotCtrl.js"></script>
+
         <!-- Components -->
-        <script src="js/components/niekesSwitch.js"></script>
-        <script src="js/components/niekesBlurElement.js"></script>
-        <script src="js/components/niekesChangeListener.js"></script>
-        <script src="js/components/niekesComponentFunction.js"></script>
-        <script src="js/components/niekesScatterplot.js"></script>
+        <script src="js/components/scatterplot.js"></script>
     </head>
 
     <body>
         <div class="container-fluid">
-            <div class="row height10">
-                <nav class="col-lg-12 height100">
+
+            <div class="row height10" style="position: relative;">
+                <nav class="col-lg-12 height100 vertical-align-wrap">
+                    <div class="vertical-align vertical-align--middle">
                     <ul>
                         <li><a href="./#/">HOME</a></li>
-                        <li><a href="https://github.com/Niekes/angular-components">Repo</a></li>
+                        <li><a href="https://github.com/Niekes/d3js">Repo</a></li>
+                        <li><a href="./#/scatterplot">Scatterplot</a></li>
                     </ul>
+                    </div>
                 </nav>
+            </div>
 
+            <div class="row height85 noPadding">
+                <div class="col-lg-12 height100 noPadding" data-ui-view></div>
             </div>
-            <div class="row height90">
-                <div class="col-lg-12 height100" data-ui-view></div>
-            </div>
+
+            <footer class="row height5 text-center vertical-align-wrap">
+                <div class="vertical-align vertical-align--middle">
+                    Mady by Niekes
+                </div>
+            </footer>
+
         </div>
     </body>
 </html>

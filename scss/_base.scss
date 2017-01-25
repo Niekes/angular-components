@@ -2,18 +2,36 @@
 	font-family: 'Helvetica Neue';
 }
 
-.height100, html, body, .container-fluid, niekes-scatter-plot{
+.height100, html, body, .container-fluid{
 	height: 100%
 }
 
-niekes-scatter-plot{
-	display: block
+.height85{
+	height: 85%;
 }
 
-.height90{
-	height: 90%
+div.noPadding{
+	padding: 0;
 }
 
 .height10{
 	height: 10%
+}
+.height5{
+	height: 5%
+}
+
+.vertical-align-wrap {
+	position: absolute;
+	width: 100%;
+	display: table;
+
+}
+
+.vertical-align {
+	display: table-cell;
+}
+
+.vertical-align--middle {
+  	vertical-align: middle;
 }

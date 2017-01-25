@@ -1,0 +1,19 @@
+.widget{
+	display: block;
+	height: 100%;
+	width: 100%;
+
+	g.y.axis line{
+		stroke-dasharray: 3,3;
+		opacity: 0.3;
+	}
+
+	g.axis{
+		line, path{
+			stroke: lighten($gray-light, 20%);
+		}
+		text{
+			fill: lighten($gray-light, 20%);
+		}
+	}
+}

@@ -1,3 +1,5 @@
+'use strict';
+
 app.constant('DEFAULTS', {
-	'baseURL': 'https://niekes.github.io/angular-components/'
+	'baseURL': 'https://niekes.github.io/d3js/'
 });
