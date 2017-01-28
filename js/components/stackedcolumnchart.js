@@ -118,7 +118,6 @@ app.component('stackedColumnChart', {
 				.attr('height', function(d) { return yScale(0) - yScale(d.height); })
 				.attr('fill', function(d){ 	return color(d.name); });
 
-
 			bar
 				.exit()
 				.transition().duration(DEFAULTS.TRANSITION.TIME)
