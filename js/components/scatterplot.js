@@ -62,8 +62,6 @@ app.component('scatterPlot', {
 			var yMin = d3.min(data, function(d){return d.sum; });
 			var yMax = d3.max(data, function(d){ return d.sum; });
 
-			var gMax = d3.max(data, function(d){ return d.group; });
-
 			var xScale = d3.scaleTime()
 			    .range([0, width])
 			    .domain([
@@ -127,85 +125,53 @@ app.component('scatterPlot', {
 			//////////////// CIRCLES //////////////////
 			///////////////////////////////////////////
 			///////////////////////////////////////////
-			var circle = svg.select('g.circles').selectAll('circle').data(data); // UPDATE SELECTION
+			var circles = svg.select('g.labels').selectAll('path').data(data);
 
-			circle.enter().append('circle') // ENTER
+			circles.enter()
+				.append('path')
+				.attr('id', function(d, i) { return 'textPath_' + i; })
 				.style('fill', 'transparent')
 				.style('stroke-width', 1)
-				.attr('r', 0)
-				.attr('cx', function(d){ return xScale(d.date); })
-				.attr('cy', function(d){ return yScale(d.sum); })
-			.merge(circle) // ENTER + UPDATE
+				.attr('transform', function(d){ return 'translate(' + xScale(d.date) + ','+ yScale(d.sum) +') rotate(225)';	})
+				.attr('d', d3.symbol().size(1))
+			.merge(circles)
 				.transition().duration(transitionTime)
-				.attr('r', function(d){ return d.radius; })
-				.attr('cx', function(d){ return xScale(d.date); })
-				.attr('cy', function(d){ return yScale(d.sum); })
+				.attr('transform', function(d){ return 'translate(' + xScale(d.date) + ','+ yScale(d.sum) +') rotate(225)';	})
 				.style('fill', function(d){ return color(d.group); })
 				.style('stroke', function(d){ return color(d.group); })
+				.attr('d', d3.symbol().size(function(d){
+					return d.radius * d.radius * Math.PI;
+				}))
 				.style('fill-opacity', 0.6)
 				.style('stroke-opacity', 1);
 
-			circle.exit() // EXIT
+			circles.exit()
 				.transition().duration(transitionTime)
-				.attr('r', function(){ return 0; })
+				.style('fill-opacity', 0.6)
+				.style('stroke-opacity', 1)
+				.attr('d', d3.symbol().size(1))
 				.remove();
 
-			////////////////////////////////////////////
-			////////////////////////////////////////////
-			///////////////// LABELS ///////////////////
-			////////////////////////////////////////////
-			////////////////////////////////////////////
-
-			var radialLineGenerator = d3.radialLine()
-			  .curve(d3.curveBasis)
-			  .angle(function(d) {
-			    return d.a;
-			  })
-			  .radius(function(d) {
-			    return d.r;
-			  });
-
-			var textArc = svg.select('g.labels').selectAll('path').data(data);
-
-			textArc.enter()
-				.append('path')
-				.attr('id', function(d, i) { return 'textArc_' + i; })
-				.attr('fill', 'none')
-				.attr('stroke', 'none')
-				.attr('transform', function(d){ return 'translate(' + xScale(d.date) + ','+ yScale(d.sum) +')';	})
-			.merge(textArc)
-				.transition().duration(transitionTime)
-				.attr('transform', function(d){ return 'translate(' + xScale(d.date) + ','+ yScale(d.sum) +')';	})
-				.attr('d', function(d){
-					return radialLineGenerator([
-						{a: Math.PI * 1.5, r: d.radius + 10},
-						{a: Math.PI * 2.0, r: d.radius + 10},
-						{a: Math.PI * 0.5, r: d.radius + 10}
-					]);
-				})
-				.attr('opacity', 1);
-
-			textArc.exit()
-				.transition().duration(transitionTime)
-				.attr('opacity', 0)
-				.remove();
+			//////////////////////////////////////////
+			//////////////////////////////////////////
+			//////////////// LABELS //////////////////
+			//////////////////////////////////////////
+			//////////////////////////////////////////
 
 			var labels = svg.select('g.labels').selectAll('text').data(data);
 
 			labels.enter().append('text')
 				.attr('opacity', 1)
 				.attr('fill', d3.color('white'))
-				.attr('dy', 0)
-				.attr('x', function(d){
-					return 15 - d.name.length;
-				})
+				.attr('dy', -5)
+				.attr('x', 0)
+				.attr('text-anchor', 'start')
 				.style('font-size', 9)
-				.style('letter-spacing', 2)
 				.append('textPath')
-					.attr('xlink:href', function(d, i){ return '#textArc_' + i; })
+					.attr('xlink:href', function(d, i){ return '#textPath_' + i; })
 					.text(function(d){ return d.name; })
 			.merge(labels)
-				.transition().duration(transitionTime)
+				.transition().duration(transitionTime*3)
 				.attr('opacity', 1);
 
 			labels.exit()

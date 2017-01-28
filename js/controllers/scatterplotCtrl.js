@@ -18,7 +18,7 @@ app.controller('scatterplotCtrl', function($interval){
 			name: names[_randomIntBetweenMinMax(0, names.length-1)],
 			date: _randomDate(new Date(2010, 0, 1), new Date()),
 			sum:  _randomIntBetweenMinMax(-2000, 10000),
-			radius: _randomIntBetweenMinMax(4, 10),
+			radius: _randomIntBetweenMinMax(5, 15),
 			group: _randomIntBetweenMinMax(0, 2),
 		};
 	};
