@@ -12,7 +12,7 @@ app.component('stackedColumnChart', {
 		var svg;
 		var height;
 		var width;
-		var color = d3.scaleOrdinal(d3.schemeDark2.reverse());
+		var color = d3.scaleOrdinal(['#8e3032', '#bb3540', '#e74a62', '#f58b97']);
 		var transitionTime = 1000;
 
 		$stackedcolumnchartCtrl.init = function(){
