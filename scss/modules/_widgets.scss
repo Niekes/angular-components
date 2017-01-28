@@ -16,4 +16,15 @@
 			fill: lighten($gray-light, 20%);
 		}
 	}
+
+	g.axis.x.justText path{
+		stroke: transparent;
+	}
+
+	g.axis.x.noText{
+		stroke-dasharray: 3,3;
+		text{
+			fill: none;
+		}
+	}
 }

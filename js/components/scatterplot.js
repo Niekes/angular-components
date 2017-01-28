@@ -20,10 +20,8 @@ app.component('scatterPlot', {
 
 			angular.element(el).empty();
 
-			// MARGIN
 			var margin = {top: 40, right: 20, bottom: 30, left: 40};
 
-			// // WIDTH AND HEIGHT
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
 
@@ -163,7 +161,7 @@ app.component('scatterPlot', {
 			labels.enter().append('text')
 				.attr('opacity', 1)
 				.attr('fill', d3.color('white'))
-				.attr('dy', -5)
+				.attr('dy', -10)
 				.attr('x', 0)
 				.attr('text-anchor', 'start')
 				.style('font-size', 9)
