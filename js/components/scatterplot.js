@@ -165,16 +165,7 @@ app.component('scatterPlot', {
 			    return d.r;
 			  });
 
-			var points = [
-				{a: Math.PI * 1.5, r: 10},
-				{a: Math.PI * 2.0, r: 10},
-				{a: Math.PI * 0.5, r: 10},
-			];
-
-			var pathData = radialLineGenerator(points);
-
-
-			var textArc = svg.select('g.labels').selectAll('path').data(data); // UPDATE SELECTION
+			var textArc = svg.select('g.labels').selectAll('path').data(data);
 
 			textArc.enter()
 				.append('path')
@@ -209,6 +200,7 @@ app.component('scatterPlot', {
 					return 15 - d.name.length;
 				})
 				.style('font-size', 9)
+				.style('letter-spacing', 2)
 				.append('textPath')
 					.attr('xlink:href', function(d, i){ return '#textArc_' + i; })
 					.text(function(d){ return d.name; })

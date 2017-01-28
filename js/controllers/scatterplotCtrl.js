@@ -28,7 +28,7 @@ app.controller('scatterplotCtrl', function($interval){
 		for (var i = _randomIntBetweenMinMax(2, 100); i >= 0; i--) {
 			users.push(user());
 		}
-		$scatterplotCtrl.users = users;
+		$scatterplotCtrl.data = users;
 	}
 
 	updateData();

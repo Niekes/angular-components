@@ -18,6 +18,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'scatterplotCtrl',
         templateUrl: 'partials/scatterplot.html',
         data : { pageTitle: 'Scatterplot' },
+    })
+    .state('stackedcolumnchart', {
+        url: '/stackedcolumnchart',
+        controller: 'stackedcolumnchartCtrl',
+        controllerAs: 'stackedcolumnchartCtrl',
+        templateUrl: 'partials/stackedcolumnchart.html',
+        data : { pageTitle: 'Stacked Column Chart' },
     });
 
     $urlRouterProvider.otherwise('/');
