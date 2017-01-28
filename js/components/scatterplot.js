@@ -21,16 +21,11 @@ app.component('scatterPlot', {
 			angular.element(el).empty();
 
 			// MARGIN
-			var margin = {top: 20, right: 20, bottom: 30, left: 40};
+			var margin = {top: 40, right: 20, bottom: 30, left: 40};
 
 			// // WIDTH AND HEIGHT
-			// height = 500 - margin.left - margin.right;
-			// width  = 960 - margin.top - margin.bottom;
-
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
-
-			console.log(angular.element(el));
 
     		svg = d3.select(el).append('svg')
 				.attr('width', width + margin.left + margin.right)
@@ -51,8 +46,8 @@ app.component('scatterPlot', {
 			svg.append('g')
 				.attr('class', 'circles');
 
-			// svg.append('g')
-			// 	.attr('class', 'labels');
+			svg.append('g')
+				.attr('class', 'labels');
 		};
 
 		$scatterplotCtrl.$onChanges = function(changes){
@@ -72,8 +67,8 @@ app.component('scatterPlot', {
 			var xScale = d3.scaleTime()
 			    .range([0, width])
 			    .domain([
-			    	new Date(new Date(xMin).setMonth(xMin.getMonth())),
-			    	new Date(new Date(xMax).setMonth(xMax.getMonth()))
+			    	new Date(new Date(xMin).setMonth(xMin.getMonth()-3)),
+			    	new Date(new Date(xMax).setMonth(xMax.getMonth()+3))
 		    	]);
 
 			var yScale = d3.scaleLinear()
@@ -135,11 +130,11 @@ app.component('scatterPlot', {
 			var circle = svg.select('g.circles').selectAll('circle').data(data); // UPDATE SELECTION
 
 			circle.enter().append('circle') // ENTER
-				.style('fill', function(){ return 'transparent'; })
-				.attr('r', function(){ return 0; })
+				.style('fill', 'transparent')
+				.style('stroke-width', 1)
+				.attr('r', 0)
 				.attr('cx', function(d){ return xScale(d.date); })
 				.attr('cy', function(d){ return yScale(d.sum); })
-				.style('stroke-width', 1)
 			.merge(circle) // ENTER + UPDATE
 				.transition().duration(transitionTime)
 				.attr('r', function(d){ return d.radius; })
@@ -160,27 +155,71 @@ app.component('scatterPlot', {
 			///////////////// LABELS ///////////////////
 			////////////////////////////////////////////
 			////////////////////////////////////////////
-			// var labels = svg.select('g.labels').selectAll('text').data(data); // UPDATE SELECTION
 
-			// labels.enter().append('text')
-			// 	.attr('opacity', 0)
-			// 	.attr('x', function(d){ return xScale(d.date); })
-			// 	.attr('y', function(d){ return yScale(d.sum); })
-			// 	.attr('dy', - 10 )
+			var radialLineGenerator = d3.radialLine()
+			  .curve(d3.curveBasis)
+			  .angle(function(d) {
+			    return d.a;
+			  })
+			  .radius(function(d) {
+			    return d.r;
+			  });
 
-			// 	.attr('text-anchor', 'middle' )
-			// 	.text(function(d){ return d.name; })
-			// .merge(labels)
-			// 	.transition().duration(transitionTime)
-			// 	.attr('opacity', 1)
-			// 	.attr('fill', d3.color('white'))
-			// 	.attr('x', function(d){ return xScale(d.date); })
-			// 	.attr('y', function(d){ return yScale(d.sum); });
+			var points = [
+				{a: Math.PI * 1.5, r: 10},
+				{a: Math.PI * 2.0, r: 10},
+				{a: Math.PI * 0.5, r: 10},
+			];
 
-			// labels.exit() // EXIT
-			// 	.transition().duration(transitionTime)
-			// 	.attr('opacity', 0)
-			// 	.remove();
+			var pathData = radialLineGenerator(points);
+
+
+			var textArc = svg.select('g.labels').selectAll('path').data(data); // UPDATE SELECTION
+
+			textArc.enter()
+				.append('path')
+				.attr('id', function(d, i) { return 'textArc_' + i; })
+				.attr('fill', 'none')
+				.attr('stroke', 'none')
+				.attr('transform', function(d){ return 'translate(' + xScale(d.date) + ','+ yScale(d.sum) +')';	})
+			.merge(textArc)
+				.transition().duration(transitionTime)
+				.attr('transform', function(d){ return 'translate(' + xScale(d.date) + ','+ yScale(d.sum) +')';	})
+				.attr('d', function(d){
+					return radialLineGenerator([
+						{a: Math.PI * 1.5, r: d.radius + 10},
+						{a: Math.PI * 2.0, r: d.radius + 10},
+						{a: Math.PI * 0.5, r: d.radius + 10}
+					]);
+				})
+				.attr('opacity', 1);
+
+			textArc.exit()
+				.transition().duration(transitionTime)
+				.attr('opacity', 0)
+				.remove();
+
+			var labels = svg.select('g.labels').selectAll('text').data(data);
+
+			labels.enter().append('text')
+				.attr('opacity', 1)
+				.attr('fill', d3.color('white'))
+				.attr('dy', 0)
+				.attr('x', function(d){
+					return 15 - d.name.length;
+				})
+				.style('font-size', 9)
+				.append('textPath')
+					.attr('xlink:href', function(d, i){ return '#textArc_' + i; })
+					.text(function(d){ return d.name; })
+			.merge(labels)
+				.transition().duration(transitionTime)
+				.attr('opacity', 1);
+
+			labels.exit()
+				.transition().duration(transitionTime)
+				.attr('opacity', 0)
+				.remove();
 		};
 
 		$scatterplotCtrl.init();
