@@ -4,25 +4,52 @@ app.controller('piechartCtrl', function($interval){
 
 	var $piechartCtrl = this;
 
-	function row(d){
-		return {
-			2016: d['2016'],
-			Chrome : +d.Chrome,
-			Firefox : +d.Firefox,
-			IE : +d.IE,
-			Opera : +d.Opera,
-			Safari : +d.Safari,
-		};
+	function rndInt(min, max){
+		return Math.floor(d3.randomUniform(min, max)());
 	}
 
+	var dataSet = [
+		[
+			{name: 'A', value: rndInt(0,100)},
+			{name: 'B', value: rndInt(0,100)},
+			{name: 'C', value: rndInt(0,100)},
+			{name: 'D', value: rndInt(0,100)},
+			{name: 'E', value: rndInt(0,100)},
+		],
+		[
+			{name: 'A', value: rndInt(0,100)},
+			{name: 'B', value: rndInt(0,100)},
+			{name: 'C', value: rndInt(0,100)},
+			{name: 'D', value: rndInt(0,100)},
+			{name: 'E', value: rndInt(0,100)},
+		],
+		[
+			{name: 'A', value: rndInt(15,100)},
+			{name: 'C', value: rndInt(15,100)},
+			{name: 'D', value: rndInt(15,100)},
+			{name: 'E', value: rndInt(15,100)},
+		],
+		[
+			{name: 'A', value: rndInt(15,100)},
+			{name: 'B', value: rndInt(15,100)},
+			{name: 'D', value: rndInt(15,100)},
+			{name: 'E', value: rndInt(15,100)},
+		],
+		[
+			{name: 'A', value: rndInt(15,100)},
+			{name: 'B', value: rndInt(15,100)},
+			{name: 'C', value: rndInt(15,100)},
+			{name: 'D', value: rndInt(15,100)},
+			{name: 'E', value: rndInt(15,100)},
+		],
+	];
+
+	var i = 0;
 	function updateData(){
-
-		d3.csv('../data/browserstatistics_2016.csv', row, function(data){
-			$piechartCtrl.data = data;
-		});
-
+		$piechartCtrl.data  = dataSet[(i % dataSet.length)];
+		i++;
 	}
 
 	updateData();
-	// $interval(updateData, 5000);
+	$interval(updateData, 2000);
 });

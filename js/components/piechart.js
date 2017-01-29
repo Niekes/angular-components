@@ -5,13 +5,15 @@ app.component('pieChart', {
     	data: '<'
   	},
   	controllerAs: '$piechartCtrl',
-	controller: function($element){
+	controller: function($element, DEFAULTS){
 
 		var $piechartCtrl = this;
 		var el = $element[0];
 		var svg;
 		var height;
 		var width;
+		var arc;
+		var path;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
 
 		$piechartCtrl.init = function(){
@@ -44,41 +46,92 @@ app.component('pieChart', {
 
 			var radius = Math.min(width, height)/2;
 
-			var preparedData = $piechartCtrl.groupData(data, '2016');
-			var filteredData = preparedData.filter(function(d){ return d.key === 'May'; });
-
         	var pie = d3.pie()
-            	.value(function(d) { return d.value; });
+            	.value(function(d) { return d.value; })
+            	.sort(null);
 
-	        var arc = d3.arc()
+	        arc = d3.arc()
 	            .outerRadius(radius - 140)
 	            .innerRadius(radius)
 	            .padAngle(0.05)
 	            .cornerRadius(5);
 
-         	var g = svg.select('g.piechart').selectAll('g.arc')
-      			.data(pie(filteredData[0].value))
-    			.enter().append('g')
-      			.attr('class', 'arc');
+			var path = svg.select('g.piechart').selectAll('path.path');
+	        var data0 = path.data();
+         	var data1 = pie(data);
 
-  			g.append('path')
-      			.attr('d', arc)
-      			.style('fill', function(d) {return color(d.data.name); });
+     		path = path.data(data1, $piechartCtrl.key);
+
+	      	path
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+      			.attrTween('d', $piechartCtrl.arcTween);
+
+        	path
+        		.enter()
+        		.append('path')
+        		.attr('class', 'path')
+        		.attr('fill', 'transparent')
+        		.attr('stroke-opacity', 0)
+				.each(function(d, i) { this._current = $piechartCtrl.findNeighborArc(i, data0, data1, $piechartCtrl.key) || d; })
+      			.transition().duration(DEFAULTS.TRANSITION.TIME)
+      			.attr('stroke-opacity', 1)
+   				.attr('stroke', function(d) { return d3.rgb(color(d.data.name)).brighter(1); })
+      			.attr('fill-opacity', 1)
+   				.attr('fill', function(d) { return d3.rgb(color(d.data.name)).darker(1); })
+      			.attrTween('d', $piechartCtrl.arcTween);
+
+			path
+				.exit()
+				.datum(function(d, i) { return $piechartCtrl.findNeighborArc(i, data1, data0, $piechartCtrl.key) || d; })
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.attrTween('d', $piechartCtrl.arcTween)
+				.attr('stroke-opacity', 0)
+				.remove();
 		};
 
-		$piechartCtrl.groupData = function(data, accessor){
-			return d3.nest()
-				.key(function(d){ return d[accessor]; })
-				.rollup(function(v){
-					return [
-						{ name: 'Chrome', value: v[0].Chrome},
-						{ name: 'Firefox', value: v[0].Firefox},
-						{ name: 'IE', value: v[0].IE},
-						{ name: 'Opera', value: v[0].Opera},
-						{ name: 'Safari', value: v[0].Safari},
-					];
-				})
-				.entries(data);
+		$piechartCtrl.arcTween = function(d){
+    		var i = d3.interpolate(this._current, d);
+    		this._current = i(0);
+    		return function(t) {
+        		return arc(i(t));
+    		};
+		};
+
+		$piechartCtrl.key = function(d){
+    		return d.data.name;
+  		};
+
+  		// Thx to Mike Bostock
+  		// https://bl.ocks.org/mbostock/5682158
+		$piechartCtrl.findNeighborArc = function(i, data0, data1, key) {
+  			var d;
+  			return (d = $piechartCtrl.findPreceding(i, data0, data1, key)) ? {startAngle: d.endAngle, endAngle: d.endAngle}
+      			: (d = $piechartCtrl.findFollowing(i, data0, data1, key)) ? {startAngle: d.startAngle, endAngle: d.startAngle}
+      			: null;
+		};
+
+		$piechartCtrl.findPreceding = function(i, data0, data1, key) {
+			var m = data0.length;
+  			while (--i >= 0) {
+    			var k = key(data1[i]);
+    			for (var j = 0; j < m; ++j) {
+      				if (key(data0[j]) === k) {
+      					return data0[j];
+      				}
+    			}
+  			}
+		};
+
+		$piechartCtrl.findFollowing = function(i, data0, data1, key) {
+			var n = data1.length, m = data0.length;
+			while (++i < n) {
+	    		var k = key(data1[i]);
+	    		for (var j = 0; j < m; ++j) {
+	      			if (key(data0[j]) === k) {
+	      				return data0[j];
+	      			}
+	    		}
+ 			}
 		};
 
 		$piechartCtrl.init();
