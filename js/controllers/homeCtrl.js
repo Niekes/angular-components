@@ -2,7 +2,8 @@
 
 app.controller('homeCtrl', function(){
     this.sites = [
-    	{ name: 'Scatterplot', description: 'Scatterplot with curved text', url: 'scatterplot' },
-    	{ name: 'Stacked Column Chart', description: 'Stacked Column Chart with negative values', url: 'stackedcolumnchart' },
+    	{ name: 'Scatterplot', description: 'with curved text', state: 'scatterplot' },
+    	{ name: 'Stacked column chart', description: 'with negative values', state: 'stackedcolumnchart' },
+    	{ name: 'Pie chart', description: 'Pie chart', state: 'piechart' },
     ];
 });

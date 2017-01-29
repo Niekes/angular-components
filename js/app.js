@@ -25,6 +25,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'stackedcolumnchartCtrl',
         templateUrl: 'partials/stackedcolumnchart.html',
         data : { pageTitle: 'Stacked Column Chart' },
+    })
+    .state('piechart', {
+        url: '/piechart',
+        controller: 'piechartCtrl',
+        controllerAs: 'piechartCtrl',
+        templateUrl: 'partials/piechart.html',
+        data : { pageTitle: 'Pie Chart' },
     });
 
     $urlRouterProvider.otherwise('/');
