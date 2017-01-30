@@ -1,10 +1,9 @@
 'use strict';
 
-app.controller('homeCtrl', function(){
-    this.sites = [
-    	{ name: 'Scatterplot', description: 'with curved text', state: 'scatterplot' },
-    	{ name: 'Stacked column chart', description: 'with negative values', state: 'stackedcolumnchart' },
-    	{ name: 'Pie chart', description: 'Pie chart', state: 'piechart' },
-    	{ name: 'Text animation', description: 'Text animation', state: 'textanimation' },
-    ];
+app.controller('homeCtrl', function($state){
+
+	this.sites = $state.get().filter(function(site){
+		return site.data ? site.data.showInList : false;
+	});
+
 });
