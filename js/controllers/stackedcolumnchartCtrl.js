@@ -29,5 +29,5 @@ app.controller('stackedcolumnchartCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 10000);
+	$interval(updateData, 5000);
 });

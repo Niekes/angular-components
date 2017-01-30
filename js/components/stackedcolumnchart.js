@@ -99,7 +99,7 @@ app.component('stackedColumnChart', {
     		stack
     			.exit()
 				.transition().duration(DEFAULTS.TRANSITION.TIME)
-				.style('opacity', 0)
+				.attr('transform', 'translate(3000)')
 				.remove();
 
 			var bar = stack.merge(stackEnter).selectAll('rect.bar').data(function(d) { return d.values; }, function(d){	return d.name; });
