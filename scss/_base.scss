@@ -3,6 +3,10 @@
 	font-weight: $font-weight-light;
 }
 
+.monospace{
+	font-family: monospace, 'Lucida Console', 'Courier New', $raleway, sans-serif;
+}
+
 .height100, html, body, .container-fluid{
 	height: 100%
 }
@@ -26,7 +30,6 @@ div.noPadding{
 	position: absolute;
 	width: 100%;
 	display: table;
-
 }
 
 .vertical-align {

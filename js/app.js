@@ -32,6 +32,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         controllerAs: 'piechartCtrl',
         templateUrl: 'partials/piechart.html',
         data : { pageTitle: 'Pie Chart' },
+    })
+    .state('textanimation', {
+        url: '/textanimation',
+        controller: 'textanimationCtrl',
+        controllerAs: 'textanimationCtrl',
+        templateUrl: 'partials/textanimation.html',
+        data : { pageTitle: 'Text Animation' },
     });
 
     $urlRouterProvider.otherwise('/');

@@ -13,7 +13,6 @@ app.component('pieChart', {
 		var height;
 		var width;
 		var arc;
-		var path;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
 
 		$piechartCtrl.init = function(){
