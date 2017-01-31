@@ -50,7 +50,7 @@ app.component('pieChart', {
             	.sort(null);
 
 	        arc = d3.arc()
-	            .outerRadius(radius - 140)
+	            .outerRadius(radius - (radius/2))
 	            .innerRadius(radius)
 	            .padAngle(0.05)
 	            .cornerRadius(5);
