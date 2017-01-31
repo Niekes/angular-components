@@ -64,7 +64,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Gauge',
-            description: 'Gauge'
+            description: 'with number at the tip of the needle'
         },
     });
 
