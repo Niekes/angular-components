@@ -15,8 +15,8 @@ app.component('gauge', {
 		var transitionTime = 1000;
 		var needleLength;
 		var needleRadius;
-		var aqua = 'aqua';
 		var arc;
+		var bg = d3.color(DEFAULTS.COLORS.BG);
 
 		$gaugeCtrl.init = function(){
 
@@ -41,22 +41,6 @@ app.component('gauge', {
 				.append('g')
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-			var gradient = svg.append('defs')
-				.append('radialGradient')
-				.attr('id', 'gradient')
-				.attr('gradientUnits', 'userSpaceOnUse')
-    			.attr('cx', 0)
-    			.attr('cy', 0)
-    			.attr('r', '40%');
-
-			gradient.append('stop')
-				.attr('offset', '0%')
-				.attr('stop-color', d3.color(aqua).brighter(2));
-
-			gradient.append('stop')
-				.attr('offset', '100%')
-				.attr('stop-color', d3.color(aqua).darker(3));
-
 			var gauge = svg.append('g')
 				.attr('class', 'gauge')
 				.attr('opacity', 0)
@@ -64,41 +48,39 @@ app.component('gauge', {
 
 			gauge
 				.append('path')
-					.attr('class', 'arcIndicator')
-					.datum({ endAngle: -Math.PI/2 })
-    				.style('fill-opacity', 0.5)
-    				.attr('d', arc);
-
-			gauge
-				.append('path')
 					.attr('class', 'arc')
 					.datum({ endAngle: -Math.PI/2 })
-    				.style('fill', 'none')
-    				.style('stroke', d3.color(aqua).darker())
-    				.attr('stroke-width', 5)
+    				.style('fill', bg.brighter(0.5))
     				.transition().duration(transitionTime*2)
     				.attrTween('d', $gaugeCtrl.arcTween(Math.PI/2));
 
 			gauge
 				.append('path')
+					.attr('class', 'arcIndicator')
+					.datum({ endAngle: -Math.PI/2 })
+    				.style('fill-opacity', 0.6)
+    				.attr('d', arc);
+
+			gauge
+				.append('path')
 					.attr('class', 'needle')
-					.attr('fill', d3.color(aqua).darker(3))
-					.attr('stroke', d3.color(aqua).brighter());
+					.attr('fill', bg.brighter(2))
+					.attr('stroke', bg.brighter(4));
 
 			gauge
 				.append('text')
 				.attr('class', 'valueText')
 				.classed('monospace', true)
 				.attr('font-size', 30)
-				.attr('fill', d3.color(DEFAULTS.COLORS.BG).brighter(5))
+				.attr('fill', 'transparent')
 				.attr('text-anchor', 'middle')
 				.attr('dy', '0.25em')
 				.text('0');
 
 			gauge
 				.append('circle')
-				.attr('fill', d3.color(DEFAULTS.COLORS.BG))
-				.attr('stroke', d3.color(aqua).darker(2))
+				.attr('fill', bg.darker(0.25))
+				.attr('stroke', bg.brighter(4))
 				.attr('r', needleRadius);
 
 			gauge
@@ -135,7 +117,9 @@ app.component('gauge', {
 
 			arcIndicator
 				.transition().duration(transitionTime)
-				.style('fill', 'url(#gradient)')
+				.attr('fill', d3.interpolateRdYlGn(data))
+				.attr('stroke', d3.color(d3.interpolateRdYlGn(data)))
+				.attr('stroke-width', 2)
 				.attrTween('d', $gaugeCtrl.arcTween( -Math.PI/2 + rads ));
 
 			var valueText = gauge.select('text.valueText');
@@ -158,7 +142,8 @@ app.component('gauge', {
 						var textY = Math.sin(iRads/2)*(-needleLength-30);
 						that.attr('transform', 'translate('+ textX +',' + textY +')');
 					};
-				});
+				})
+				.attr('fill', d3.interpolateRdYlGn(data));
 		};
 
 		$gaugeCtrl.arcTween = function(newAngle){
