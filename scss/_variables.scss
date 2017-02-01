@@ -4,3 +4,15 @@ $raleway: 'Overpass';
 $font-weight-light: 300;
 $font-weight-medium: 400;
 $font-weight-bold: 700;
+
+.font-weight-light{
+	font-weight: $font-weight-light
+}
+
+.font-weight-medium{
+	font-weight: $font-weight-medium
+}
+
+.font-weight-bold{
+	font-weight: $font-weight-bold
+}

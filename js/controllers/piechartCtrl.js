@@ -10,18 +10,18 @@ app.controller('piechartCtrl', function($interval){
 
 	var dataSet = [
 		[
-			{name: 'A', value: rndInt(0,100)},
-			{name: 'B', value: rndInt(0,100)},
-			{name: 'C', value: rndInt(0,100)},
-			{name: 'D', value: rndInt(0,100)},
-			{name: 'E', value: rndInt(0,100)},
+			{name: 'A', value: rndInt(15,100)},
+			{name: 'B', value: rndInt(15,100)},
+			{name: 'C', value: rndInt(15,100)},
+			{name: 'D', value: rndInt(15,100)},
+			{name: 'E', value: rndInt(15,100)},
 		],
 		[
-			{name: 'A', value: rndInt(0,100)},
-			{name: 'B', value: rndInt(0,100)},
-			{name: 'C', value: rndInt(0,100)},
-			{name: 'D', value: rndInt(0,100)},
-			{name: 'E', value: rndInt(0,100)},
+			{name: 'A', value: rndInt(15,100)},
+			{name: 'B', value: rndInt(15,100)},
+			{name: 'C', value: rndInt(15,100)},
+			{name: 'D', value: rndInt(15,100)},
+			{name: 'E', value: rndInt(15,100)},
 		],
 		[
 			{name: 'A', value: rndInt(15,100)},
@@ -34,13 +34,16 @@ app.controller('piechartCtrl', function($interval){
 			{name: 'B', value: rndInt(15,100)},
 			{name: 'D', value: rndInt(15,100)},
 			{name: 'E', value: rndInt(15,100)},
+			{name: 'F', value: rndInt(15,100)},
+			{name: 'G', value: rndInt(15,100)},
+			{name: 'H', value: rndInt(15,100)},
+			{name: 'I', value: rndInt(15,100)},
 		],
 		[
 			{name: 'A', value: rndInt(15,100)},
 			{name: 'B', value: rndInt(15,100)},
-			{name: 'C', value: rndInt(15,100)},
 			{name: 'D', value: rndInt(15,100)},
-			{name: 'E', value: rndInt(15,100)},
+			{name: 'H', value: rndInt(15,100)},
 		],
 	];
 
@@ -51,5 +54,5 @@ app.controller('piechartCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 2000);
+	$interval(updateData, 5000);
 });

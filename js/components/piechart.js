@@ -43,15 +43,16 @@ app.component('pieChart', {
 
 		$piechartCtrl.update = function(el, data){
 
-			var radius = Math.min(width, height)/2;
+			var outerRadius = Math.min(width, height)/2;
+			var innerRadius = outerRadius - (outerRadius/2);
 
         	var pie = d3.pie()
             	.value(function(d) { return d.value; })
             	.sort(null);
 
 	        arc = d3.arc()
-	            .outerRadius(radius - (radius/2))
-	            .innerRadius(radius)
+	            .outerRadius(outerRadius)
+	            .innerRadius(innerRadius)
 	            .padAngle(0.05)
 	            .cornerRadius(5);
 
@@ -86,6 +87,100 @@ app.component('pieChart', {
 				.attrTween('d', $piechartCtrl.arcTween)
 				.attr('stroke-opacity', 0)
 				.remove();
+
+			var labels = svg.select('g.piechart').selectAll('text.labels').data(data, function(d){ return d.name; });
+
+			labels
+				.enter()
+				.append('text')
+				.attr('class', 'labels')
+				.attr('opacity', 0)
+				.attr('text-anchor', 'middle')
+				.attr('font-size', 30)
+				.attr('fill', d3.color(DEFAULTS.COLORS.BG).brighter(3))
+				.classed('font-weight-bold', true)
+				.attr('x', -10)
+			.merge(labels)
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.attr('opacity', 1)
+				.attr('y', function(d, i){
+					return i * 30 - (data.length*10);
+				})
+				.text(function(d){
+					return d.name;
+				});
+
+			labels
+				.exit()
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.attr('opacity', 0)
+				.remove();
+
+			var values = svg.select('g.piechart').selectAll('text.values').data(data, function(d){ return d.name; });
+
+			values
+				.enter()
+				.append('text')
+				.attr('class', 'values')
+				.attr('opacity', 0)
+				.attr('text-anchor', 'end')
+				.attr('font-size', 30)
+				.attr('fill', d3.color(DEFAULTS.COLORS.BG).brighter(3))
+				.classed('font-weight-light', true)
+				.attr('x', 40)
+			.merge(values)
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.attr('opacity', 1)
+				.attr('y', function(d, i){
+					return i * 30 - (data.length*10);
+				})
+				.tween('text', function(d){
+            		var that = d3.select(this);
+            		var i = d3.interpolateNumber(that.text(), d.value);
+					return function(t) {
+						that.text(Math.floor(i(t)));
+					};
+				});
+
+			values
+				.exit()
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.tween('text', function(){
+            		var that = d3.select(this);
+            		var i = d3.interpolateNumber(that.text(), 0);
+					return function(t) {
+						that.text(Math.floor(i(t)));
+					};
+				})
+				.attr('opacity', 0)
+				.remove();
+
+			var labelPoints = svg.select('g.piechart').selectAll('circle.labelPoints').data(data, function(d){ return d.name; });
+
+			labelPoints
+				.enter()
+				.append('circle')
+				.attr('class', 'labelPoints')
+				.attr('fill', 'transparent')
+				.attr('cx', 0)
+				.attr('cx', -40)
+			.merge(labelPoints)
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.attr('opacity', 1)
+				.attr('fill', function(d){ return color(d.name); })
+				.attr('r', 3)
+				.attr('cy', function(d, i){
+					return i * 30 - (data.length*10) - 10;
+				})
+				.attr('cx', -40);
+
+			labelPoints
+				.exit()
+				.transition().duration(DEFAULTS.TRANSITION.TIME)
+				.attr('r', 0)
+				.attr('opacity', 0)
+				.remove();
+
 		};
 
 		$piechartCtrl.arcTween = function(d){
