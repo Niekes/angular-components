@@ -46,6 +46,10 @@
                         <ul>
                             <li><a data-ui-sref="home"><img src="./img/home_icon.white.svg"></a></li>
                             <li><a href="https://github.com/Niekes/d3js"><img src="./img/github_logo.white.svg"></a></li>
+                            <li class="stateInfo">
+                                <span data-ng-bind="$state.current.data.pageTitle"></span>
+                                <span data-ng-bind="$state.current.data.description"></span>
+                            </li>
                         </ul>
                     </div>
                 </nav>

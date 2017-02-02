@@ -1,6 +1,29 @@
-.homeUl{
+ul.homeUl{
+
+	@include row;
 	list-style: none;
-	a{
+	padding: 30px 15px;
+
+	a:hover{
+		text-decoration: none !important;
+	}
+
+	span{
 		color: #33b79b;
+	}
+
+	em span{
+		color: $gray-lighter
+	}
+
+	li{
+		padding-bottom: 30px;
+		text-align: center;
+		@include col(1, 4);
+		div{
+			border-radius: 5px;
+			padding: 15px;
+			background-color: lighten($body-bg,5%);
+		}
 	}
 }

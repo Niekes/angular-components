@@ -10,7 +10,10 @@ app.config(function($stateProvider, $urlRouterProvider){
         controller: 'homeCtrl',
         controllerAs: 'homeCtrl',
         templateUrl: 'partials/home.html',
-        data : { pageTitle: 'Home' }
+        data : {
+            pageTitle: 'd3 portfolio',
+            description: 'by niekes'
+        }
     })
     .state('scatterplot', {
         url: '/scatterplot',
@@ -42,7 +45,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Pie Chart',
-            description: 'Pie chart'
+            description: 'with padding and rounded corners'
         }
     })
     .state('textanimation', {

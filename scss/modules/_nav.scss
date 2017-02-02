@@ -13,6 +13,21 @@ nav{
 			img{
 				height: 2em;
 			}
+			&:first-child{
+				padding-left: 0px;
+			}
+			&.stateInfo{
+				vertical-align: middle !important;
+				font-size: 1.8em !important;
+				span:first-child{
+					border-left: 1px solid lighten($body-bg, 10%);
+					padding-left: 15px;
+				}
+				span:nth-child(2){
+					margin-left: 10px;
+					color: lighten($body-bg, 60%);
+				}
+			}
 		}
 	}
 }

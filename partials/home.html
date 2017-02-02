@@ -1,6 +1,11 @@
 <ul class="homeUl">
 	<li data-ng-repeat="site in homeCtrl.sites">
-		<a data-ui-sref="{{site.name}}"><span data-ng-bind="site.data.pageTitle"></span></a>
-		<em><span data-ng-bind="site.data.description"></span></em>
+		<a data-ui-sref="{{site.name}}">
+			<div>
+				<span data-ng-bind="site.data.pageTitle"></span>
+				<br>
+				<em><span data-ng-bind="site.data.description"></span></em>
+			</div>
+		</a>
 	</li>
 </ul>
