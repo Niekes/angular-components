@@ -15,16 +15,38 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
-    .state('scatterplot', {
-        url: '/scatterplot',
-        controller: 'scatterplotCtrl',
-        controllerAs: 'scatterplotCtrl',
-        templateUrl: 'partials/scatterplot.html',
+    .state('treemap', {
+        url: '/treemap',
+        controller: 'treemapCtrl',
+        controllerAs: 'treemapCtrl',
+        templateUrl: 'partials/treemap.html',
         data : {
             showInList: true,
-            pageTitle: 'Scatterplot',
-            description: 'with curved text'
+            pageTitle: 'Treemap',
+            description: 'with ...'
         }
+    })
+    .state('gauge', {
+        url: '/gauge',
+        controller: 'gaugeCtrl',
+        controllerAs: 'gaugeCtrl',
+        templateUrl: 'partials/gauge.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Gauge',
+            description: 'with number at the tip of the needle'
+        },
+    })
+    .state('textanimation', {
+        url: '/textanimation',
+        controller: 'textanimationCtrl',
+        controllerAs: 'textanimationCtrl',
+        templateUrl: 'partials/textanimation.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Text Animation',
+            description: 'interpolate between two numeric values'
+        },
     })
     .state('stackedcolumnchart', {
         url: '/stackedcolumnchart',
@@ -48,27 +70,16 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'with padding and rounded corners'
         }
     })
-    .state('textanimation', {
-        url: '/textanimation',
-        controller: 'textanimationCtrl',
-        controllerAs: 'textanimationCtrl',
-        templateUrl: 'partials/textanimation.html',
+    .state('scatterplot', {
+        url: '/scatterplot',
+        controller: 'scatterplotCtrl',
+        controllerAs: 'scatterplotCtrl',
+        templateUrl: 'partials/scatterplot.html',
         data : {
             showInList: true,
-            pageTitle: 'Text Animation',
-            description: 'interpolate between two numeric values'
-        },
-    })
-    .state('gauge', {
-        url: '/gauge',
-        controller: 'gaugeCtrl',
-        controllerAs: 'gaugeCtrl',
-        templateUrl: 'partials/gauge.html',
-        data : {
-            showInList: true,
-            pageTitle: 'Gauge',
-            description: 'with number at the tip of the needle'
-        },
+            pageTitle: 'Scatterplot',
+            description: 'with curved text'
+        }
     });
 
     $urlRouterProvider.otherwise('/');
