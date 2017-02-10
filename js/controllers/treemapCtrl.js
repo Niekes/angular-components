@@ -3,18 +3,15 @@
 app.controller('treemapCtrl', function($interval){
 
 	var $treemapCtrl = this;
-	var d1 = { 'name': 'Eve', 'children': [ { 'name': 'Cain' }, { 'name': 'Seth', 'children': [ { 'name': 'Enos' }, { 'name': 'Noam' } ] }, { 'name': 'Abel' }, { 'name': 'Awan', 'children': [ { 'name': 'Enoch' } ] }, { 'name': 'Azura' } ] };
-	var d2 = { 'name': 'Eve', 'children': [ { 'name': 'Cain' }, { 'name': 'Seth', 'children': [ { 'name': 'Enos' }, { 'name': 'Noam' }, { 'name': 'Kallo' }, { 'name': 'Jochen' } ] }, { 'name': 'Abel' }, { 'name': 'Awan', 'children': [ { 'name': 'Enoch' }, { 'name': 'Harry' } ] }, { 'name': 'Azura' } ] };
-	var i = 0;
+	var d1 = { 'name': 'Eve', 'children': [ { 'name': 'Cain', 'value': 3 }, { 'name': 'Seth', 'value': 2 }, { 'name': 'Abel', 'value': 1 }, { 'name': 'Awan', 'value': 1 }, { 'name': 'Azura', 'value': 0.5 } ] };
+
 	function updateData(){
-		$treemapCtrl.data = i % 2 === 0 ? d1 : d2;
-		// console.log(i % 2 === 0 ? d1 : d2);
-		i++;
+		$treemapCtrl.data = d1;
 	}
 
 	updateData();
 
-	$interval(function(){
-		updateData();
-	}, 2500);
+	// $interval(function(){
+	// 	updateData();
+	// }, 10000);
 });
