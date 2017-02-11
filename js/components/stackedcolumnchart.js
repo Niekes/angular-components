@@ -58,7 +58,7 @@ app.component('stackedColumnChart', {
 
 			var xScale = d3.scaleBand()
 				.domain(stackedData.map(function(d){ return d.name; }))
-				.rangeRound([0, width ])
+				.rangeRound([0, width])
 				.padding(0.5);
 
 			var yScale = d3.scaleLinear()

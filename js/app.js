@@ -15,6 +15,17 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('histogram', {
+        url: '/histogram',
+        controller: 'histogramCtrl',
+        controllerAs: 'histogramCtrl',
+        templateUrl: 'partials/histogram.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Histogram',
+            description: 'for image'
+        }
+    })
     .state('treemap', {
         url: '/treemap',
         controller: 'treemapCtrl',
