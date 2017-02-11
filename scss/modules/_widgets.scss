@@ -1,3 +1,27 @@
+div.widgetMenu{
+	position: absolute;
+	top: 25px;
+	color: black;
+	width: 100%;
+	text-align: center;
+	z-index: 1000;
+	select{
+		border-radius:0;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		width: auto;
+		padding: 5px 10px 5px 10px;
+		background-color: lighten($body-bg, 10%);
+		color: $gray-lighter;
+		cursor: pointer;
+		&:focus, &:active{
+			outline: none;
+			box-shadow: none;
+		}
+	}
+}
+
 .widget{
 	display: block;
 	height: 100%;
@@ -30,5 +54,11 @@
 
 	text.textValue{
 		content: '%'
+	}
+
+	.brush{
+		.selection{
+			fill-opacity: 0.1;
+		}
 	}
 }

@@ -1,3 +1,7 @@
+<div class="widgetMenu">
+	<select data-ng-change="histogramCtrl.updateData()" data-ng-model="histogramCtrl.defaultImage" data-ng-options="image.name for image in histogramCtrl.images"></select>
+</div>
+
 <div class="height50">
 	<canvas id="canvas"></canvas>
 </div>

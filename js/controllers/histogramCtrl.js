@@ -1,33 +1,23 @@
 'use strict';
 
-app.controller('histogramCtrl', function($timeout){
+app.controller('histogramCtrl', function(){
 
 	var $histogramCtrl = this;
 
-	var img = new Image();
-    var	canvas = document.getElementById('canvas');
-    var	context = canvas.getContext('2d');
-    var	src = '../../img/cameraman.png';
-    var imageData;
+    $histogramCtrl.images = [
+      	{name:'Cameraman', src: '../../img/cameraman.jpg'},
+      	{name:'Lena', src: '../../img/lena.jpg'},
+      	{name:'Airplane', src: '../../img/airplane.jpg'},
+      	{name:'Peppers', src: '../../img/peppers.jpg'},
+      	{name:'Lake', src: '../../img/lake.jpg'},
+      	{name:'Baboon', src: '../../img/baboon.jpg'},
+    ];
 
-	img.crossOrigin = 'Anonymous';
+    $histogramCtrl.defaultImage = $histogramCtrl.images[0];
 
-	img.onload = function() {
-    	canvas.width = this.width;
-    	canvas.height = this.height;
-    	context.drawImage(img, 0, 0);
-		imageData = context.getImageData(0, 0, this.width, this.height).data;
+	$histogramCtrl.updateData = function(){
+		$histogramCtrl.data = $histogramCtrl.defaultImage;
 	};
 
-	img.src = src;
-
-	function updateData(){
-		$histogramCtrl.data = imageData;
-	}
-
-	$timeout(function() {
-		updateData();
-	}, 100);
-
-
+	$histogramCtrl.updateData();
 });

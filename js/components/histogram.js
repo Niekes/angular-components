@@ -12,6 +12,9 @@ app.component('histogram', {
 		var svg;
 		var height;
 		var width;
+		var	canvas = document.getElementById('canvas');
+    	var	context = canvas.getContext('2d');
+    	var x;
 		var min = 0;
 		var max = 255;
 
@@ -41,6 +44,9 @@ app.component('histogram', {
 
 			svg.append('g')
 				.attr('class', 'bars');
+
+			svg.append('g')
+				.attr('class', 'brush');
 		};
 
 		$histogramCtrl.$onChanges = function(changes){
@@ -49,50 +55,81 @@ app.component('histogram', {
 
 		$histogramCtrl.update = function(el, data){
 
-			var domain = d3.range(max + 1).map(function(){ return 0; });
-			var image = $histogramCtrl.retrieveImgData(data, domain);
+			var img = new Image();
 
-			var x = d3.scaleBand()
-				.domain(d3.range(max + 1))
-    			.range([0, width]);
+			img.onload = function() {
 
-			var y = d3.scaleLinear()
-				.domain([min, d3.max(image.histogram.values)])
-          		.rangeRound([height, min])
-          		.nice();
+				var w = this.width;
+				var h = this.height;
 
-			var xAxis = d3.axisBottom(x).tickValues([]);
-			var yAxis = d3.axisLeft(y);
+				context.clearRect(0, 0, w, h);
+		    	canvas.width = w;
+		    	canvas.height = h;
+		    	context.drawImage(img, 0, 0);
 
-		    svg.select('g.x.axis').transition().duration(DEFAULTS.TRANSITION.TIME).attr('opacity', 1).call(xAxis);
-		    svg.select('g.y.axis').transition().duration(DEFAULTS.TRANSITION.TIME).attr('opacity', 1).call(yAxis);
+		    	var brush = d3.brushX()
+    				.extent([[0, 0], [width, height]])
+    				.on('end', $histogramCtrl.brushed);
 
-		    var bar = svg.select('g.bars').selectAll('rect.bar').data(image.histogram.values);
+				var data = context.getImageData(0, 0, w, h).data;
+				var image = $histogramCtrl.retrieveImgData(data);
+				var rangeband = width/image.histogram.values.length;
 
-		    bar
-		    	.enter()
-		    	.append('rect')
-		    	.attr('class', 'bar')
-		    	.attr('x', function(d, i){ return x(i); })
-		    	.attr('y', height)
-		    	.attr('width', x.bandwidth())
-		    	.attr('height', 0)
-			.merge(bar)
-				.transition().duration(DEFAULTS.TRANSITION.TIME)
-		    	.attr('x', function(d, i){ return x(i); })
-		    	.attr('y', function(d){ return isNaN(y(d)) ? 0 : y(d); })
-		    	.attr('width', x.bandwidth())
-		    	.attr('height', function(d){ return isNaN(y(d)) ? 0 : height - y(d); });
+				x = d3.scaleLinear()
+					.domain([min - 1, max])
+    				.range([0, width]);
 
-	    	bar
-	    		.exit()
-	    		.transition().duration(DEFAULTS.TRANSITION.TIME)
-	    		.remove();
+				var y = d3.scaleLinear()
+					.domain([min, d3.max(image.histogram.values)])
+	          		.range([height, min])
+	          		.nice();
 
+				var xAxis = d3.axisBottom(x).tickValues([max]);
+				var yAxis = d3.axisLeft(y);
+
+			    svg.select('g.x.axis').transition().duration(DEFAULTS.TRANSITION.TIME).attr('opacity', 1).call(xAxis);
+			    svg.select('g.y.axis').transition().duration(DEFAULTS.TRANSITION.TIME).attr('opacity', 1).call(yAxis);
+
+			    var bar = svg.select('g.bars').selectAll('rect.bar').data(image.histogram.values);
+
+			    bar
+			    	.enter()
+			    	.append('rect')
+			    	.attr('class', 'bar')
+			    	.attr('x', function(d, i){ return x(i); })
+			    	.attr('y', height)
+			    	.attr('width', rangeband)
+			    	.attr('height', 0)
+				.merge(bar)
+					.transition().duration(DEFAULTS.TRANSITION.TIME)
+			    	.attr('x', function(d, i){ return x(i); })
+			    	.attr('y', function(d){ return isNaN(y(d)) ? 0 : y(d); })
+			    	.attr('width', rangeband)
+			    	.attr('height', function(d){ return isNaN(y(d)) ? 0 : height - y(d); });
+
+		    	bar
+		    		.exit()
+		    		.transition().duration(DEFAULTS.TRANSITION.TIME)
+		    		.remove();
+
+	    		// svg
+	    		// 	.select('g.brush')
+	    		// 	.call(brush)
+	    		// 	.call(brush.move, [0, width]);
+
+				};
+
+			img.src = data.src;
 		};
 
-		$histogramCtrl.retrieveImgData = function(data, histo){
-			var image = {values : [], histogram: { values: histo}};
+		$histogramCtrl.brushed = function(){
+			var s = d3.event.selection;
+			 var sx = s.map(x.invert);
+			console.log(sx);
+		};
+
+		$histogramCtrl.retrieveImgData = function(data){
+			var image = {values : [], histogram: { values: d3.range(max + 1).map(function(){ return 0; })}};
 			var counter = 0;
 			for (var i = 0; i < data.length; i += 4) {
 				image.values[counter] = {
@@ -110,16 +147,13 @@ app.component('histogram', {
 				image.histogram.values[pixel.grayscale]++;
     		});
 
-    		var max = d3.max(image.histogram.values);
+    		var maxValue = d3.max(image.histogram.values);
 
     		image.histogram.mode = {
-    			pixel: max,
-    			value: image.histogram.values.indexOf(max)
+    			pixel: maxValue,
+    			value: image.histogram.values.indexOf(maxValue)
     		};
     		image.histogram.mean = d3.mean(image.histogram.values);
-    		image.histogram.sum = d3.sum(image.histogram.values);
-
-    		console.log(image.histogram);
 
     		return image;
 		};

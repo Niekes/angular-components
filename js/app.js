@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Histogram',
-            description: 'for image'
+            description: 'for images'
         }
     })
     .state('treemap', {
