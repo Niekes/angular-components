@@ -69,7 +69,8 @@ app.component('histogram', {
 
 		    	var brush = d3.brushX()
     				.extent([[0, 0], [width, height]])
-    				.on('end', $histogramCtrl.brushed);
+    				.on('end', $histogramCtrl.brushed)
+    				.on('brush', $histogramCtrl.brush);
 
 				var data = context.getImageData(0, 0, w, h).data;
 				var image = $histogramCtrl.retrieveImgData(data);
@@ -112,10 +113,11 @@ app.component('histogram', {
 		    		.transition().duration(DEFAULTS.TRANSITION.TIME)
 		    		.remove();
 
-	    		// svg
-	    		// 	.select('g.brush')
-	    		// 	.call(brush)
-	    		// 	.call(brush.move, [0, width]);
+	    		svg
+	    			.select('g.brush')
+	    			.call(brush)
+	    			.transition().duration(DEFAULTS.TRANSITION.TIME)
+	    			.call(brush.move, [0, width]);
 
 				};
 
@@ -124,8 +126,17 @@ app.component('histogram', {
 
 		$histogramCtrl.brushed = function(){
 			var s = d3.event.selection;
-			 var sx = s.map(x.invert);
-			console.log(sx);
+			var sx = s.map(x.invert);
+			var start = sx[0] === -1 ? 0 : parseInt(sx[0]);
+			var end = parseInt(sx[1]);
+			console.log(start, end);
+		};
+
+		$histogramCtrl.brush = function(){
+			var selection = d3.select(this).select('rect.selection');
+			var w = selection.attr('width');
+			var h = selection.attr('height');
+			selection.attr('stroke-dasharray', '0,' + w + ',' + h + ',' + w + ',' + h);
 		};
 
 		$histogramCtrl.retrieveImgData = function(data){

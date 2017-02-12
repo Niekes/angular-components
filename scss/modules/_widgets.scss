@@ -56,9 +56,10 @@ div.widgetMenu{
 		content: '%'
 	}
 
-	.brush{
-		.selection{
+	g.brush{
+		rect.selection{
 			fill-opacity: 0.1;
+			stroke-width: 1
 		}
 	}
 }
