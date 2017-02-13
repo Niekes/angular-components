@@ -13,10 +13,14 @@ app.component('histogram', {
 		var height;
 		var width;
 		var	canvas = document.getElementById('canvas');
+		var cvs = document.createElement('canvas');
     	var	context = canvas.getContext('2d');
-    	var x;
-		var min = 0;
+    	var	ctx = cvs.getContext('2d');
 		var max = 255;
+		var min = 0;
+    	var x;
+    	var w;
+    	var h;
 
 		$histogramCtrl.init = function(){
 
@@ -59,21 +63,24 @@ app.component('histogram', {
 
 			img.onload = function() {
 
-				var w = this.width;
-				var h = this.height;
+				w = this.width;
+				h = this.height;
 
 				context.clearRect(0, 0, w, h);
 		    	canvas.width = w;
 		    	canvas.height = h;
+		    	cvs.width = w;
+		    	cvs.height = h;
 		    	context.drawImage(img, 0, 0);
+		    	ctx.drawImage(canvas, 0, 0);
 
 		    	var brush = d3.brushX()
     				.extent([[0, 0], [width, height]])
     				.on('end', $histogramCtrl.brushed)
     				.on('brush', $histogramCtrl.brush);
 
-				var data = context.getImageData(0, 0, w, h).data;
-				var image = $histogramCtrl.retrieveImgData(data);
+    			var imageData = context.getImageData(0, 0, w, h);
+				var image = $histogramCtrl.retrieveImgData(imageData.data);
 				var rangeband = width/image.histogram.values.length;
 
 				x = d3.scaleLinear()
@@ -127,9 +134,30 @@ app.component('histogram', {
 		$histogramCtrl.brushed = function(){
 			var s = d3.event.selection;
 			var sx = s.map(x.invert);
-			var start = sx[0] === -1 ? 0 : parseInt(sx[0]);
-			var end = parseInt(sx[1]);
-			console.log(start, end);
+			var min = sx[0] === -1 ? 0 : parseInt(sx[0]);
+			var max = parseInt(sx[1]);
+			$histogramCtrl.changeContrast(min, max);
+		};
+
+		function contrast(d, min, max){
+			return 255*(d-min)/(max-min);
+		}
+
+		$histogramCtrl.changeContrast = function(min, max){
+
+			var copyCanvas = document.createElement('canvas');
+			copyCanvas.width = w;
+			copyCanvas.height = h;
+			var	copyContext = copyCanvas.getContext('2d');
+			copyContext.drawImage(cvs, 0, 0);
+
+			var imageData = copyContext.getImageData(0, 0, w, h);
+			for (var i = 0; i < imageData.data.length; i += 4) {
+      			imageData.data[i]     = contrast(imageData.data[i], min, max);     // red
+      			imageData.data[i + 1] = contrast(imageData.data[i + 1], min, max); // green
+      			imageData.data[i + 2] = contrast(imageData.data[i + 2], min, max); // blue
+    		}
+			context.putImageData(imageData, 0, 0);
 		};
 
 		$histogramCtrl.brush = function(){
