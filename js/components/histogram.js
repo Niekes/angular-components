@@ -157,7 +157,6 @@ app.component('histogram', {
       			imageData.data[i + 1] = contrast(imageData.data[i + 1], min, max); // green
       			imageData.data[i + 2] = contrast(imageData.data[i + 2], min, max); // blue
     		}
-    		console.log(imageData.data);
 			context.putImageData(imageData, 0, 0);
 		};
 
