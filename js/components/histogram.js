@@ -134,8 +134,8 @@ app.component('histogram', {
 		$histogramCtrl.brushed = function(){
 			var s = d3.event.selection;
 			var sx = s.map(x.invert);
-			var min = sx[0] === -1 ? 0 : sx[0])
-			var max = sx[1])
+			var min = sx[0] === -1 ? 0 : parseInt(sx[0]);
+			var max = parseInt(sx[1]);
 			$histogramCtrl.changeContrast(min, max);
 		};
 
@@ -157,6 +157,7 @@ app.component('histogram', {
       			imageData.data[i + 1] = contrast(imageData.data[i + 1], min, max); // green
       			imageData.data[i + 2] = contrast(imageData.data[i + 2], min, max); // blue
     		}
+    		console.log(imageData.data);
 			context.putImageData(imageData, 0, 0);
 		};
 
