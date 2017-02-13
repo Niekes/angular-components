@@ -12,6 +12,7 @@ app.component('histogram', {
 		var svg;
 		var height;
 		var width;
+		var brush;
 		var	canvas = document.getElementById('canvas');
 		var cvs = document.createElement('canvas');
     	var	context = canvas.getContext('2d');
@@ -50,7 +51,14 @@ app.component('histogram', {
 				.attr('class', 'bars');
 
 			svg.append('g')
-				.attr('class', 'brush');
+				.attr('class', 'brush')
+				.on('dblclick', function(){
+
+					d3.select(this)
+					.transition().duration(DEFAULTS.TRANSITION.TIME)
+	    			.call(brush.move, [0, width]);
+
+				});
 		};
 
 		$histogramCtrl.$onChanges = function(changes){
@@ -74,10 +82,11 @@ app.component('histogram', {
 		    	context.drawImage(img, 0, 0);
 		    	ctx.drawImage(canvas, 0, 0);
 
-		    	var brush = d3.brushX()
+		    	brush = d3.brushX()
     				.extent([[0, 0], [width, height]])
     				.on('end', $histogramCtrl.brushed)
     				.on('brush', $histogramCtrl.brush);
+
 
     			var imageData = context.getImageData(0, 0, w, h);
 				var image = $histogramCtrl.retrieveImgData(imageData.data);
@@ -133,10 +142,12 @@ app.component('histogram', {
 
 		$histogramCtrl.brushed = function(){
 			var s = d3.event.selection;
-			var sx = s.map(x.invert);
-			var min = sx[0] === -1 ? 0 : parseInt(sx[0]);
-			var max = parseInt(sx[1]);
-			$histogramCtrl.changeContrast(min, max);
+			if(s !== null){
+				var sx = s.map(x.invert);
+				var min = sx[0] === -1 ? 0 : parseInt(sx[0]);
+				var max = parseInt(sx[1]);
+				$histogramCtrl.changeContrast(min, max);
+			}
 		};
 
 		function contrast(d, min, max){
