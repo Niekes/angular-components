@@ -1,11 +1,16 @@
-<ul class="homeUl">
-	<li data-ng-repeat="site in homeCtrl.sites">
+<div class="col-lg-12 exampleSearch">
+	<input type="text" name="search" data-ng-model="q" placeholder="filter examples..." aria-label="filter examples"/>
+</div>
+
+<div
+	data-ng-repeat="site in homeCtrl.sites | filter:q as results track by $index"
+	data-ng-class="{paddingLeft : $index % 3 !== 2, paddingLeftAndRight : $index % 3 === 2}"
+	class="widgetList col-xs-12 col-sm-12 col-md-4 col-lg-4 noPadding">
+
 		<a data-ui-sref="{{site.name}}">
-			<div>
-				<span data-ng-bind="site.data.pageTitle"></span>
-				<br>
-				<em><span data-ng-bind="site.data.description"></span></em>
+			<div class="itemWrapper">
+				<div data-ng-bind="site.data.pageTitle"></div>
+				<em><div data-ng-bind="site.data.description"></div></em>
 			</div>
 		</a>
-	</li>
-</ul>
+</div>

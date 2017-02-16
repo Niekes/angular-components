@@ -34,6 +34,31 @@ div.noPadding{
 	padding: 0;
 }
 
+div.paddingLeft{
+	padding-left: 15px;
+	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+		padding: 0;
+	}
+
+	@media (max-width: $screen-xs-max) {
+		padding: 0;
+	}
+}
+
+div.paddingLeftAndRight{
+	padding-left: 15px;
+	padding-right: 15px;
+
+	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+		padding: 0;
+	}
+
+	@media (max-width: $screen-xs-max) {
+		padding: 0;
+	}
+}
+
+
 .vertical-align-wrap {
 	position: absolute;
 	width: 100%;
