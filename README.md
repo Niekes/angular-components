@@ -6,7 +6,7 @@ I created a little app where you can find all the [examples][2]
 
 [Histogram][9] for images
 
-[Treemap][8] animates to table
+[Treemap][8] with tranformations to table
 
 [Gauge][7] with number at tip of the needle
 
@@ -14,7 +14,7 @@ I created a little app where you can find all the [examples][2]
 
 [Stacked column chart][5] with negative values
 
-[Pie chart][4] with padding and rounded corners
+[Pie chart][4] with arc padding and rounded corners
 
 [Scatterplot][3] with curved text
 

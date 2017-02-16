@@ -56,7 +56,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Text Animation',
-            description: 'interpolate between two numeric values'
+            description: 'interpolation between to numeric values'
         },
     })
     .state('stackedcolumnchart', {
@@ -78,7 +78,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Pie Chart',
-            description: 'with padding and rounded corners'
+            description: 'with arc padding and rounded corners'
         }
     })
     .state('scatterplot', {
