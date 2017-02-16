@@ -34,7 +34,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Treemap',
-            description: 'with tranformations to table'
+            description: 'with tranformation to table'
         }
     })
     .state('gauge', {

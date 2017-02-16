@@ -6,7 +6,7 @@ I created a little app where you can find all the [examples][2]
 
 [Histogram][9] for images
 
-[Treemap][8] with tranformations to table
+[Treemap][8] with tranformation to table
 
 [Gauge][7] with number at tip of the needle
 
