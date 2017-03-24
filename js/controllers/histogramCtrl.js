@@ -13,10 +13,10 @@ app.controller('histogramCtrl', function(){
       	{name:'Baboon', src: './img/baboon.jpg'},
     ];
 
-    $histogramCtrl.defaultImage = $histogramCtrl.images[0];
+    $histogramCtrl.defaultImage = $histogramCtrl.images[0].name;
 
-	$histogramCtrl.updateData = function(){
-		$histogramCtrl.data = $histogramCtrl.defaultImage;
+	$histogramCtrl.updateData = function(img){
+        $histogramCtrl.data = img || $histogramCtrl.images[0];
 	};
 
 	$histogramCtrl.updateData();

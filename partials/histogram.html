@@ -1,8 +1,11 @@
-<div class="widgetMenu">
-	<select data-ng-change="histogramCtrl.updateData()" data-ng-model="histogramCtrl.defaultImage" data-ng-options="image.name for image in histogramCtrl.images"></select>
+<div class="height10">
+	<label data-ng-repeat="image in histogramCtrl.images">
+	  	<input type="radio" name="imageSelection" data-ng-change="histogramCtrl.updateData(image)" data-ng-model="histogramCtrl.defaultImage" data-ng-value="image.name" />
+	  	{{image.name}}
+	</label>
 </div>
 
-<div class="height50">
+<div class="height40">
 	<canvas id="canvas"></canvas>
 </div>
 

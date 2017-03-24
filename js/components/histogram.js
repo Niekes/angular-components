@@ -74,7 +74,7 @@ app.component('histogram', {
 				w = this.width;
 				h = this.height;
 
-				context.clearRect(0, 0, w, h);
+				context.clearRect(0, 0, w*2, h*2);
 		    	canvas.width = w;
 		    	canvas.height = h;
 		    	cvs.width = w;
@@ -134,6 +134,8 @@ app.component('histogram', {
 	    			.call(brush)
 	    			.transition().duration(DEFAULTS.TRANSITION.TIME)
 	    			.call(brush.move, [0, width]);
+
+    			canvas.style.height = angular.element(canvas).parent()[0].clientHeight + 'px';
 
 				};
 
