@@ -11,30 +11,10 @@
 }
 
 @mixin transition($transition...) {
-    -moz-transition:    $transition;
-    -o-transition:      $transition;
     -webkit-transition: $transition;
+    -moz-transition:    $transition;
+    -ms-transition:     $transition;
+    -o-transition:      $transition;
     transition:         $transition;
-}
 
-// This is mixin which you will include in parent
-// of columns. It kills default margin of inline-block
-// elements.
-@mixin row () {
-    font-size: 0;
-}
-
-// This is column mixins.
-@mixin col ($col, $sum, $gap: 1em, $align: top, $first: false, $last: false) {
-    width: 100%;
-    display: inline-block;
-    font-size: 16px;
-    padding-left: if($first, 0, $gap);
-    padding-right: if($last, 0, $gap);
-    @media only screen and (min-width: 768px) {
-        width: percentage($col/$sum);
-        vertical-align: $align;
-    }
-
-    &.fluid { width: percentage($col/$sum); }
 }

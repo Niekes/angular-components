@@ -16,7 +16,10 @@ app.controller('histogramCtrl', function(){
     $histogramCtrl.defaultImage = $histogramCtrl.images[0].name;
 
 	$histogramCtrl.updateData = function(img){
+
         $histogramCtrl.data = img || $histogramCtrl.images[0];
+        $histogramCtrl.defaultImage = $histogramCtrl.data.name;
+
 	};
 
 	$histogramCtrl.updateData();

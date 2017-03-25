@@ -1,0 +1,41 @@
+div.switch-field-6 {
+	label{
+		width: 16.666666666%;
+	}
+}
+
+div.switch-field {
+
+	input{
+		position: absolute !important;
+		clip: rect(0, 0, 0, 0);
+		height: 1px;
+		width: 1px;
+		border: 0;
+		overflow: hidden;
+		&:checked + label{
+			background-color: lighten($body-bg, 15%);
+			color: rgba(255, 255, 255, 1);
+            -webkit-box-shadow: none;
+  			box-shadow: none;
+		}
+	}
+
+	label{
+		float: left;
+		display: inline-block;
+		background-color: lighten($body-bg, 5%);
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 14px;
+		font-weight: normal;
+		text-align: center;
+		text-shadow: none;
+		padding: 6px 14px;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+		cursor: pointer;
+		@include transition(all .4s ease-in-out);
+	}
+
+}

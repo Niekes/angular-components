@@ -2,4 +2,13 @@ footer{
 	background-color: lighten($body-bg, 2%);
 	color: lighten($body-bg, 25%);
 	position: relative;
+
+
+	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+		display: none !important;
+	}
+
+	@media (max-width: $screen-xs-max) {
+		display: none !important;
+	}
 }

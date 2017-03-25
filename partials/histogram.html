@@ -1,8 +1,8 @@
-<div class="height10">
-	<label data-ng-repeat="image in histogramCtrl.images">
-	  	<input type="radio" name="imageSelection" data-ng-change="histogramCtrl.updateData(image)" data-ng-model="histogramCtrl.defaultImage" data-ng-value="image.name" />
-	  	{{image.name}}
-	</label>
+<div class="height10 switch-field switch-field-6">
+	<span data-ng-repeat="image in histogramCtrl.images track by $index" type="radio" name="imageSelection">
+		<input type="radio" name="imageSelection" data-ng-checked="image.name === histogramCtrl.defaultImage" data-ng-value="image.name"/>
+		<label data-ng-click="histogramCtrl.updateData(image)" data-ng-bind="image.name"></label>
+	</span>
 </div>
 
 <div class="height40">
