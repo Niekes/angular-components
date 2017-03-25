@@ -1,7 +1,13 @@
-<div data-ng-if="treemapCtrl.data" class="height100">
-	<form>
-		<label><input type="radio" name="mode" value="treemap" checked> Treemap</label>
-	  	<label><input type="radio" name="mode" value="table"> Table</label>
-	</form>
+<div class="height10">
+	<div class="switch-field switch-field-2">
+		<input type="radio" id="treemap" name="mode" value="treemap" checked/>
+		<label for="treemap">Treemap</label>
+		<input type="radio" id="table" name="mode" value="table" />
+		<label for="table">Table</label>
+	</div>
+</div>
+
+
+<div data-ng-if="treemapCtrl.data" class="height90">
 	<treemap class="widget" data="treemapCtrl.data"></treemap>
 </div>

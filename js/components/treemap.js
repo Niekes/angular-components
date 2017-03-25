@@ -21,7 +21,7 @@ app.component('treemap', {
 
 			angular.element(el).empty();
 
-			var margin = {top: 20, right: 20, bottom: 25, left: 20};
+			var margin = {top: 20, right: 20, bottom: 10, left: 20};
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
