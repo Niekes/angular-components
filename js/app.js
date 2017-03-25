@@ -23,7 +23,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Histogram',
-            description: 'for images'
+            description: 'for images',
+            codeLink: 'histogram'
         }
     })
     .state('treemap', {
@@ -34,7 +35,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Treemap',
-            description: 'with tranformation to table'
+            description: 'with tranformation to table',
+            codeLink: 'treemap'
         }
     })
     .state('gauge', {
@@ -45,7 +47,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Gauge',
-            description: 'with number at the tip of the needle'
+            description: 'with number at the tip of the needle',
+            codeLink: 'gauge'
         },
     })
     .state('textanimation', {
@@ -56,7 +59,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Text Animation',
-            description: 'interpolation between to numeric values'
+            description: 'interpolation between to numeric values',
+            codeLink: 'textanimation'
         },
     })
     .state('stackedcolumnchart', {
@@ -67,7 +71,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Stacked Column Chart',
-            description: 'with negative values'
+            description: 'with negative values',
+            codeLink: 'stackedcolumnchart'
         }
     })
     .state('piechart', {
@@ -78,7 +83,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Pie Chart',
-            description: 'with arc padding and rounded corners'
+            description: 'with arc padding and rounded corners',
+            codeLink: 'piechart'
         }
     })
     .state('scatterplot', {
@@ -89,7 +95,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Scatterplot',
-            description: 'with curved text'
+            description: 'with curved text',
+            codeLink: 'scatterplot'
         }
     });
 

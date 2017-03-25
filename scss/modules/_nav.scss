@@ -27,6 +27,15 @@ nav{
 					margin-left: 10px;
 					color: lighten($body-bg, 60%);
 				}
+				span a {
+					margin-left: 5px;
+					color: lighten($body-bg, 15%);
+					@include transition(all .4s ease-in-out);
+					&:hover{
+						text-decoration: none;
+						color: lighten($body-bg, 30%);
+					}
+				}
 			}
 		}
 	}
