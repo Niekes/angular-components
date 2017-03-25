@@ -36,7 +36,7 @@ app.component('scatterPlot', {
 				.attr('class', 'axis x');
 
 			svg.append('g')
-				.attr('class', 'axis y');
+				.attr('class', 'axis y dashed');
 
 			svg.append('g')
 				.attr('class', 'minusBorder');

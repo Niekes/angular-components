@@ -3,7 +3,7 @@
 	height: 100%;
 	width: 100%;
 
-	g.y.axis line{
+	g.y.axis.dashed line{
 		stroke-dasharray: 3,3;
 		opacity: 0.3;
 	}
@@ -22,7 +22,7 @@
 	}
 
 	g.axis.x.noText{
-		stroke-dasharray: 3,3;
+		stroke-width: .5px;
 		text{
 			fill: none;
 		}
