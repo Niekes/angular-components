@@ -135,9 +135,9 @@ app.component('histogram', {
 	    			.transition().duration(DEFAULTS.TRANSITION.TIME)
 	    			.call(brush.move, [0, width]);
 
-    			canvas.style.height = angular.element(canvas).parent()[0].clientHeight + 'px';
+				canvas.style.height = angular.element(canvas).parent()[0].clientHeight + 'px';
 
-				};
+			};
 
 			img.src = data.src;
 		};

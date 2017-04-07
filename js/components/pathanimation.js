@@ -17,7 +17,7 @@ app.component('pathanimation', {
 
 			angular.element(el).empty();
 
-			var margin = {top: 40, right: 20, bottom: 30, left: 40};
+			var margin = {top: 50, right: 20, bottom: 50, left: 20};
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
