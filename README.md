@@ -6,6 +6,8 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 
 <br>
 
+[Path animation][10] with text
+
 [Histogram][9] for images
 
 [Treemap][8] with tranformation to table
@@ -29,3 +31,4 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 [7]: https://niekes.github.io/d3/#/gauge
 [8]: https://niekes.github.io/d3/#/treemap
 [9]: https://niekes.github.io/d3/#/histogram
+[10]: https://niekes.github.io/d3/#/pathanimation
