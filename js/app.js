@@ -15,6 +15,16 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('pathanimation', {
+        url: '/pathanimation',
+        templateUrl: 'partials/pathanimation.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Path animation',
+            description: 'with text',
+            codeLink: 'pathanimation'
+        }
+    })
     .state('histogram', {
         url: '/histogram',
         controller: 'histogramCtrl',
