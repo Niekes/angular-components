@@ -1,9 +1,7 @@
 'use strict';
 
-app.component('pathAnimation', {
-	bindings: {
-    	data: '<'
-  	},
+app.component('pathanimation', {
+
   	controllerAs: '$pathanimationCtrl',
 	controller: function($element){
 
@@ -28,7 +26,23 @@ app.component('pathAnimation', {
 				.append('g')
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-			console.log('WORKS');
+			svg.append('path')
+				.attr('id', 'path')
+				.attr('d', 'M 0,' + height + ' Q ' + width/2 + ',' + height + ' ' + width + ',0')
+				.style('fill', 'none')
+				.style('stroke', '#BBB');
+
+			svg.append('text')
+			   	.append('textPath')
+				.attr('xlink:href', '#path')
+				.style('text-anchor','middle')
+				.style('fill', 'white')
+				.attr('startOffset', '50%')
+				.text('Yay, my text is on a wavy path');
+
+			svg.selectAll('path')
+				.transition().duration(2000).delay(2000)
+				.attr('d', 'M 0,' + 0 + ' Q ' + width/2 + ',' + height + ' ' + width + ',' + height + '');
 
 		};
 
