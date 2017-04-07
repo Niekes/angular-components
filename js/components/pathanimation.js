@@ -3,13 +3,15 @@
 app.component('pathanimation', {
 
   	controllerAs: '$pathanimationCtrl',
-	controller: function($element){
+	controller: function($element, DEFAULTS){
 
 		var $pathanimationCtrl = this;
+		var tt = DEFAULTS.TRANSITION.TIME;
+		var line = d3.line().curve(d3.curveCardinal);
 		var el = $element[0];
-		var svg;
 		var height;
 		var width;
+		var svg;
 
 		$pathanimationCtrl.init = function(){
 
@@ -28,7 +30,6 @@ app.component('pathanimation', {
 
 			svg.append('path')
 				.attr('id', 'path')
-				.attr('d', 'M 0,' + height + ' Q ' + width/2 + ',' + height + ' ' + width + ',0')
 				.style('fill', 'none')
 				.style('stroke', '#BBB');
 
@@ -37,12 +38,27 @@ app.component('pathanimation', {
 				.attr('xlink:href', '#path')
 				.style('text-anchor','middle')
 				.style('fill', 'white')
+				.style('letter-spacing', '2px')
+				.style('font-size', '2em')
 				.attr('startOffset', '50%')
-				.text('Yay, my text is on a wavy path');
+				.text('I am a pretty awesome text, don\'t you think ?');
+
+			$pathanimationCtrl.repeat();
+
+		};
+
+		$pathanimationCtrl.repeat = function(){
+
+			var pathStart = [[0,0],[width/2,0],[width,0]];
+			var pathEnd = [[0,0],[width/2,height],[width,0]];
 
 			svg.selectAll('path')
-				.transition().duration(2000).delay(2000)
-				.attr('d', 'M 0,' + 0 + ' Q ' + width/2 + ',' + height + ' ' + width + ',' + height + '');
+				.attr('d', line(pathStart))
+				.transition().duration(tt).delay(tt*2).ease(d3.easeBounce)
+				.attr('d', line(pathEnd))
+				.transition().duration(tt).delay(tt*2).ease(d3.easeBack)
+				.attr('d', line(pathStart))
+				.on('end', $pathanimationCtrl.repeat);
 
 		};
 
