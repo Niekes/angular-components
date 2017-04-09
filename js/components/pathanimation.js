@@ -9,6 +9,7 @@ app.component('pathanimation', {
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var line = d3.line().curve(d3.curveCardinal);
 		var el = $element[0];
+		var textPath;
 		var height;
 		var width;
 		var svg;
@@ -17,7 +18,7 @@ app.component('pathanimation', {
 
 			angular.element(el).empty();
 
-			var margin = {top: 50, right: 20, bottom: 50, left: 20};
+			var margin = {top: 100, right: 20, bottom: 100, left: 20};
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
@@ -33,14 +34,13 @@ app.component('pathanimation', {
 				.style('fill', 'none')
 				.style('stroke', '#BBB');
 
-			svg.append('text')
+			textPath = svg.append('text')
 			   	.append('textPath')
 				.attr('xlink:href', '#path')
 				.style('text-anchor','middle')
 				.style('fill', 'white')
 				.style('letter-spacing', '2px')
 				.style('font-size', '2em')
-				.attr('startOffset', '50%')
 				.text('I am a pretty awesome text, don\'t you think ?');
 
 			$pathanimationCtrl.repeat();
@@ -49,12 +49,33 @@ app.component('pathanimation', {
 
 		$pathanimationCtrl.repeat = function(){
 
-			var pathStart = [[0,0],[width/2,0],[width,0]];
-			var pathEnd = [[0,0],[width/2,height],[width,0]];
+			textPath
+				.attr('startOffset', '20%')
+				.style('text-anchor','start')
+				.transition().duration(tt).delay(tt).ease(d3.easeBack)
+				.attr('startOffset', '50%')
+				.style('text-anchor','start')
+				.transition().duration(tt).delay(tt).ease(d3.easeBack)
+				.attr('startOffset', '20%')
+				.style('text-anchor','start');
+
+			var pathStart = [
+				[0,0],
+				[width/3,height],
+				[width/4*3,0],
+				[width,0]
+			];
+
+			var pathEnd = [
+				[0,0],
+				[width/3,0],
+				[width/4*3,height],
+				[width,0]
+			];
 
 			svg.selectAll('path')
 				.attr('d', line(pathStart))
-				.transition().duration(tt).delay(tt*2).ease(d3.easeBounce)
+				.transition().duration(tt).delay(tt*2).ease(d3.easeBack)
 				.attr('d', line(pathEnd))
 				.transition().duration(tt).delay(tt*2).ease(d3.easeBack)
 				.attr('d', line(pathStart))
