@@ -50,13 +50,13 @@ app.component('pathanimation', {
 		$pathanimationCtrl.repeat = function(){
 
 			textPath
-				.attr('startOffset', '20%')
+				.attr('startOffset', '10%')
 				.style('text-anchor','start')
-				.transition().duration(tt).delay(tt).ease(d3.easeBack)
+				.transition().duration(tt).ease(d3.easeBack)
 				.attr('startOffset', '50%')
 				.style('text-anchor','start')
 				.transition().duration(tt).delay(tt).ease(d3.easeBack)
-				.attr('startOffset', '20%')
+				.attr('startOffset', '10%')
 				.style('text-anchor','start');
 
 			var pathStart = [
@@ -75,9 +75,9 @@ app.component('pathanimation', {
 
 			svg.selectAll('path')
 				.attr('d', line(pathStart))
-				.transition().duration(tt).delay(tt*2).ease(d3.easeBack)
+				.transition().duration(tt).delay(tt).ease(d3.easeExp)
 				.attr('d', line(pathEnd))
-				.transition().duration(tt).delay(tt*2).ease(d3.easeBack)
+				.transition().duration(tt).delay(tt).ease(d3.easeExp)
 				.attr('d', line(pathStart))
 				.on('end', $pathanimationCtrl.repeat);
 
