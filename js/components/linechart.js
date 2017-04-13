@@ -47,38 +47,40 @@ app.component('linechart', {
 		};
 
 		$linechartCtrl.$onChanges = function(changes){
-			$linechartCtrl.update(el, changes.data.currentValue);
+			if(changes.data.currentValue !== undefined){
+				$linechartCtrl.update(el, changes.data.currentValue);
+			}
 		};
 
 		$linechartCtrl.update = function(el, data){
 
-			var yMin = d3.min(data, function(d) { return d3.min(d.values, function(d) { return d.y; }); });
-			var yMax = d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.y; }); });
+			var yMin = d3.min(data, function(d) { return d3.min(d.values, function(d) { return d.temperature; }); });
+			var yMax = d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.temperature; }); });
 
 			var xScale = d3.scaleTime()
-				.domain(d3.min(data, function(d) { return d3.extent(d.values, function(d) { return parseTime(d.x); }); }))
+				.domain(d3.min(data, function(d) { return d3.extent(d.values, function(d) { return d.date; }); }))
 				.range([0, width]);
 
 			var yScale = d3.scaleLinear()
-			    .domain([yMin, yMax])
+			    .domain([yMin, yMax+5])
 			    .range([height, 0])
 			    .nice();
 
-			var xAxis = d3.axisBottom(xScale).ticks(4).tickFormat(d3.timeFormat('%b %d'));
+			var xAxis = d3.axisBottom(xScale);
 		    var yAxis = d3.axisLeft(yScale).ticks(4);
 
 		    svg.select('g.x.axis').transition().duration(tt).attr('opacity', 1).call(xAxis);
 		    svg.select('g.y.axis').transition().duration(tt).attr('opacity', 1).call(yAxis);
 
 			var line = d3.line()
-	    		.curve(d3.curveBasis)
-	    		.x(function(d) { return xScale(parseTime(d.x)); })
-	    		.y(function(d) { return yScale(d.y); });
+	    		.curve(d3.curveLinear)
+	    		.x(function(d) { return xScale(d.date); })
+	    		.y(function(d) { return yScale(d.temperature); });
 
 			var enterLine = d3.line()
-	    		.curve(d3.curveBasis)
-	    		.x(function(d) { return xScale(parseTime(d.x)); })
-	    		.y(function(d) { return height; });
+	    		.curve(d3.curveLinear)
+	    		.x(function(d) { return xScale(d.date); })
+	    		.y(function() { return height; });
 
     		var lines = svg.select('g.lines').selectAll('path.line').data(data, function(d){ return d.key; });
 

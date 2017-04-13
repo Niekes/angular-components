@@ -3,40 +3,29 @@
 app.controller('linechartCtrl', function($scope, $interval){
 
 	var $linechartCtrl = this;
-
-	function rndInt(min, max){
-		return Math.floor(d3.randomUniform(min, max)());
-	}
+	var parseTime = d3.timeParse('%Y%m%d');
 
 	function row(d){
 		return {
-			date: d.MESS_DATUM_BEGINN.trim(),
+			date: parseTime(d.MESS_DATUM_BEGINN.trim()),
 			temperature: parseInt(d.LUFTTEMPERATUR),
 		};
 	}
 
 	function updateData(){
-
-		$linechartCtrl.data = [
-			{key: 'A', values: [{x: '20111001', y: rndInt(0,10)},{x: '20111002', y: rndInt(0,10)},{x: '20111003', y: rndInt(0,10)},{x: '20111004', y: rndInt(0,10)}]},
-			{key: 'B', values: [{x: '20111001', y: rndInt(0,10)},{x: '20111002', y: rndInt(0,10)},{x: '20111003', y: rndInt(0,10)},{x: '20111004', y: rndInt(0,10)}]},
-			{key: 'C', values: [{x: '20111001', y: rndInt(0,10)},{x: '20111002', y: rndInt(0,10)},{x: '20111003', y: rndInt(0,10)},{x: '20111004', y: rndInt(0,10)}]},
-			{key: 'D', values: [{x: '20111001', y: rndInt(0,10)},{x: '20111002', y: rndInt(0,10)},{x: '20111003', y: rndInt(0,10)},{x: '20111004', y: rndInt(0,10)}]},
-		];
-
-
-		d3.csv('data/berlin-weather.csv', row, function(d){
-			console.log(d);
+		d3.csv('data/berlin-weather.csv', row, function(error, data){
+			if(error){ throw error; }
+			$linechartCtrl.data = [{key: 'Berlin', values: data}];
 		});
 	}
 
 	updateData();
 
-	var i = $interval(updateData, 5000);
+	// var i = $interval(updateData, 5000);
 
-	$scope.$on('$destroy', function(){
-		if(i){
-			$interval.cancel(i);
-		}
-	});
+	// $scope.$on('$destroy', function(){
+	// 	if(i){
+	// 		$interval.cancel(i);
+	// 	}
+	// });
 });
