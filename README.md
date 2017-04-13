@@ -6,6 +6,8 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 
 <br>
 
+[Multi series line chart][11] with v4
+
 [Path animation][10] with text
 
 [Histogram][9] for images
@@ -32,3 +34,4 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 [8]: https://niekes.github.io/d3/#/treemap
 [9]: https://niekes.github.io/d3/#/histogram
 [10]: https://niekes.github.io/d3/#/pathanimation
+[11]: https://niekes.github.io/d3/#/linechart
