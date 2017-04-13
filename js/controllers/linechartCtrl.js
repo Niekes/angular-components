@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('linechartCtrl', function(){
+app.controller('linechartCtrl', function($interval){
 
 	var $linechartCtrl = this;
 
@@ -31,4 +31,6 @@ app.controller('linechartCtrl', function(){
 	}
 
 	updateData();
+
+	$interval(updateData, 5000)
 });
