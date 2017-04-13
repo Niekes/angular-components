@@ -15,6 +15,19 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('linechart', {
+        url: '/linechart',
+        controller: 'linechartCtrl',
+        controllerAs: 'linechartCtrl',
+        templateUrl: 'partials/linechart.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Multi series line chart',
+            // description: 'with zooming effect',
+            description: 'with v4',
+            codeLink: 'linechart'
+        }
+    })
     .state('pathanimation', {
         url: '/pathanimation',
         templateUrl: 'partials/pathanimation.html',
