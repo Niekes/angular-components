@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('gaugeCtrl', function($interval){
+app.controller('gaugeCtrl', function($scope, $interval){
 
 	var $gaugeCtrl = this;
 	var data = 0.000000000001;
@@ -14,7 +14,14 @@ app.controller('gaugeCtrl', function($interval){
 	}
 
 	updateData(data);
-	$interval(function(){
+
+	var i = $interval(function(){
 		updateData(rnd(0, 1));
 	}, 2500);
+
+	$scope.$on('$destroy', function(){
+		if(i){
+			$interval.cancel(i);
+		}
+	});
 });

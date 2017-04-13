@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('linechartCtrl', function($interval){
+app.controller('linechartCtrl', function($scope, $interval){
 
 	var $linechartCtrl = this;
 
@@ -32,5 +32,11 @@ app.controller('linechartCtrl', function($interval){
 
 	updateData();
 
-	$interval(updateData, 5000);
+	var i = $interval(updateData, 5000);
+
+	$scope.$on('$destroy', function(){
+		if(i){
+			$interval.cancel(i);
+		}
+	});
 });

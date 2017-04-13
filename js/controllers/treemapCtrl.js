@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('treemapCtrl', function($interval){
+app.controller('treemapCtrl', function(){
 
 	var $treemapCtrl = this;
 	var d1 = { 'name': 'Eve', 'children': [ { 'name': 'Cain', 'value': 3 }, { 'name': 'Seth', 'value': 2 }, { 'name': 'Abel', 'value': 1 }, { 'name': 'Awan', 'value': 1 }, { 'name': 'Azura', 'value': 0.5 } ] };
@@ -11,7 +11,4 @@ app.controller('treemapCtrl', function($interval){
 
 	updateData();
 
-	// $interval(function(){
-	// 	updateData();
-	// }, 10000);
 });

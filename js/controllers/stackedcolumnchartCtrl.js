@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('stackedcolumnchartCtrl', function($interval){
+app.controller('stackedcolumnchartCtrl', function($scope, $interval){
 
 	var $stackedcolumnchartCtrl = this;
 	var al = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -29,5 +29,12 @@ app.controller('stackedcolumnchartCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 5000);
+
+	var i = $interval(updateData, 5000);
+
+	$scope.$on('$destroy', function(){
+		if(i){
+			$interval.cancel(i);
+		}
+	});
 });

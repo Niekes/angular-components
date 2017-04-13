@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('piechartCtrl', function($interval){
+app.controller('piechartCtrl', function($scope, $interval){
 
 	var $piechartCtrl = this;
 
@@ -54,5 +54,13 @@ app.controller('piechartCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 5000);
+
+	var i = $interval(updateData, 5000);
+
+	$scope.$on('$destroy', function(){
+		if(i){
+			$interval.cancel(i);
+		}
+	});
+
 });

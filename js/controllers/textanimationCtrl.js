@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('textanimationCtrl', function($interval){
+app.controller('textanimationCtrl', function($scope, $interval){
 
 	var $textanimationCtrl = this;
 	var limit = 1000000;
@@ -14,5 +14,12 @@ app.controller('textanimationCtrl', function($interval){
 	}
 
 	updateData();
-	$interval(updateData, 5000);
+
+	var i = $interval(updateData, 5000);
+
+	$scope.$on('$destroy', function(){
+		if(i){
+			$interval.cancel(i);
+		}
+	});
 });
