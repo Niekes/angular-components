@@ -32,5 +32,5 @@ app.controller('linechartCtrl', function($interval){
 
 	updateData();
 
-	$interval(updateData, 5000)
+	$interval(updateData, 5000);
 });
