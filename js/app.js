@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ui.router']);
 
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
+app.config(function($stateProvider, $urlRouterProvider){
 
     $stateProvider
     .state('home', {
@@ -124,12 +124,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
     });
 
     $urlRouterProvider.otherwise('/');
-
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false,
-        rewriteLinks: false
-    });
 });
 
 app.run(function ($rootScope, $state){
