@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('linechartCtrl', function($scope, $interval){
+app.controller('linechartCtrl', function($scope, $interval, $http){
 
 	var $linechartCtrl = this;
 	var parseTime = d3.timeParse('%Y%m%d');
@@ -13,10 +13,14 @@ app.controller('linechartCtrl', function($scope, $interval){
 	}
 
 	function updateData(){
-		d3.csv('data/berlin-weather.csv', row, function(error, data){
-			if(error){ throw error; }
-			$linechartCtrl.data = [{key: 'Berlin', values: data}];
+
+		$http.get('data/berlin-weather.csv', function(res){
+			console.log(res);
 		});
+
+		// d3.csv('data/berlin-weather.csv', row, function(error, data){
+		// 	$linechartCtrl.data = [{key: 'Berlin', values: data}];
+		// });
 	}
 
 	updateData();

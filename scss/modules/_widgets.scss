@@ -38,4 +38,10 @@
 			stroke-width: 1
 		}
 	}
+
+	rect.zoom {
+		cursor: move;
+		fill: none;
+		pointer-events: all;
+	}
 }

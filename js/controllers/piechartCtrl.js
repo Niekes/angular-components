@@ -47,10 +47,10 @@ app.controller('piechartCtrl', function($scope, $interval){
 		],
 	];
 
-	var i = 0;
+	var k = 0;
 	function updateData(){
-		$piechartCtrl.data  = dataSet[(i % dataSet.length)];
-		i++;
+		$piechartCtrl.data  = dataSet[(k % dataSet.length)];
+		k++;
 	}
 
 	updateData();
