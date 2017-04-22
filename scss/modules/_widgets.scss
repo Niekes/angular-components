@@ -51,25 +51,33 @@
     	background-color: darken($body-bg, 5%) !important;
 
     	ul{
+    		font-size: 18px;
     		position: relative;
     		list-style: none;
     		padding-left: 5px;
     		span{
     			&:hover{
     				cursor: pointer;
+					background-color: darken($body-bg, 2%) !important;
     			}
     		}
     		span.it{
-    			// display: block;
-    			&:hover{
-    				cursor: pointer;
-					background-color: darken($body-bg, 3%) !important;
+    			padding-left: 5px;
+    			display: inline-block;
+    			width: 80%;
+    			&.sin{
+    				width: 100%;
     			}
     		}
+    		span.selectAll{
+    			display: inline-block;
+    			width: 10%;
+    			text-align: center;
+    		}
     		span.expand{
-    			position: absolute;
-    			z-index: 2;
-    			right: 5px;
+    			display: inline-block;
+    			width: 10%;
+    			text-align: center;
     		}
     	}
 

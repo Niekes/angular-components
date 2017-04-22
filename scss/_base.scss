@@ -1,6 +1,12 @@
 *{
 	font-family: $raleway, 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-weight: $font-weight-light;
+  	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 .monospace{

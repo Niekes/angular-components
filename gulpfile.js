@@ -3,50 +3,67 @@
 var gulp            = require('gulp');
 var sass            = require('gulp-sass');
 var autoprefixer    = require('gulp-autoprefixer');
-var livereload      = require('gulp-livereload');
+var browserSync     = require('browser-sync').create();
 
-
+var jsSrc           = ['js/**/*.js'];
+var sassSrc         = ['scss/**/*.scss'];
+var htmlSrc         = ['index.html', 'partials/**/*.html', 'templates/**/*.html'];
 //-------------------------------------------------
 // SASS
 //-------------------------------------------------
 gulp.task('sass', function(){
     return gulp.src('scss/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-	.pipe(autoprefixer())
-    .pipe(gulp.dest('css/'))
-    .pipe(livereload());
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('css/'))
+        .pipe(browserSync.stream());
 });
 
 //-------------------------------------------------
 // JAVASCRIPT
 //-------------------------------------------------
-var jsSrc = ['js/**/*.js'];
-gulp.task('scripts', function(){
-    gulp.src(jsSrc)
-    .pipe(livereload());
+gulp.task('js', function(){
+    return gulp.src(jsSrc)
+        .pipe(browserSync.stream());
 });
 
 //-------------------------------------------------
 // HTML
 //-------------------------------------------------
-var htmlSrc = ['index.html', 'partials/**/*.html', 'templates/**/*.html'];
 gulp.task('html', function(){
-    gulp.src(htmlSrc)
-    .pipe(livereload());
-});
-
-//-------------------------------------------------
-// WATCH
-//-------------------------------------------------
-var scssSrc = ['scss/**/*.scss'];
-gulp.task('watch', function(){
-    livereload.listen();
-    gulp.watch(scssSrc, ['sass']);
-    gulp.watch(htmlSrc, ['html']);
-    gulp.watch(jsSrc, ['scripts']);
+    return gulp.src(htmlSrc)
+        .pipe(browserSync.stream());
 });
 
 //-------------------------------------------------
 // DEFAULT
 //-------------------------------------------------
-gulp.task('default', ['sass', 'html', 'scripts', 'watch']);
+// use default task to launch BS and watch files
+gulp.task('default', ['js', 'html', 'sass'], function () {
+
+    // Serve files from the root of this project
+    browserSync.init({
+        proxy: 'd3-portfolio.dev'
+    });
+
+    gulp.watch(htmlSrc, ['html-watch']);
+    gulp.watch(jsSrc,   ['js-watch']);
+    gulp.watch(sassSrc, ['sass-watch']);
+});
+//-------------------------------------------------
+// WATCH TASKS
+//-------------------------------------------------
+gulp.task('html-watch', ['html'], function (done) {
+    browserSync.reload();
+    done();
+});
+
+gulp.task('sass-watch', ['sass'], function (done) {
+    browserSync.reload();
+    done();
+});
+
+gulp.task('js-watch', ['js'], function (done) {
+    browserSync.reload();
+    done();
+});

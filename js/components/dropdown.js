@@ -34,9 +34,9 @@ app.component('dropdown', {
 			var parent = d.selectAll('li.item').data(data, key);
 			generateList(parent);
 
-			// d3.selectAll('span.it').on('click', function(){
-			// console.log('WORKS');
-			// });
+			d3.selectAll('span.it').on('click', function(){
+				select(this);
+			});
 
 			d3.selectAll('span.expand').on('click', function(){
 				expandChilds(this);
@@ -54,13 +54,14 @@ app.component('dropdown', {
 				.style('padding-left', depth === 0 ? '' : '8px')
 				.each(function(d){ d.depth = depth; })
 				.html(function(d){
-					var html = '<span class="it">' + d.name + '</span>';
+					var cssC = d.children !== undefined ? 'it' : 'it sin';
+					var html = '<span class="'+cssC+'">' + d.name + '</span>';
 					if(d.children !== undefined){
-						html += '<span class="expand">&#8853;</span>';
+						html += '<span class="selectAll">&#9744;</span><span class="expand">&#8853;</span>';
 					}
 					return html;
 				})
-				.append('ul').attr('class', 'childList');
+				.append('ul').attr('class', 'childList').classed('hidden', true);
 
 			parent
 				.exit()
@@ -78,11 +79,16 @@ app.component('dropdown', {
 			}
 		}
 
+		function select(){
+
+		}
+
 		function expandChilds(el){
 			var _el = d3.select(el);
 			var _ch = d3.select(_el.node().nextSibling);
 			var _hh = _ch.classed('hidden');
 			_ch.classed('hidden', !_hh);
+			_el.html(_hh ? '&#8854;' : '&#8853;');
 		}
 
 		$dropdownCtrl.init();
