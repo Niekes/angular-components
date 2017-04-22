@@ -51,20 +51,34 @@
     	background-color: darken($body-bg, 5%) !important;
 
     	ul{
+    		position: relative;
     		list-style: none;
     		padding-left: 5px;
+    		span{
+    			&:hover{
+    				cursor: pointer;
+    			}
+    		}
     		span.it{
-    			display: block;
+    			// display: block;
     			&:hover{
     				cursor: pointer;
 					background-color: darken($body-bg, 3%) !important;
     			}
     		}
+    		span.expand{
+    			position: absolute;
+    			z-index: 2;
+    			right: 5px;
+    		}
     	}
 
-    	.items ul{
+    	ul.childList{
     		overflow: hidden;
-    		li.sub{
+    		&.hidden{
+    			height: 0;
+    		}
+    		li.item{
     			margin-top: 1px;
     		}
     	}

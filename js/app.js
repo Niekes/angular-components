@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Dropdown menu',
-            description: 'with nested children',
+            description: 'with nested children and recursive update pattern',
             codeLink: 'dropdown'
         }
     })
@@ -35,8 +35,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Multi series line chart',
-            // description: 'with zooming effect',
-            description: 'with v4',
+            description: 'with zooming and brushing',
             codeLink: 'linechart'
         }
     })
@@ -70,7 +69,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Treemap',
-            description: 'with tranformation to table',
+            description: 'with transformation to table',
             codeLink: 'treemap'
         }
     })

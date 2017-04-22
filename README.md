@@ -6,13 +6,13 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 
 <br>
 
-[Multi series line chart][11] with v4
+[Multi series line chart][11] with zooming and brushing
 
 [Path animation][10] with text
 
 [Histogram][9] for images
 
-[Treemap][8] with tranformation to table
+[Treemap][8] with transformation to table
 
 [Gauge][7] with number at tip of the needle
 

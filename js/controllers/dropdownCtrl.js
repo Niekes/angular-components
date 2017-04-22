@@ -31,13 +31,13 @@ app.controller('dropdownCtrl', function($scope, $interval){
 
 	updateData();
 
-	var i = $interval(function(){
-		updateData();
-	}, 5000);
+	// var i = $interval(function(){
+	// 	updateData();
+	// }, 5000);
 
-	$scope.$on('$destroy', function(){
-		if(i){
-			$interval.cancel(i);
-		}
-	});
+	// $scope.$on('$destroy', function(){
+	// 	if(i){
+	// 		$interval.cancel(i);
+	// 	}
+	// });
 });

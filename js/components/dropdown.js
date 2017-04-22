@@ -13,11 +13,6 @@ app.component('dropdown', {
 		var el = $element[0];
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var key = function(d){ return d.name; };
-		var html = function(d, e){
-			var childcount = d.children ? ' (' + d.children.length : '(0';
-			childcount += '-'+d.depth+')';
-			return '<span class="it">' + d.name + childcount + '</span>';
-		};
 
 		$dropdownCtrl.init = function(){
 
@@ -30,7 +25,6 @@ app.component('dropdown', {
 		$dropdownCtrl.$onChanges = function(changes){
 
 			depth = 0;
-
 			$dropdownCtrl.update(el, changes.data.currentValue);
 
 		};
@@ -40,6 +34,13 @@ app.component('dropdown', {
 			var parent = d.selectAll('li.item').data(data, key);
 			generateList(parent);
 
+			// d3.selectAll('span.it').on('click', function(){
+			// console.log('WORKS');
+			// });
+
+			d3.selectAll('span.expand').on('click', function(){
+				expandChilds(this);
+			});
 		};
 
 		function generateList (parent) {
@@ -49,14 +50,17 @@ app.component('dropdown', {
 				.append('li')
 				.attr('class', 'item')
 			.merge(parent)
-				.style('border-left', '1px solid #503b65')
-				.style('padding-left', '10px')
+				.style('border-left', depth === 0 ? '' : '1px solid #503b65')
+				.style('padding-left', depth === 0 ? '' : '8px')
 				.each(function(d){ d.depth = depth; })
-				.html(html)
-				.on('click', function(){
-					expandChilds(this);
+				.html(function(d){
+					var html = '<span class="it">' + d.name + '</span>';
+					if(d.children !== undefined){
+						html += '<span class="expand">&#8853;</span>';
+					}
+					return html;
 				})
-				.append('ul');
+				.append('ul').attr('class', 'childList');
 
 			parent
 				.exit()
@@ -75,19 +79,10 @@ app.component('dropdown', {
 		}
 
 		function expandChilds(el){
-			var s = d3.select(el).select('ul');
-			var t = s.transition();
-			var h = s.classed('hidden');
-			var o = h ? 1 : 0;
-			if(h){
-				t.style('opacity', o).style('height', s._currentHeight);
-				s.classed('hidden', false);
-			}else{
-				s._currentHeight = s.style('height');
-				t.style('opacity', o).style('height', '0px');
-				s.classed('hidden', true);
-			}
-
+			var _el = d3.select(el);
+			var _ch = d3.select(_el.node().nextSibling);
+			var _hh = _ch.classed('hidden');
+			_ch.classed('hidden', !_hh);
 		}
 
 		$dropdownCtrl.init();
