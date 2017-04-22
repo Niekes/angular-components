@@ -12,6 +12,7 @@ app.component('linechart', {
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var $linechartCtrl = this;
 		var el = $element[0];
+		var req = ['data/berlin-weather.csv'];
 		var xScale2;
 		var xScale;
 		var height;
@@ -24,7 +25,20 @@ app.component('linechart', {
 
 		$linechartCtrl.init = function(){
 
-			d3.csv('data/berlin-weather.csv', row, function(error, data){
+			Promise.all(req.map(function(url){
+					return fetch(url).then(function(response){
+						return response.ok ? response.text() : Promise.reject(response.status);
+				}).then(function(text) {
+					return d3.dsvFormat(';').parse(text).map(function(row){
+						return {
+							date: parseTime(row.MESS_DATUM),
+							temperature: parseInt(row.LUFTTEMPERATUR),
+						};
+					});
+				});
+			})).then(function(data){
+
+				console.log(data);
 
 				angular.element(el).empty();
 
@@ -72,18 +86,10 @@ app.component('linechart', {
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 					.call(zoom);
 
-
-				$linechartCtrl.update(el, [{key: 'Berlin', values: data}]);
+				$linechartCtrl.update(el, [{key: 'Berlin', values: data[0]}]);
 			});
 
 		};
-
-		function row(d){
-			return {
-				date: parseTime(d.MESS_DATUM_BEGINN.trim()),
-				temperature: parseInt(d.LUFTTEMPERATUR),
-			};
-		}
 
 		function zoomed(){
 			var t = d3.event.transform;
@@ -94,19 +100,21 @@ app.component('linechart', {
 
 		$linechartCtrl.update = function(el, data){
 
+			console.log(data);
+
 			var yMin = d3.min(data, function(d) { return d3.min(d.values, function(d) { return d.temperature; }); });
 			var yMax = d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.temperature; }); });
 
 			xScale = d3.scaleTime()
-				.domain(d3.min(data, function(d) { return d3.extent(d.values, function(d) { return d.date; }); }))
+				.domain([parseTime('19480101'), parseTime('20151201')])
 				.range([0, width]);
 
 			xScale2 = d3.scaleTime()
-				.domain(d3.min(data, function(d) { return d3.extent(d.values, function(d) { return d.date; }); }))
+				.domain([parseTime('19480101'), parseTime('20151201')])
 				.range([0, width]);
 
 			var yScale = d3.scaleLinear()
-			    .domain([yMin, yMax+5])
+			    .domain([-20, 40])
 			    .range([height, 0])
 			    .nice();
 

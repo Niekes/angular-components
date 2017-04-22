@@ -44,4 +44,29 @@
 		fill: none;
 		pointer-events: all;
 	}
+
+	div.dropdown{
+		margin: 0 auto;
+    	width: 250px;
+    	background-color: darken($body-bg, 5%) !important;
+
+    	ul{
+    		list-style: none;
+    		padding-left: 5px;
+    		span.it{
+    			display: block;
+    			&:hover{
+    				cursor: pointer;
+					background-color: darken($body-bg, 3%) !important;
+    			}
+    		}
+    	}
+
+    	.items ul{
+    		overflow: hidden;
+    		li.sub{
+    			margin-top: 1px;
+    		}
+    	}
+	}
 }

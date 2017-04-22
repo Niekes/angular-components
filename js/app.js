@@ -15,6 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('dropdown', {
+        url: '/dropdown',
+        controller: 'dropdownCtrl',
+        controllerAs: 'dropdownCtrl',
+        templateUrl: 'partials/dropdown.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Dropdown menu',
+            description: 'with nested children',
+            codeLink: 'dropdown'
+        }
+    })
     .state('linechart', {
         url: '/linechart',
         controller: 'linechartCtrl',
