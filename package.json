@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Niekes/d3js.git"
+    "url": "git+https://github.com/Niekes/d3.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Niekes/d3js/issues"
+    "url": "https://github.com/Niekes/d3/issues"
   },
-  "homepage": "https://github.com/Niekes/d3js#readme",
+  "homepage": "https://niekes.github.io/d3",
   "devDependencies": {
     "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
