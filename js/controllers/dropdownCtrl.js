@@ -12,17 +12,17 @@ app.controller('dropdownCtrl', function($scope, $interval){
 	function updateData(){
 
 		var a = [
-			{name: 'A', children: [{name: 'a.a'},{name: 'a.b'}]},
-			{name: 'B', children: [{name: 'b.a'},{name: 'b.c'}]},
-			{name: 'D', children: [{name: 'd.a'},{name: 'd.b.'},{name: 'd.d.'},{name: 'd.e.'}]},
+			{expand: true, name: 'A', children: [{expand: true, name: 'a.a'},{expand: true, name: 'a.b'}]},
+			{expand: true, name: 'B', children: [{expand: true, name: 'b.a'},{expand: true, name: 'b.c'}]},
+			{expand: true, name: 'D', children: [{expand: true, name: 'd.a'},{expand: true, name: 'd.b.'},{expand: true, name: 'd.d.'},{expand: true, name: 'd.e.'}]},
 		];
 
 		var b = [
-			{name: 'A', children: [{name: 'a.a'},{name: 'a.b'}]},
-			{name: 'B', children: [{name: 'b.a'},{name: 'b.b'}]},
-			{name: 'C', children: [{name: 'c.a'},{name: 'c.b'}]},
-			{name: 'D', children: [{name: 'd.a'},{name: 'd.e', children: [{name: 'harry', children:[{name:'Joe'},{name:'billy'}]}]}]},
-			{name: 'E', children: [{name: 'e.a', children: [{name:'e.a'}]} ]},
+			{expand: true, name: 'A', children: [{expand: true, name: 'a.a'},{expand: true, name: 'a.b'}]},
+			{expand: true, name: 'B', children: [{expand: true, name: 'b.a'},{expand: true, name: 'b.b'}]},
+			{expand: true, name: 'C', children: [{expand: true, name: 'c.a'},{expand: true, name: 'c.b'}]},
+			{expand: true, name: 'D', children: [{expand: true, name: 'd.a'},{expand: true, name: 'd.e', children: [{expand: true, name: 'harry', children:[{expand: true, name:'Joe'},{expand: true, name:'billy'}]}]}]},
+			{expand: true, name: 'E', children: [{expand: true, name: 'e.a', children: [{expand: true, name:'e.a'}]} ]},
 		];
 
 		$dropdownCtrl.data = count % 2 !== 0 ? a : b;

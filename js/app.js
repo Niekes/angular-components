@@ -15,6 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('datatable', {
+        url: '/datatable',
+        controller: 'datatableCtrl',
+        controllerAs: 'datatableCtrl',
+        templateUrl: 'partials/datatable.html',
+        data : {
+            showInList: true,
+            pageTitle: 'Datatable',
+            description: '...',
+            codeLink: 'datatable'
+        }
+    })
     .state('dropdown', {
         url: '/dropdown',
         controller: 'dropdownCtrl',

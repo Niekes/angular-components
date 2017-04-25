@@ -22,11 +22,8 @@ app.component('dropdown', {
 		var hidden = false;
 
 		$dropdownCtrl.init = function(){
-
 			angular.element(el).empty();
-
 			d = d3.select(el).append('div').attr('class', 'dropdown').append('ul');
-
 		};
 
 		$dropdownCtrl.$onChanges = function(changes){
