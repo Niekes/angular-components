@@ -63,6 +63,7 @@ app.component('datatable', {
 			rows
 				.exit()
 				.transition().duration(tt)
+				.attr('transform', 'scale(1,0)')
 				.style('opacity', 0)
 				.remove();
 
