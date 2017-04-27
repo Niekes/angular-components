@@ -120,7 +120,7 @@ app.component('dropdown', {
 			var _ch = d3.select(_el.node().nextSibling);
 			var _hh = _ch.classed('hidden');
 			_ch.classed('hidden', !_hh);
-			_el.html(_hh ? '&#8854;' : '&#8853;');
+			_el.html(_hh ? sym.minus : sym.plus);
 		}
 
 		$dropdownCtrl.init();

@@ -12,8 +12,8 @@ app.component('datatable', {
 		var height;
 		var rowHeight = 25;
 		var textPadding = 10;
-		var textAnchorStart = [0];
 		var el = $element[0];
+		var textAnchorStart = [0];
 		var $datatableCtrl = this;
 		var bg = d3.color(DEFAULTS.COLORS.BG).darker(1);
 		var tt = DEFAULTS.TRANSITION.TIME;
@@ -41,12 +41,10 @@ app.component('datatable', {
 		};
 
 		$datatableCtrl.update = function(el, data){
-			var _header = {};
-			var _keys   = d3.keys(data[0]);
-			_keys.forEach(function(k){ _header[k] = k; });
+			var _header = makeHeader(data);
 			var _rowLength = Object.keys(_header).length;
 
-			data.unshift(_header);
+			makeFooter(data, _header);
 
 			var rows = svg.selectAll('g.rows').data(data, function(d){ return d.name; });
 
@@ -55,7 +53,7 @@ app.component('datatable', {
   				.append('g')
   				.style('opacity', 0)
   				.attr('class', 'rows')
-  				.classed('th', function(d, i){ return i === 0; })
+  				.classed('th', function(d, i){ return i === 0 || i === data.length-1; })
   				.attr('transform', function(d, i){ return 'translate(0,' + (i*rowHeight) + ')'; })
 			.merge(rows)
 				.transition().duration(tt)
@@ -139,6 +137,30 @@ app.component('datatable', {
 				_d.push(k);
 			});
 			return _d;
+		}
+
+		function makeHeader(d){
+			var _h = {};
+			var _k = d3.keys(d[0]);
+			_k.forEach(function(k){ _h[k] = k; });
+			d.unshift(_h);
+			return _h;
+		}
+
+		function makeFooter(data, _h){
+			var _f = {name: 'Total'};
+			angular.forEach(_h, function(d){
+				if(Object.keys(_f).indexOf(d) === -1){
+					_f[d] = d3.sum(data, function(k){
+						if(angular.isNumber(k[d])){
+							return k[d];
+						}else{
+							return 'hello';
+						}
+					});
+				}
+			});
+			data.push(_f);
 		}
 
 		$datatableCtrl.init();

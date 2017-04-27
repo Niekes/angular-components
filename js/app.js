@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         data : {
             showInList: true,
             pageTitle: 'Datatable',
-            description: '...',
+            description: 'with animated rows',
             codeLink: 'datatable'
         }
     })

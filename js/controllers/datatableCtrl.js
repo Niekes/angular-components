@@ -14,7 +14,7 @@ app.controller('datatableCtrl', function($scope, $interval){
 		var _count = rnd(1, al.length);
 		for (var i = 0; i < _count; i++) {
 			data.push({
-				name: al[i], val: rnd(0,100), ly: rnd(0,100), pv: rnd(0,100), ca: rnd(0,100), kp: rnd(0,100),
+				name: al[i].toUpperCase(), val: rnd(0,100), ly: rnd(0,100), pv: rnd(0,100), ca: rnd(0,100), kp: rnd(0,100),
 			});
 		}
 		$datatableCtrl.data = data.sort(function(a, b){ return b.val - a.val; });
