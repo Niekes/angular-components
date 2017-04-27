@@ -6,6 +6,10 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 
 <br>
 
+[Data table][13] with animated rows
+
+[Dropdown menu][12] with nested children and recursive update pattern
+
 [Multi series line chart][11] with zooming and brushing
 
 [Path animation][10] with text
@@ -35,3 +39,5 @@ I am a freelance data visualisation designer and developer from Berlin. I create
 [9]: https://niekes.github.io/d3/#/histogram
 [10]: https://niekes.github.io/d3/#/pathanimation
 [11]: https://niekes.github.io/d3/#/linechart
+[12]: https://niekes.github.io/d3/#/dropdown
+[13]: https://niekes.github.io/d3/#/datatable
