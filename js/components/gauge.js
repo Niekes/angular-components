@@ -5,17 +5,17 @@ app.component('gauge', {
     	data: '<'
   	},
   	controllerAs: '$gaugeCtrl',
-	controller: function($element, $filter, DEFAULTS){
+	controller: function($rootScope, $element, $filter, DEFAULTS){
 
-		var $gaugeCtrl = this;
-		var el = $element[0];
 		var svg;
-		var height;
+		var arc;
 		var width;
-		var transitionTime = 1000;
+		var height;
 		var needleLength;
 		var needleRadius;
-		var arc;
+		var el = $element[0];
+		var $gaugeCtrl = this;
+		var transitionTime = 1000;
 		var bg = d3.color(DEFAULTS.COLORS.BG);
 
 		$gaugeCtrl.init = function(){
@@ -181,12 +181,8 @@ app.component('gauge', {
 
 		$gaugeCtrl.init();
 
-		var timeout;
-		window.onresize = function() {
-			clearTimeout(timeout);
-			timeout = setTimeout(function(){
-    			$gaugeCtrl.init();
-			}, 1000);
-		};
+		$rootScope.$on('window:resize', function(){
+			$gaugeCtrl.init();
+		});
 	}
 });

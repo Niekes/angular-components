@@ -5,14 +5,14 @@ app.component('pieChart', {
     	data: '<'
   	},
   	controllerAs: '$piechartCtrl',
-	controller: function($element, DEFAULTS){
+	controller: function($rootScope, $element, DEFAULTS){
 
-		var $piechartCtrl = this;
-		var el = $element[0];
-		var svg;
-		var height;
-		var width;
 		var arc;
+		var svg;
+		var width;
+		var height;
+		var el = $element[0];
+		var $piechartCtrl = this;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
 
 		$piechartCtrl.init = function(){
@@ -230,12 +230,8 @@ app.component('pieChart', {
 
 		$piechartCtrl.init();
 
-		var timeout;
-		window.onresize = function() {
-			clearTimeout(timeout);
-			timeout = setTimeout(function(){
-    			$piechartCtrl.init();
-			}, 1000);
-		};
+		$rootScope.$on('window:resize', function(){
+			$piechartCtrl.init();
+		});
 	}
 });

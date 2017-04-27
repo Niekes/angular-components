@@ -5,9 +5,10 @@ app.component('dropdown', {
     	data: '<'
   	},
   	controllerAs: '$dropdownCtrl',
-	controller: function($element, $filter, DEFAULTS){
+	controller: function($rootScope, $element, $filter, DEFAULTS){
 
 		var d;
+		var __d;
 		var depth = 0;
 		var $dropdownCtrl = this;
 		var el = $element[0];
@@ -34,6 +35,8 @@ app.component('dropdown', {
 		};
 
 		$dropdownCtrl.update = function(el, data){
+
+			__d = data;
 
 			var parent = d.selectAll('li.item').data(data, key);
 			generateList(parent);
@@ -122,12 +125,9 @@ app.component('dropdown', {
 
 		$dropdownCtrl.init();
 
-		var timeout;
-		window.onresize = function() {
-			clearTimeout(timeout);
-			timeout = setTimeout(function(){
-    			$dropdownCtrl.init();
-			}, 1000);
-		};
+		$rootScope.$on('window:resize', function(){
+			$dropdownCtrl.init();
+			$dropdownCtrl.update(el, __d);
+		});
 	}
 });

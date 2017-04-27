@@ -27,6 +27,7 @@
 
         <!-- Controllers -->
         <script src="js/controllers/homeCtrl.js"></script>
+        <script src="js/controllers/masterCtrl.js"></script>
         <script src="js/controllers/scatterplotCtrl.js"></script>
         <script src="js/controllers/stackedcolumnchartCtrl.js"></script>
         <script src="js/controllers/piechartCtrl.js"></script>
@@ -53,7 +54,7 @@
     </head>
 
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid" data-ng-controller="masterCtrl as master">
 
             <div class="row height10" style="position: relative;">
                 <nav class="col-lg-12 height100 vertical-align-wrap">

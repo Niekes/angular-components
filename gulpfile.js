@@ -48,17 +48,12 @@ gulp.task('default', ['js', 'html', 'sass'], function () {
 
     gulp.watch(htmlSrc, ['html-watch']);
     gulp.watch(jsSrc,   ['js-watch']);
-    gulp.watch(sassSrc, ['sass-watch']);
+    gulp.watch(sassSrc, ['sass']);
 });
 //-------------------------------------------------
 // WATCH TASKS
 //-------------------------------------------------
 gulp.task('html-watch', ['html'], function (done) {
-    browserSync.reload();
-    done();
-});
-
-gulp.task('sass-watch', ['sass'], function (done) {
     browserSync.reload();
     done();
 });
