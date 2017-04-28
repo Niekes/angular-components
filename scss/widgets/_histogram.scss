@@ -1,0 +1,20 @@
+div.canvasWrapper{
+	@include flexbox;
+	@include flex-dir(column);
+	@include flex(7, 0, 0);
+	@include flex-just(center);
+	#canvas {
+	    padding: 10px 0px 5px 0px;
+	    margin: auto;
+	    display: block;
+	}
+}
+
+histogram{
+	g.brush{
+		rect.selection{
+			fill-opacity: 0.1;
+			stroke-width: 1
+		}
+	}
+}

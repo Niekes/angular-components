@@ -1,14 +1,14 @@
-<div class="height10 switch-field switch-field-6">
-	<span data-ng-repeat="image in histogramCtrl.images track by $index" type="radio" name="imageSelection">
-		<input type="radio" name="imageSelection" data-ng-checked="image.name === histogramCtrl.defaultImage" data-ng-value="image.name"/>
-		<label data-ng-click="histogramCtrl.updateData(image)" data-ng-bind="image.name"></label>
-	</span>
+<div class="control">
+	<div class="switch-field switch-field-6">
+		<span data-ng-repeat="image in histogramCtrl.images track by $index" type="radio" name="imageSelection">
+			<input type="radio" name="imageSelection" data-ng-checked="image.name === histogramCtrl.defaultImage" data-ng-value="image.name"/>
+			<label data-ng-click="histogramCtrl.updateData(image)" data-ng-bind="image.name"></label>
+		</span>
+	</div>
 </div>
 
-<div class="height40">
+<div class="canvasWrapper">
 	<canvas id="canvas"></canvas>
 </div>
 
-<div data-ng-if="histogramCtrl.data" class="height50">
-	<histogram class="widget" data="histogramCtrl.data"></histogram>
-</div>
+<histogram class="widget" data-ng-if="histogramCtrl.data" data="histogramCtrl.data"></histogram>

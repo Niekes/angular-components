@@ -1,0 +1,8 @@
+div.control{
+	@include flexbox;
+	@include flex-dir(column);
+	@include align-items(center);
+	@include flex-just(center);
+	@include flex-just(start);
+	min-height: 30px;
+}
