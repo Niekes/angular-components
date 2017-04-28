@@ -1,35 +1,37 @@
 'use strict';
 
-app.controller('linechartCtrl', function($scope, $interval, $http){
+app.controller('linechartCtrl', function(){
 
 	var $linechartCtrl = this;
-	var parseTime = d3.timeParse('%Y%m%d');
+	var _lastYear = new Date().getFullYear()-1;
+	var _w = d3.timeWeek.range(new Date(_lastYear, 0, 1), new Date(_lastYear, 11, 31), 1);
 
-	function row(d){
-		return {
-			date: parseTime(d.MESS_DATUM_BEGINN.trim()),
-			temperature: parseInt(d.LUFTTEMPERATUR),
-		};
+	function rndInt(min, max){
+		return Math.floor(d3.randomUniform(min, max)());
 	}
 
-	function updateData(){
-
-		$http.get('data/berlin-weather.csv', function(res){
-			console.log(res);
+	function generateValues(){
+		var _vals = [];
+		_w.forEach(function(w){
+			_vals.push({ x: w, y: rndInt(0, 1000) });
 		});
-
-		// d3.csv('data/berlin-weather.csv', row, function(error, data){
-		// 	$linechartCtrl.data = [{key: 'Berlin', values: data}];
-		// });
+		return _vals;
 	}
 
-	updateData();
+	function generateData(){
+		var _c = rndInt(1, 6);
+		var data = [];
+		for (var i = 0; i < _c; i++) {
+			data.push({
+				key: i, values: generateValues(),
+			});
+		}
+		return data;
+	}
 
-	// var i = $interval(updateData, 5000);
+	$linechartCtrl.updateData = function(){
+		$linechartCtrl.data = generateData();
+	};
 
-	// $scope.$on('$destroy', function(){
-	// 	if(i){
-	// 		$interval.cancel(i);
-	// 	}
-	// });
+	$linechartCtrl.updateData();
 });

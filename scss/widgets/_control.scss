@@ -5,4 +5,18 @@ div.control{
 	@include flex-just(center);
 	@include flex-just(start);
 	min-height: 30px;
+	button{
+		height: 30px;
+		width: 100%;
+		border: none;
+		font-size: 14px;
+		background-color: lighten($body-bg, 15%);
+		color: rgba(255, 255, 255, 1);
+		-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+		&:hover{
+			cursor: pointer;
+		}
+
+	}
 }

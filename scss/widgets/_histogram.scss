@@ -4,7 +4,7 @@ div.canvasWrapper{
 	@include flex(7, 0, 0);
 	@include flex-just(center);
 	#canvas {
-	    padding: 10px 0px 5px 0px;
+	    padding: 20px 0px 15px 0px;
 	    margin: auto;
 	    display: block;
 	}
