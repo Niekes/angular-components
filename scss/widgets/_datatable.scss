@@ -1,0 +1,11 @@
+datatable{
+    g.rows.th{
+        > text{
+            text-transform: uppercase;
+            font-weight: bolder;
+        }
+        > rect{
+            fill: darken($body-bg, 7%);
+        }
+    }
+}

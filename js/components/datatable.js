@@ -22,7 +22,7 @@ app.component('datatable', {
 
 			angular.element(el).empty();
 
-			var margin = {top: 40, right: 10, bottom: 0, left: 10};
+			var margin = {top: 10, right: 10, bottom: 0, left: 10};
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
@@ -75,7 +75,7 @@ app.component('datatable', {
 				.attr('fill', bg)
 				.attr('class', 'bgs')
 				.attr('x', function(d, i){ return i*(width/_rowLength); })
-				.attr('y', -rowHeight)
+				.attr('y', 0)
 				.attr('height', rowHeight-2)
 				.attr('width', (width/_rowLength)-2)
 			.merge(bgs)
@@ -101,7 +101,7 @@ app.component('datatable', {
 					return 'end';
 				})
 				.style('fill', d3.color('white'))
-				.attr('y', -(rowHeight/2))
+				.attr('y', (rowHeight/2))
 				.attr('x', function(d, i){
 					if(textAnchorStart.indexOf(i) !== -1){
 						return i*(width/_rowLength)+textPadding;
@@ -110,7 +110,7 @@ app.component('datatable', {
 				})
 			.merge(cells)
 				.transition().duration(tt)
-				.attr('dy', '.3em')
+				.attr('dy', '.4em')
 				.tween('text', function(d){
             		var that = d3.select(this);
 					if(angular.isNumber(d)){

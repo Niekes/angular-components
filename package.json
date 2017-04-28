@@ -17,6 +17,7 @@
   },
   "homepage": "https://niekes.github.io/d3",
   "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",

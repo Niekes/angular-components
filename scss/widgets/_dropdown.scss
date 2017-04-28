@@ -1,0 +1,50 @@
+div.dropdown{
+	margin: 0 auto;
+	width: 250px;
+	background-color: darken($body-bg, 5%) !important;
+	ul{
+		color: darkgrey;
+		font-size: 18px;
+		position: relative;
+		list-style: none;
+		padding-left: 5px;
+		span{
+			&:hover{
+				cursor: pointer;
+				background-color: darken($body-bg, 2%) !important;
+			}
+		}
+		span.it{
+			padding-left: 5px;
+			display: inline-block;
+			width: 80%;
+    		&.selected{
+				color: white;
+				background-color: #100d13;
+			}
+			&.sin{
+				width: 100%;
+			}
+		}
+		span.selectAll{
+			display: inline-block;
+			width: 10%;
+			text-align: center;
+		}
+		span.expand{
+			display: inline-block;
+			width: 10%;
+			text-align: center;
+		}
+	}
+
+	ul.childList{
+		overflow: hidden;
+		&.hidden{
+			height: 0;
+		}
+		li.item{
+			margin-top: 1px;
+		}
+	}
+}

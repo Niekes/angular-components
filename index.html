@@ -3,14 +3,14 @@
 <html data-ng-app="app" lang="en">
     <head>
         <!-- Meta -->
-        <meta name="google-site-verification" content="VVyy5kc9A3J7W3XEO72tMw61SRxWMBiVleZUdEoAmfI" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" (>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Title -->
         <title data-ng-bind="$state.current.data.pageTitle + ' ' + $state.current.data.description | uppercase"></title>
 
         <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
         <link rel="stylesheet" href="css/style.css" />
 
         <!-- Libs -->
@@ -54,34 +54,20 @@
     </head>
 
     <body>
-        <div class="container-fluid" data-ng-controller="masterCtrl as master">
+        <div class="container" data-ng-controller="masterCtrl as master">
+            <header>
+                <ul>
+                    <li><a data-ui-sref="home"><img src="./img/home_icon.white.svg"></a></li>
+                    <li><a href="https://github.com/Niekes/d3"><img src="./img/github_logo.white.svg"></a></li>
+                    <li data-ng-bind="$state.current.data.pageTitle"></li>
+                    <li data-ng-bind="$state.current.data.description"></li>
+                    <li data-ng-if="$state.current.data.codeLink"><a data-ng-href="https://github.com/Niekes/d3/blob/gh-pages/js/components/{{$state.current.data.codeLink|lowercase}}.js">&#60;/&#62;</a></li>
+                </ul>
+            </header>
 
-            <div class="row height10" style="position: relative;">
-                <nav class="col-lg-12 height100 vertical-align-wrap">
-                    <div class="vertical-align vertical-align--middle">
-                        <ul>
-                            <li><a data-ui-sref="home"><img src="./img/home_icon.white.svg"></a></li>
-                            <li><a href="https://github.com/Niekes/d3"><img src="./img/github_logo.white.svg"></a></li>
-                            <li class="stateInfo">
-                                <span data-ng-bind="$state.current.data.pageTitle"></span>
-                                <span data-ng-bind="$state.current.data.description"></span>
-                                <span><a data-ng-if="$state.current.data.codeLink" data-ng-href="https://github.com/Niekes/d3/blob/gh-pages/js/components/{{$state.current.data.codeLink|lowercase}}.js">&#60;/&#62;</a></span>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            <article data-ui-view></article>
 
-            <div class="row height85 noPadding">
-                <div class="col-lg-12 height100 noPadding" data-ui-view></div>
-            </div>
-
-            <footer class="row height5 text-center vertical-align-wrap">
-                <div class="vertical-align vertical-align--middle">
-                    Mady by Niekes
-                </div>
-            </footer>
-
+            <footer>&copy; Made by Niekes</footer>
         </div>
     </body>
 </html>

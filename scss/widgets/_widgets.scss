@@ -1,0 +1,59 @@
+.widget{
+ 	display: flex;
+ 	flex-direction: column;
+ 	flex: 10;
+
+
+
+
+// 	g.y.axis.dashed line{
+// 		stroke-dasharray: 3,3;
+// 		opacity: 0.3;
+// 	}
+
+// 	g.axis{
+// 		line, path{
+// 			stroke: lighten($gray-light, 20%);
+// 		}
+// 		text{
+// 			fill: lighten($gray-light, 20%);
+// 		}
+// 	}
+
+// 	g.axis.x.justText path{
+// 		stroke: transparent;
+// 	}
+
+// 	g.axis.x.noText{
+// 		stroke-width: .5px;
+// 		text{
+// 			fill: none;
+// 		}
+// 	}
+
+// 	text.textValue{
+// 		content: '%'
+// 	}
+
+// 	g.brush{
+// 		rect.selection{
+// 			fill-opacity: 0.1;
+// 			stroke-width: 1
+// 		}
+// 	}
+
+// 	rect.zoom {
+// 		cursor: move;
+// 		fill: none;
+// 		pointer-events: all;
+// 	}
+
+}
+
+div.contrl{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	min-height: 30px;
+}

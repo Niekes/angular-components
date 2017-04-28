@@ -1,12 +1,19 @@
 @import "variables";
-@import "bootstrap/bootstrap";
-@import "mixins";
 @import "base";
-// ------------------
-//      MODULES
-// ------------------
+// // ------------------
+// //      MIXINS
+// // ------------------
+@import "mixins/transition";
+// // ------------------
+// //      MODULES
+// // ------------------
 @import "modules/home";
-@import "modules/nav";
+@import "modules/header";
 @import "modules/footer";
-@import "modules/widgets";
 @import "modules/switch-field";
+// // ----------------------------
+// //      WIDGETS
+// // ----------------------------
+@import "widgets/widgets";
+@import "widgets/datatable";
+@import "widgets/dropdown";
