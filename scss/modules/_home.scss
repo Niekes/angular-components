@@ -6,34 +6,29 @@ html,body{
 
 .container {
 	min-height: 100%;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	-moz-box-orient: vertical;
-	-moz-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
+	@include flexbox;
+	@include flex-dir(column);
 	> header {
-		flex: 1.5 0 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		@include flexbox;
+		@include flex-dir(column);
+		@include flex(1.5, 0, 0);
+		@include flex-just(center);
 	}
 	> article {
-		flex: 15 0 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
+		@include flexbox;
+		@include flex(15, 0, 0);
+		@include flex-dir(column);
+		@include flex-just(flex-start);
+		overflow: auto;
 		background-color: $body-bg;
 		div.search{
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
+			@include flexbox;
+			@include flex-dir(column);
+			@include flex-just(center);
+			min-height:52px;
+			@media (max-width: 992px) {
+				@include flex(1, 0, 100%);
+			}
 			input{
 				margin: 15px 15px 0px 15px;
 				font-size: .9em;
@@ -45,37 +40,43 @@ html,body{
 				color: white;
 			}
 		}
-		div.widgetList{
-			margin: 0px 15px 15px 0px;
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			flex-flow: row wrap;
-			> div{
-				flex: 1 0 33%;
-				a{
-					text-align: center;
-					text-decoration: none !important;
-					&:hover, &:active, &:focus{
-						text-decoration: none !important;
+		div.box{
+			min-height: min-content;
+			div.widgetList{
+				margin: 0px 15px 15px 0px;
+				@include flexbox;
+				@include flex-dir(row);
+				@include flex-just(center);
+				@include flex-wrap(wrap);
+				> div{
+					@include flex(1, 0, 33%);
+					@media (max-width: 992px) {
+						@include flex(1, 0, 100%);
 					}
-					div.itemWrapper{
-						margin-top: 15px;
-						margin-left: 15px;
-						background-color: lighten($body-bg,5%);
-						border-radius: 5px;
-						padding: 15px;
-						div{
-							font-size: 1.3em;
-							text-transform: uppercase;
-							padding: 5px;
-							color: $link-color;
+					a{
+						text-align: center;
+						text-decoration: none !important;
+						&:hover, &:active, &:focus{
+							text-decoration: none !important;
 						}
+						div.itemWrapper{
+							margin-top: 15px;
+							margin-left: 15px;
+							background-color: lighten($body-bg,5%);
+							border-radius: 5px;
+							padding: 15px;
+							div{
+								font-size: 1.3em;
+								text-transform: uppercase;
+								padding: 5px;
+								color: $link-color;
+							}
 
-						em div{
-							font-size: 1em;
-							text-transform: lowercase;
-							color: lighten($body-bg, 70%);
+							em div{
+								font-size: 1em;
+								text-transform: lowercase;
+								color: lighten($body-bg, 70%);
+							}
 						}
 					}
 				}
@@ -83,11 +84,16 @@ html,body{
 		}
 	}
 	> footer {
-		flex: 0.5 0 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+		@include flexbox;
+		@include flex-dir(column);
+		@include flex-just(center);
+		@include flex-wrap(wrap);
+		@include flex(0.5, 0, 0);
+		@include align-items(center);
+		@media (max-width: 992px) {
+			box-shadow: 0px -1px 15px 0px #161319;
+			-webkitbox-shadow: 0px -1px 15px 0px #161319;
+		}
 	}
 
 }

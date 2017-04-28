@@ -1,14 +1,15 @@
 <div class="search">
 	<input type="text" name="search" data-ng-model="q" placeholder="filter examples..." aria-label="filter examples"/>
 </div>
-
-<div class="widgetList">
-	<div data-ng-repeat="site in homeCtrl.sites | filter:q as results track by $index">
-		<a data-ui-sref="{{site.name}}">
-			<div class="itemWrapper">
-				<div data-ng-bind="site.data.pageTitle"></div>
-				<em><div data-ng-bind="site.data.description"></div></em>
-			</div>
-		</a>
+<div class="box">
+	<div class="widgetList">
+		<div data-ng-repeat="site in homeCtrl.sites | filter:q as results track by $index">
+			<a data-ui-sref="{{site.name}}">
+				<div class="itemWrapper">
+					<div data-ng-bind="site.data.pageTitle"></div>
+					<em><div data-ng-bind="site.data.description"></div></em>
+				</div>
+			</a>
+		</div>
 	</div>
 </div>
