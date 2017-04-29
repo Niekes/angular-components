@@ -4,7 +4,9 @@
     <head>
         <!-- Meta -->
         <meta charset="utf-8">
+        <meta name="google-site-verification" content="VVyy5kc9A3J7W3XEO72tMw61SRxWMBiVleZUdEoAmfI">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="fragment" content="!">
 
         <!-- Title -->
         <title data-ng-bind="$state.current.data.pageTitle + ' ' + $state.current.data.description | uppercase"></title>
@@ -59,9 +61,11 @@
                 <ul>
                     <li><a data-ui-sref="home"><img src="./img/home_icon.white.svg"></a></li>
                     <li><a href="https://github.com/Niekes/d3"><img src="./img/github_logo.white.svg"></a></li>
-                    <li data-ng-bind="$state.current.data.pageTitle"></li>
-                    <li data-ng-bind="$state.current.data.description"></li>
-                    <li data-ng-if="$state.current.data.codeLink"><a data-ng-href="https://github.com/Niekes/d3/blob/gh-pages/js/components/{{$state.current.data.codeLink|lowercase}}.js">&#60;/&#62;</a></li>
+                    <li>
+                        <span data-ng-bind="$state.current.data.pageTitle"></span>
+                        <span data-ng-bind="$state.current.data.description"></span>
+                        <span data-ng-if="$state.current.data.codeLink"><a data-ng-href="https://github.com/Niekes/d3/blob/gh-pages/js/components/{{$state.current.data.codeLink|lowercase}}.js">&#60;/&#62;</a></span>
+                    </li>
                 </ul>
             </header>
 

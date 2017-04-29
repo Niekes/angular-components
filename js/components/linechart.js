@@ -75,7 +75,7 @@ app.component('linechart', {
 
 			main.append('g')
 				.attr('opacity', 0)
-				.attr('class', 'axis x justText')
+				.attr('class', 'axis x')
 				.attr('transform', 'translate(0,' + height + ')');
 
 			main.append('g')

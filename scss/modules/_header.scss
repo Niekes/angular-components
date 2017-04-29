@@ -7,12 +7,19 @@ header{
 		text-transform: uppercase;
 		li{
 			color:white;
-			padding-left: 15px;
-			font-size: 1.6em !important;
 			display: inline;
+			font-size: 1.6em !important;
+			padding-left: 15px;
+			white-space: nowrap;
+			@media (max-width: 992px) {
+				font-size: 1.2em !important;
+			}
 			img{
 				vertical-align: top;
 				height: 30px;
+				@media (max-width: 992px) {
+					height: 20px;
+				}
 			}
 			&:nth-child(2){
 				padding-right: 15px;
@@ -20,17 +27,20 @@ header{
 			&:nth-child(3){
 				border-left: 1px solid lighten($body-bg, 10%);
 				padding-left: 15px;
-			}
-			&:nth-child(4){
-				color: lighten($body-bg, 60%);
-			}
-			a{
-				color: lighten($body-bg, 2%);
-				text-decoration: none;
-				&:visited, &:active, &:hover{
-				color: lighten($body-bg, 2%);
-				text-decoration: none;
+				span{
+					&:nth-child(2){
+						padding-left: 15px;
+						color: lighten($body-bg, 60%);
+					}
+					a{
+						color: lighten($body-bg, 2%);
+						text-decoration: none;
+						&:visited, &:active, &:hover{
+						color: lighten($body-bg, 2%);
+						text-decoration: none;
 
+						}
+					}
 				}
 			}
 		}

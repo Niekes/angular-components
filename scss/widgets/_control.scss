@@ -17,6 +17,8 @@ div.control{
 		&:hover{
 			cursor: pointer;
 		}
-
+		&:active{
+			background-color: lighten($body-bg, 10%);
+		}
 	}
 }
