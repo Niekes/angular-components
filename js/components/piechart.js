@@ -96,7 +96,8 @@ app.component('pieChart', {
 				.attr('class', 'labels')
 				.attr('opacity', 0)
 				.attr('text-anchor', 'middle')
-				.attr('font-size', 30)
+				.attr('font-size', 14)
+				.attr('dy', '-.4em')
 				.attr('fill', d3.color(DEFAULTS.COLORS.BG).brighter(3))
 				.classed('font-weight-bold', true)
 				.attr('x', -10)
@@ -104,7 +105,7 @@ app.component('pieChart', {
 				.transition().duration(DEFAULTS.TRANSITION.TIME)
 				.attr('opacity', 1)
 				.attr('y', function(d, i){
-					return i * 30 - (data.length*10);
+					return i * 20 - (data.length*10) + 20;
 				})
 				.text(function(d){
 					return d.name;
@@ -124,7 +125,8 @@ app.component('pieChart', {
 				.attr('class', 'values')
 				.attr('opacity', 0)
 				.attr('text-anchor', 'end')
-				.attr('font-size', 30)
+				.attr('dy', '-.4em')
+				.attr('font-size', 14)
 				.attr('fill', d3.color(DEFAULTS.COLORS.BG).brighter(3))
 				.classed('font-weight-light', true)
 				.attr('x', 40)
@@ -132,13 +134,13 @@ app.component('pieChart', {
 				.transition().duration(DEFAULTS.TRANSITION.TIME)
 				.attr('opacity', 1)
 				.attr('y', function(d, i){
-					return i * 30 - (data.length*10);
+					return i * 20 - (data.length*10) + 20;
 				})
 				.tween('text', function(d){
             		var that = d3.select(this);
             		var i = d3.interpolateNumber(that.text(), d.value);
 					return function(t) {
-						that.text(Math.floor(i(t)));
+						that.text(i(t).toFixed(2));
 					};
 				});
 
@@ -149,7 +151,7 @@ app.component('pieChart', {
             		var that = d3.select(this);
             		var i = d3.interpolateNumber(that.text(), 0);
 					return function(t) {
-						that.text(Math.floor(i(t)));
+						that.text(i(t).toFixed(2));
 					};
 				})
 				.attr('opacity', 0)
@@ -162,17 +164,16 @@ app.component('pieChart', {
 				.append('circle')
 				.attr('class', 'labelPoints')
 				.attr('fill', 'transparent')
-				.attr('cx', 0)
-				.attr('cx', -40)
+				.attr('cx', -30)
 			.merge(labelPoints)
 				.transition().duration(DEFAULTS.TRANSITION.TIME)
 				.attr('opacity', 1)
 				.attr('fill', function(d){ return color(d.name); })
 				.attr('r', 3)
 				.attr('cy', function(d, i){
-					return i * 30 - (data.length*10) - 10;
+					return i * 20 - (data.length*10) + 10;
 				})
-				.attr('cx', -40);
+				.attr('cx', -30);
 
 			labelPoints
 				.exit()

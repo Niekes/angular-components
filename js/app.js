@@ -15,6 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
             description: 'by niekes'
         }
     })
+    .state('gaugepie', {
+        url: '/gaugepie',
+        controller: 'gaugepieCtrl',
+        controllerAs: 'gaugepieCtrl',
+        templateUrl: 'partials/gaugepie.html',
+        data : {
+            showInList: true,
+            pageTitle: 'gauge pie',
+            description: '...',
+            codeLink: 'gaugepie'
+        }
+    })
     .state('datatable', {
         url: '/datatable',
         controller: 'datatableCtrl',
