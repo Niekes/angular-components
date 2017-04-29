@@ -43,8 +43,17 @@ app.component('linechart', {
 
 			height2 = height + margin1.top + margin1.bottom - margin2.top - margin2.bottom;
 
+			xScale1 = d3.scaleTime().range([0, width]);
+			xScale2 = d3.scaleTime().range([0, width]);
+
+			yScale1 = d3.scaleLinear().range([height, 0]);
+			yScale2 = d3.scaleLinear().range([height2, 0]);
+
+			xAxis = d3.axisBottom(xScale1).tickFormat(d3.timeFormat('%b %d'));
+		    yAxis = d3.axisLeft(yScale1);
+
 			zoom = d3.zoom()
-				.scaleExtent([1, Infinity])
+				.scaleExtent([1, 10])
 				.translateExtent([[0, 0], [width, height]])
 				.extent([[0, 0], [width, height]])
 				.on('zoom', zoomed);
@@ -97,7 +106,12 @@ app.component('linechart', {
 			sub.append('g')
 				.attr('class', 'brush')
 				.call(brush)
-				.call(brush.move, [0, width]);
+				.call(brush.move, [0, width])
+				.on('dblclick', function(){
+					d3.select(this)
+					.transition().duration(tt)
+	    			.call(brush.move, [0, width]);
+				});
 
 			sub.append('g')
 				.attr('opacity', 0)
@@ -115,31 +129,17 @@ app.component('linechart', {
 			var yMin = d3.min(data, function(d) { return d3.min(d.values, function(d) { return d.y; }); });
 			var yMax = d3.max(data, function(d) { return d3.max(d.values, function(d) { return d.y; }); });
 
-			xScale1 = d3.scaleTime()
-				.domain(d3.min(data, function(d) { return d3.extent(d.values, function(d) { return d.x; }); }))
-				.range([0, width]);
+			xScale1.domain(d3.min(data, function(d) { return d3.extent(d.values, function(d) { return d.x; }); }));
+			xScale2.domain(xScale1.domain());
 
-			xScale2 = d3.scaleTime()
-				.domain(xScale1.domain())
-				.range(xScale1.range());
-
-			yScale1 = d3.scaleLinear()
-			    .domain([yMin, yMax])
-			    .range([height, 0])
-			    .nice();
-
-			yScale2 = d3.scaleLinear()
-			    .domain(yScale1.domain())
-			    .range([height2, 0])
-			    .nice();
-
-			xAxis = d3.axisBottom(xScale1).tickFormat(d3.timeFormat('%b %d'));
-		    yAxis = d3.axisLeft(yScale1);
+			yScale1.domain([yMin, yMax]).nice();
+			yScale2.domain(yScale1.domain());
 
 		    main.select('g.x.axis').transition().duration(tt).attr('opacity', 1).call(xAxis);
 		    main.select('g.y.axis').transition().duration(tt).attr('opacity', 1).call(yAxis);
 		    main.select('rect.zoom').transition().duration(tt).call(zoom.transform, d3.zoomIdentity);
 		    sub.select('g.x2.axis').transition().duration(tt).attr('opacity', 1).call(xAxis);
+		    // sub.select('g.brush').select('.selection').transition().duration(tt*5).attr('fill', 'green');
 
 			line = d3.line()
 	    		.curve(d3.curveBasis)
@@ -212,10 +212,16 @@ app.component('linechart', {
   			xScale1.domain(t.rescaleX(xScale2).domain());
   			main.select('g.lines').selectAll('path.line').attr('d', function(d) { return line(d.values); });
   			main.select('g.x.axis').call(xAxis);
+  			sub.select('.brush').call(brush.move, xScale1.range().map(t.invertX, t));
 		}
 
 		function brushed(){
-			console.log('WORKS');
+			if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') { return; }
+			var s = d3.event.selection || xScale2.range();
+			xScale1.domain(s.map(xScale2.invert, xScale2));
+			main.select('g.lines').selectAll('path.line').attr('d', function(d) { return line(d.values); });
+			main.select('g.x.axis').call(xAxis);
+			main.select('.zoom').call(zoom.transform, d3.zoomIdentity.scale(width / (s[1] - s[0])).translate(-s[0], 0));
 		}
 
 		$linechartCtrl.init();

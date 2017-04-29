@@ -53,11 +53,9 @@ app.component('histogram', {
 			svg.append('g')
 				.attr('class', 'brush')
 				.on('dblclick', function(){
-
 					d3.select(this)
 					.transition().duration(DEFAULTS.TRANSITION.TIME)
 	    			.call(brush.move, [0, width]);
-
 				});
 		};
 
