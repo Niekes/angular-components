@@ -11,6 +11,7 @@ app.component('linechart', {
 		var main;
 		var zoom;
 		var line;
+		var brush;
 		var width;
 		var xAxis;
 		var yAxis;
@@ -47,6 +48,10 @@ app.component('linechart', {
 				.translateExtent([[0, 0], [width, height]])
 				.extent([[0, 0], [width, height]])
 				.on('zoom', zoomed);
+
+			brush = d3.brushX()
+    			.extent([[0, 0], [width, height2]])
+    			.on('brush end', brushed);
 
     		main = d3.select(el).append('svg')
 				.attr('width', width + margin1.left + margin1.right)
@@ -88,6 +93,11 @@ app.component('linechart', {
 			sub
 				.append('g')
 				.attr('class', 'lines');
+
+			sub.append('g')
+				.attr('class', 'brush')
+				.call(brush)
+				.call(brush.move, [0, width]);
 
 			sub.append('g')
 				.attr('opacity', 0)
@@ -202,6 +212,10 @@ app.component('linechart', {
   			xScale1.domain(t.rescaleX(xScale2).domain());
   			main.select('g.lines').selectAll('path.line').attr('d', function(d) { return line(d.values); });
   			main.select('g.x.axis').call(xAxis);
+		}
+
+		function brushed(){
+			console.log('WORKS');
 		}
 
 		$linechartCtrl.init();
