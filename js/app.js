@@ -150,6 +150,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
     $locationProvider.hashPrefix('!');
 });
 
-app.run(function ($rootScope, $state){
+app.run(function ($rootScope, $state, $window, $location){
+
     $rootScope.$state = $state;
+
+    $window.ga('create', 'UA-70846886-3', 'auto');
+
+    $rootScope.$on('$stateChangeSuccess', function () {
+
+        $window.ga('send', 'pageview', $location.path());
+
+    });
 });
