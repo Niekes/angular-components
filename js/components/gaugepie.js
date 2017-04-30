@@ -24,7 +24,7 @@ app.component('gaugepie', {
 
 			angular.element(el).empty();
 
-			var margin = {top: 0, right: 0, bottom: 0, left: 20};
+			var margin = {top: 20, right: 0, bottom: 0, left: 20};
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
@@ -38,7 +38,7 @@ app.component('gaugepie', {
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 			arc = d3.arc()
-	    		.innerRadius(radius - (radius/2))
+	    		.innerRadius(radius - (radius/5))
 	    		.outerRadius(radius)
 	    		.startAngle(startAngle);
 
@@ -59,6 +59,14 @@ app.component('gaugepie', {
 				.append('path')
 				.attr('class', 'indicator');
 
+			// gaugepie
+			// 	.append('circle')
+			// 	.attr('class', 'c')
+			// 	.attr('cx', Math.cos(startAngle + endAngle + endAngle)*radius)
+			// 	.attr('cy', Math.sin(startAngle + endAngle + endAngle)*radius)
+			// 	.attr('r', 10);
+
+
 		};
 
 		$gaugepieCtrl.$onChanges = function(changes){
@@ -67,12 +75,23 @@ app.component('gaugepie', {
 
 		$gaugepieCtrl.update = function(el, data, prevData){
 			prevData = angular.equals(prevData, {}) ? 0 : prevData;
+
 			svg.select('g.gaugepie').select('path.indicator')
 				.datum({ endAngle: scale(prevData) })
 				.transition().duration(tt)
 				.attr('fill', d3.interpolateRdYlBu(data))
 				.attrTween('d', $gaugepieCtrl.arcTween(scale(data)));
+
+			svg.select('g.gaugepie')
+				.append('circle')
+				.attr('class', 'c')
+				.attr('fill', 'white')
+				.attr('cx', Math.cos(scale(data)-endAngle+Math.PI)*radius)
+				.attr('cy', Math.sin(scale(data)-endAngle+Math.PI)*radius)
+				.attr('r', 10);
+
 		};
+
 
 		$gaugepieCtrl.arcTween = function(newAngle){
 			return function(d){
