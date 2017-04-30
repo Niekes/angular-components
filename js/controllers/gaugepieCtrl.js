@@ -3,59 +3,21 @@
 app.controller('gaugepieCtrl', function($scope, $interval){
 
 	var $gaugepieCtrl = this;
+	var data = 0.000000000001;
 
-	function rndInt(min, max){
-		return Math.floor(d3.randomUniform(min, max)());
+	function rnd(min, max){
+		return d3.randomUniform(min, max)();
 	}
 
-	var dataSet = [
-		[
-			{name: 'A', value: rndInt(15,100)},
-			{name: 'B', value: rndInt(15,100)},
-			{name: 'C', value: rndInt(15,100)},
-			{name: 'D', value: rndInt(15,100)},
-			{name: 'E', value: rndInt(15,100)},
-		],
-		[
-			{name: 'A', value: rndInt(15,100)},
-			{name: 'B', value: rndInt(15,100)},
-			{name: 'C', value: rndInt(15,100)},
-			{name: 'D', value: rndInt(15,100)},
-			{name: 'E', value: rndInt(15,100)},
-		],
-		[
-			{name: 'A', value: rndInt(15,100)},
-			{name: 'C', value: rndInt(15,100)},
-			{name: 'D', value: rndInt(15,100)},
-			{name: 'E', value: rndInt(15,100)},
-		],
-		[
-			{name: 'A', value: rndInt(15,100)},
-			{name: 'B', value: rndInt(15,100)},
-			{name: 'D', value: rndInt(15,100)},
-			{name: 'E', value: rndInt(15,100)},
-			{name: 'F', value: rndInt(15,100)},
-			{name: 'G', value: rndInt(15,100)},
-			{name: 'H', value: rndInt(15,100)},
-			{name: 'I', value: rndInt(15,100)},
-		],
-		[
-			{name: 'A', value: rndInt(15,100)},
-			{name: 'B', value: rndInt(15,100)},
-			{name: 'D', value: rndInt(15,100)},
-			{name: 'H', value: rndInt(15,100)},
-		],
-	];
-
-	var k = 0;
-	function updateData(){
-		$gaugepieCtrl.data  = dataSet[(k % dataSet.length)];
-		k++;
+	function updateData(val){
+		$gaugepieCtrl.data = val;
 	}
 
-	updateData();
+	updateData(data);
 
-	var i = $interval(updateData, 5000);
+	var i = $interval(function(){
+		updateData(rnd(0, 1));
+	}, 2500);
 
 	$scope.$on('$destroy', function(){
 		if(i){

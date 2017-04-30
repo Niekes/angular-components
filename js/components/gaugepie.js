@@ -4,25 +4,31 @@ app.component('gaugepie', {
 	bindings: {
     	data: '<'
   	},
-  	controllerAs: '$piechartCtrl',
+  	controllerAs: '$gaugepieCtrl',
 	controller: function($rootScope, $element, DEFAULTS){
 
+		var $gaugepieCtrl = this;
 		var arc;
-		var svg;
-		var width;
-		var height;
+		var bg = d3.color(DEFAULTS.COLORS.BG);
 		var el = $element[0];
-		var $piechartCtrl = this;
-		var color = d3.scaleOrdinal(d3.schemeDark2);
+		var height;
+		var radius;
+		var svg;
+		var tt = DEFAULTS.TRANSITION.TIME;
+		var width;
 
-		$piechartCtrl.init = function(){
+		$gaugepieCtrl.init = function(){
 
 			angular.element(el).empty();
 
-			var margin = {top: 40, right: 20, bottom: 30, left: 40};
+			var margin = {top: 0, right: 0, bottom: 0, left: 20};
+			var endAngle = 3/2*Math.PI; // 270°
+			var startAngle = ((2*Math.PI - endAngle)/2) - Math.PI;
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
+
+			radius = (Math.min(width, height)/2) - (margin.right + margin.left);
 
     		svg = d3.select(el).append('svg')
 				.attr('width', width + margin.left + margin.right)
@@ -30,25 +36,50 @@ app.component('gaugepie', {
 				.append('g')
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-			svg
+
+			arc = d3.arc()
+	    		.innerRadius(radius - (radius/2))
+	    		.outerRadius(radius)
+	    		.startAngle(startAngle);
+
+			var gaugepie = svg
 				.append('g')
 				.attr('class', 'gaugepie')
 				.attr('transform', 'translate(' + width/2 + ',' + height/2 + ')');
 
+
+			gaugepie
+				.append('path')
+					.attr('class', 'arc')
+					.datum({ endAngle: startAngle })
+    				.style('fill', bg.darker(0.5))
+    				.transition().duration(tt*2)
+    				.attrTween('d', $gaugepieCtrl.arcTween(endAngle + startAngle));
+
 		};
 
-		$piechartCtrl.$onChanges = function(changes){
-			$piechartCtrl.update(el, changes.data.currentValue);
+		$gaugepieCtrl.$onChanges = function(changes){
+			$gaugepieCtrl.update(el, changes.data.currentValue);
 		};
 
-		$piechartCtrl.update = function(el, data){
+		$gaugepieCtrl.update = function(el, data){
 			console.log(data);
 		};
 
-		$piechartCtrl.init();
+		$gaugepieCtrl.arcTween = function(newAngle){
+			return function(d){
+				var interpolate = d3.interpolate(d.endAngle, newAngle);
+				return function(t){
+					d.endAngle = interpolate(t);
+					return arc(d);
+				};
+			};
+		};
+
+		$gaugepieCtrl.init();
 
 		$rootScope.$on('window:resize', function(){
-			$piechartCtrl.init();
+			$gaugepieCtrl.init();
 		});
 	}
 });
