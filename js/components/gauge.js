@@ -15,8 +15,10 @@ app.component('gauge', {
 		var needleRadius;
 		var el = $element[0];
 		var $gaugeCtrl = this;
+		var endAngle = Math.PI; // 180°
 		var transitionTime = 1000;
 		var bg = d3.color(DEFAULTS.COLORS.BG);
+		var startAngle = ((2*Math.PI - endAngle)/2) - Math.PI;
 
 		$gaugeCtrl.init = function(){
 
@@ -33,7 +35,7 @@ app.component('gauge', {
 			arc = d3.arc()
 	    		.innerRadius(needleLength - (needleLength/2))
 	    		.outerRadius(needleLength)
-	    		.startAngle(-Math.PI/2);
+	    		.startAngle(startAngle);
 
     		svg = d3.select(el).append('svg')
 				.attr('width', width + margin.left + margin.right)
@@ -49,15 +51,15 @@ app.component('gauge', {
 			gauge
 				.append('path')
 					.attr('class', 'arc')
-					.datum({ endAngle: -Math.PI/2 })
+					.datum({ endAngle: startAngle })
     				.style('fill', bg.brighter(0.5))
     				.transition().duration(transitionTime*2)
-    				.attrTween('d', $gaugeCtrl.arcTween(Math.PI/2));
+    				.attrTween('d', $gaugeCtrl.arcTween(endAngle + startAngle));
 
 			gauge
 				.append('path')
 					.attr('class', 'arcIndicator')
-					.datum({ endAngle: -Math.PI/2 })
+					.datum({ endAngle: startAngle })
     				.style('fill-opacity', 0.6)
     				.attr('d', arc);
 
@@ -120,7 +122,7 @@ app.component('gauge', {
 				.attr('fill', d3.interpolateRdYlGn(data))
 				.attr('stroke', d3.color(d3.interpolateRdYlGn(data)))
 				.attr('stroke-width', 2)
-				.attrTween('d', $gaugeCtrl.arcTween( -Math.PI/2 + rads ));
+				.attrTween('d', $gaugeCtrl.arcTween( startAngle + rads ));
 
 			var valueText = gauge.select('text.valueText');
 

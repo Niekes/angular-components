@@ -16,14 +16,15 @@ app.component('gaugepie', {
 		var svg;
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var width;
+		var endAngle = 3/2*Math.PI; // 270°
+		var startAngle = ((2*Math.PI - endAngle)/2) - Math.PI;
+		var scale = d3.scaleLinear().domain([0, 1]).range([startAngle, startAngle + endAngle]);
 
 		$gaugepieCtrl.init = function(){
 
 			angular.element(el).empty();
 
 			var margin = {top: 0, right: 0, bottom: 0, left: 20};
-			var endAngle = 3/2*Math.PI; // 270°
-			var startAngle = ((2*Math.PI - endAngle)/2) - Math.PI;
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
@@ -36,7 +37,6 @@ app.component('gaugepie', {
 				.append('g')
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
 			arc = d3.arc()
 	    		.innerRadius(radius - (radius/2))
 	    		.outerRadius(radius)
@@ -47,23 +47,31 @@ app.component('gaugepie', {
 				.attr('class', 'gaugepie')
 				.attr('transform', 'translate(' + width/2 + ',' + height/2 + ')');
 
-
 			gaugepie
 				.append('path')
 					.attr('class', 'arc')
 					.datum({ endAngle: startAngle })
     				.style('fill', bg.darker(0.5))
     				.transition().duration(tt*2)
-    				.attrTween('d', $gaugepieCtrl.arcTween(endAngle + startAngle));
+    				.attrTween('d', $gaugepieCtrl.arcTween(startAngle + endAngle));
+
+			gaugepie
+				.append('path')
+				.attr('class', 'indicator');
 
 		};
 
 		$gaugepieCtrl.$onChanges = function(changes){
-			$gaugepieCtrl.update(el, changes.data.currentValue);
+			$gaugepieCtrl.update(el, changes.data.currentValue, changes.data.previousValue);
 		};
 
-		$gaugepieCtrl.update = function(el, data){
-			console.log(data);
+		$gaugepieCtrl.update = function(el, data, prevData){
+			prevData = angular.equals(prevData, {}) ? 0 : prevData;
+			svg.select('g.gaugepie').select('path.indicator')
+				.datum({ endAngle: scale(prevData) })
+				.transition().duration(tt)
+				.attr('fill', d3.interpolateRdYlBu(data))
+				.attrTween('d', $gaugepieCtrl.arcTween(scale(data)));
 		};
 
 		$gaugepieCtrl.arcTween = function(newAngle){
