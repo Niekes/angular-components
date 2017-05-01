@@ -16,7 +16,7 @@ app.component('gaugepie', {
 		var svg;
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var width;
-		var endAngle = 3/2*Math.PI; // 270°
+		var endAngle = 3/2*Math.PI/2; // 270°
 		var startAngle = ((2*Math.PI - endAngle)/2) - Math.PI;
 		var scale = d3.scaleLinear().domain([0, 1]).range([startAngle, startAngle + endAngle]);
 
@@ -59,12 +59,13 @@ app.component('gaugepie', {
 				.append('path')
 				.attr('class', 'indicator');
 
-			// gaugepie
-			// 	.append('circle')
-			// 	.attr('class', 'c')
-			// 	.attr('cx', Math.cos(startAngle + endAngle + endAngle)*radius)
-			// 	.attr('cy', Math.sin(startAngle + endAngle + endAngle)*radius)
-			// 	.attr('r', 10);
+			gaugepie
+				.append('circle')
+				.attr('class', 'c')
+				.attr('fill', 'white')
+				.attr('cx', 0)
+				.attr('cy', 0)
+				.attr('r', 10);
 
 
 		};
@@ -82,16 +83,33 @@ app.component('gaugepie', {
 				.attr('fill', d3.interpolateRdYlBu(data))
 				.attrTween('d', $gaugepieCtrl.arcTween(scale(data)));
 
-			svg.select('g.gaugepie')
-				.append('circle')
-				.attr('class', 'c')
-				.attr('fill', 'white')
-				.attr('cx', Math.cos(scale(data)-endAngle+Math.PI)*radius)
-				.attr('cy', Math.sin(scale(data)-endAngle+Math.PI)*radius)
-				.attr('r', 10);
+			svg.select('g.gaugepie').select('circle.c')
+				.datum({ endAngle: scale(prevData) })
+				.transition().duration(tt)
+				.attrTween('cx', $gaugepieCtrl.cxTween(scale(data)))
+				.attrTween('cy', $gaugepieCtrl.cyTween(scale(data)));
 
 		};
 
+		$gaugepieCtrl.cxTween = function(newAngle){
+			return function(d){
+				var interpolate = d3.interpolate(d.endAngle, newAngle);
+				return function(t){
+					var _t = (2*Math.PI - endAngle);
+					return Math.cos(interpolate(t))*radius;
+				};
+			};
+		};
+
+		$gaugepieCtrl.cyTween = function(newAngle){
+			return function(d){
+				var interpolate = d3.interpolate(d.endAngle, newAngle);
+				return function(t){
+					var _t = (2*Math.PI - endAngle);
+					return Math.sin(interpolate(t))*radius ;
+				};
+			};
+		};
 
 		$gaugepieCtrl.arcTween = function(newAngle){
 			return function(d){
