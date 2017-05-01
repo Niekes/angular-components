@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ui.router']);
 
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
+app.config(function($stateProvider, $urlRouterProvider){
 
     $stateProvider
     .state('home', {
@@ -159,7 +159,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
     });
 
     $urlRouterProvider.otherwise('/');
-    $locationProvider.hashPrefix('!');
 });
 
 app.run(function ($rootScope, $state, $window, $location){
