@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
         data : {
             showInList: true,
             pageTitle: 'gauge pie',
-            description: '...',
+            description: 'with extending arcs on start',
             codeLink: 'gaugepie'
         }
     })

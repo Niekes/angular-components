@@ -2,6 +2,8 @@
 
 <br>
 
+[Gauge Pie][14] with extending arcs on start
+
 [Data table][13] with animated rows
 
 [Dropdown menu][12] with nested children and recursive update pattern
@@ -37,3 +39,4 @@
 [11]: https://niekes.github.io/d3/#/linechart
 [12]: https://niekes.github.io/d3/#/dropdown
 [13]: https://niekes.github.io/d3/#/datatable
+[14]: https://niekes.github.io/d3/#/gaugepie
