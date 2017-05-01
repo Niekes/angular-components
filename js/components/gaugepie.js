@@ -12,13 +12,23 @@ app.component('gaugepie', {
 		var bg = d3.color(DEFAULTS.COLORS.BG);
 		var el = $element[0];
 		var height;
-		var radius;
+		var outerRadius;
+		var innerRadius;
+		var middleRadius;
 		var svg;
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var width;
-		var endAngle = 3/2*Math.PI/2; // 270°
-		var startAngle = ((2*Math.PI - endAngle)/2) - Math.PI;
+		var thiness = 5; // 1 => looks like pie chart, 20 => very thin line
+		// var endAngle = 2*Math.PI; // 360°
+		// var endAngle = 7/4*Math.PI; // 315°
+		var endAngle = 3/2*Math.PI; // 270°
+		// var endAngle = 5/4*Math.PI; // 225°
+		// var endAngle = Math.PI/2; // 90°
+		// var endAngle = Math.PI/6; // 30°
+		var startAngle = (2*Math.PI - endAngle)/2 - Math.PI;
 		var scale = d3.scaleLinear().domain([0, 1]).range([startAngle, startAngle + endAngle]);
+		var cos = function(c){ return Math.cos(c); };
+		var sin = function(s){ return Math.sin(s); };
 
 		$gaugepieCtrl.init = function(){
 
@@ -29,7 +39,9 @@ app.component('gaugepie', {
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
 
-			radius = (Math.min(width, height)/2) - (margin.right + margin.left);
+			outerRadius = Math.min(width, height)/2 - (margin.right + margin.left);
+			innerRadius = outerRadius - (outerRadius/thiness);
+			middleRadius = outerRadius - ((outerRadius - innerRadius)/2);
 
     		svg = d3.select(el).append('svg')
 				.attr('width', width + margin.left + margin.right)
@@ -38,9 +50,15 @@ app.component('gaugepie', {
 					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 			arc = d3.arc()
-	    		.innerRadius(radius - (radius/5))
-	    		.outerRadius(radius)
+	    		.innerRadius(innerRadius)
+	    		.outerRadius(outerRadius)
 	    		.startAngle(startAngle);
+
+			var arcPath = d3.arc()
+	    		.innerRadius(innerRadius)
+	    		.outerRadius(outerRadius)
+	    		.startAngle(startAngle)
+	    		.endAngle(startAngle + endAngle);
 
 			var gaugepie = svg
 				.append('g')
@@ -48,12 +66,18 @@ app.component('gaugepie', {
 				.attr('transform', 'translate(' + width/2 + ',' + height/2 + ')');
 
 			gaugepie
+				.append('clipPath')
+    			.attr('id', 'clipPath')
+    			.append('path')
+    			.attr('d', arcPath);
+
+			gaugepie
 				.append('path')
 					.attr('class', 'arc')
 					.datum({ endAngle: startAngle })
     				.style('fill', bg.darker(0.5))
     				.transition().duration(tt*2)
-    				.attrTween('d', $gaugepieCtrl.arcTween(startAngle + endAngle));
+    				.attrTween('d', arcTween(startAngle + endAngle));
 
 			gaugepie
 				.append('path')
@@ -62,11 +86,15 @@ app.component('gaugepie', {
 			gaugepie
 				.append('circle')
 				.attr('class', 'c')
-				.attr('fill', 'white')
-				.attr('cx', 0)
-				.attr('cy', 0)
-				.attr('r', 10);
+				.attr('fill', 'transparent')
+				.attr('clip-path', 'url(#clipPath)')
+				.attr('r', (outerRadius - innerRadius)/2);
 
+			gaugepie
+				.append('path')
+				.attr('class', 'line')
+				.attr('stroke', 'pink')
+				.attr('stroke-width', 1);
 
 		};
 
@@ -81,37 +109,47 @@ app.component('gaugepie', {
 				.datum({ endAngle: scale(prevData) })
 				.transition().duration(tt)
 				.attr('fill', d3.interpolateRdYlBu(data))
-				.attrTween('d', $gaugepieCtrl.arcTween(scale(data)));
+				.attrTween('d', arcTween(scale(data)));
 
 			svg.select('g.gaugepie').select('circle.c')
 				.datum({ endAngle: scale(prevData) })
 				.transition().duration(tt)
-				.attrTween('cx', $gaugepieCtrl.cxTween(scale(data)))
-				.attrTween('cy', $gaugepieCtrl.cyTween(scale(data)));
+				.attr('fill', d3.interpolateRdYlBu(data))
+				.attrTween('cx', circularTween(scale(data), cos))
+				.attrTween('cy', circularTween(scale(data), sin));
+
+			svg.select('g.gaugepie').select('path.line')
+				.datum({ endAngle: scale(prevData) })
+				.transition().duration(tt)
+				.attrTween('d', lineTween(scale(data)));
 
 		};
 
-		$gaugepieCtrl.cxTween = function(newAngle){
+		function lineTween(newAngle){
 			return function(d){
 				var interpolate = d3.interpolate(d.endAngle, newAngle);
 				return function(t){
-					var _t = (2*Math.PI - endAngle);
-					return Math.cos(interpolate(t))*radius;
+					var _in = interpolate(t) - Math.PI/2;
+					var _x1 = Math.cos(_in)*outerRadius;
+					var _y1 = Math.sin(_in)*outerRadius;
+					var _x2 = Math.cos(_in)*innerRadius;
+					var _y2 = Math.sin(_in)*innerRadius;
+					return d3.line()([[_x1, _y1], [_x2, _y2]]);
 				};
 			};
-		};
+		}
 
-		$gaugepieCtrl.cyTween = function(newAngle){
+		function circularTween(newAngle, fn){
 			return function(d){
 				var interpolate = d3.interpolate(d.endAngle, newAngle);
 				return function(t){
-					var _t = (2*Math.PI - endAngle);
-					return Math.sin(interpolate(t))*radius ;
+					var _in = interpolate(t) - Math.PI/2;
+					return fn(_in)*middleRadius;
 				};
 			};
-		};
+		}
 
-		$gaugepieCtrl.arcTween = function(newAngle){
+		function arcTween(newAngle){
 			return function(d){
 				var interpolate = d3.interpolate(d.endAngle, newAngle);
 				return function(t){
@@ -119,7 +157,7 @@ app.component('gaugepie', {
 					return arc(d);
 				};
 			};
-		};
+		}
 
 		$gaugepieCtrl.init();
 

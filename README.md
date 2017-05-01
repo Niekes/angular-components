@@ -1,9 +1,5 @@
 # [D3.JS][1] portfolio by niekes
 
-<a href="https://d3js.org"><img src="https://d3js.org/logo.svg" align="left" hspace="10" vspace="6"></a>
-
-I am a freelance data visualisation designer and developer from Berlin. I created an AngularJS application so that you can find all my [examples][2] I programed with **d3 (v4)**. I implemented them as AngularJS components but you can use them with any framework of your choice.
-
 <br>
 
 [Data table][13] with animated rows
