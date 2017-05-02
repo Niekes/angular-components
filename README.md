@@ -2,6 +2,8 @@
 
 <br>
 
+[knob][15] with animated indicators
+
 [Gauge Pie][14] with extending arcs on start
 
 [Data table][13] with animated rows
@@ -40,3 +42,4 @@
 [12]: https://niekes.github.io/d3/#/dropdown
 [13]: https://niekes.github.io/d3/#/datatable
 [14]: https://niekes.github.io/d3/#/gaugepie
+[15]: https://niekes.github.io/d3/#/knob
