@@ -13,23 +13,28 @@ app.component('gaugepie', {
 		var innerRadius;
 		var pi = Math.PI;
 		var tlr = pi/2;
+		var n = 100;
 		var el = $element[0];
-		var centerRadius = 250;
+		var centerRadius;
 		var $gaugepieCtrl = this;
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var bg = d3.color(DEFAULTS.COLORS.BG);
-		var scale = d3.scaleLinear().domain([0, 1]).range([pi, -pi]);
+		var startAngle =11/6*pi; // 330°
+		var endAngle = (2*pi - startAngle)/2;
+		var scale = d3.scaleLinear().domain([0, 1]).range([endAngle + pi/2, startAngle + endAngle + pi/2]);
+		var ra = d3.range(scale.range()[0], scale.range()[1], scale.range()[1] / n);
 
 		$gaugepieCtrl.init = function(){
 
 			angular.element(el).empty();
 
-			var margin = 20;
+			var margin = 30;
 
 			width = el.clientWidth;
 			height = el.clientHeight;
 
 			innerRadius = Math.min(width, height)/2 - margin;
+			centerRadius = innerRadius - (innerRadius/5);
 
     		svg = d3.select(el).append('svg')
 				.attr('width', width)
@@ -50,10 +55,25 @@ app.component('gaugepie', {
 
 			svg
 				.append('path')
-				.attr('class', 'line')
+				.attr('class', 'knob')
 				.attr('fill', bg.brighter(3))
 				.attr('opacity', 1);
 
+
+			svg
+				.selectAll('circle.indicator')
+				.data(ra)
+				.enter()
+				.append('circle')
+				.attr('class', 'indicator')
+				.attr('fill', bg.brighter(2))
+				.attr('r', 1)
+				.attr('cx', function(d){
+					return Math.cos(d)*(innerRadius+(margin/2));
+				})
+				.attr('cy', function(d){
+					return Math.sin(d)*(innerRadius+(margin/2));
+				});
 		};
 
 		$gaugepieCtrl.$onChanges = function(changes){
@@ -63,12 +83,24 @@ app.component('gaugepie', {
 		$gaugepieCtrl.update = function(el, data, prevData){
 			prevData = angular.equals(prevData, {}) ? 0 : prevData;
 
-			svg.select('path.line')
+			svg.select('path.knob')
 				.datum({ oldPoint: scale(prevData) })
 				.transition().duration(tt)
 				.attr('opacity', 1)
 				.attrTween('d', lineTween(scale(data)));
 
+			svg.selectAll('circle.indicator')
+				.transition().duration(tt).delay(function(d, i){
+					return d < scale(data) ? (15*i)/2 : ((ra.length-i)*15)/2;
+				})
+				.attrTween('fill', function(d){
+					var c = d3.select(this).attr('fill');
+					var i1 = d3.interpolateRgb(c, d3.color('hotpink').brighter());
+					var i2 = d3.interpolateRgb(c, bg.brighter(2));
+					return function(t){
+						return d < scale(data) ? i1(t) : i2(t);
+					};
+				});
 
 		};
 
