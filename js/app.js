@@ -15,6 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('knob', {
+        url: '/knob',
+        controller: 'knobCtrl',
+        controllerAs: 'knobCtrl',
+        templateUrl: 'partials/knob.html',
+        data : {
+            showInList: true,
+            pageTitle: 'knob',
+            description: 'with animated indicators',
+            codeLink: 'knob'
+        }
+    })
     .state('gaugepie', {
         url: '/gaugepie',
         controller: 'gaugepieCtrl',
