@@ -2,7 +2,7 @@
 
 <br>
 
-[knob][15] with animated indicators
+[Knob][15] with animated indicators
 
 [Gauge Pie][14] with extending arcs on start
 
