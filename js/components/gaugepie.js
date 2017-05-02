@@ -60,12 +60,6 @@ app.component('gaugepie', {
 	    		.startAngle(startAngle)
 	    		.endAngle(startAngle + endAngle);
 
-			var arcPath = d3.arc()
-	    		.innerRadius(innerRadius)
-	    		.outerRadius(outerRadius)
-	    		.startAngle(startAngle)
-	    		.endAngle(startAngle + endAngle);
-
 			var gaugepie = svg
 				.append('g')
 				.attr('class', 'gaugepie')
@@ -75,7 +69,9 @@ app.component('gaugepie', {
 				.append('clipPath')
     			.attr('id', 'clipPath')
     			.append('path')
-    			.attr('d', arcPath);
+				.datum({ innerRadius: outerRadius })
+    			.transition().duration(tt*2)
+    			.attrTween('d', extendTween(innerRadius));
 
 			gaugepie
 				.append('path')
@@ -171,7 +167,7 @@ app.component('gaugepie', {
 				var interpolate = d3.interpolate(d.oldPoint, point);
 				return function(t){
 					var tri = 10;
-					var tlr = 0.02;
+					var tlr = 0.01;
 					var _in = interpolate(t) - Math.PI/2;
 					var _x1 = Math.cos(_in)*innerRadius;
 					var _y1 = Math.sin(_in)*innerRadius;
