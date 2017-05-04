@@ -8,11 +8,17 @@ div.dropdown{
 		font-size: 18px;
 		position: relative;
 		list-style: none;
-		padding: 0px 0px 0px 4px;
+		padding: 0px 0px 0px 0px;
 		margin: 0;
+		ul.list{
+			border-left: 1px solid #503b65;
+			padding-left: 10px;
+			margin: 2px 0px 2px 5px;
+		}
 		li.item{
-			padding: 1px 5px;
-			margin: 2px 0px;
+			white-space: nowrap;
+			padding: 0px 0px;
+
 			// background-color:hotpink;
 			// width: 10px;
 			// height: 10px;
@@ -44,11 +50,10 @@ div.dropdown{
 		// 		width: 100%;
 		// 	}
 		// }
-		// span.selectAll{
-		// 	display: inline-block;
-		// 	width: 10%;
-		// 	text-align: center;
-		// }
+		span.selectAll{
+			position: absolute;
+			right: 3px;
+		}
 		// span.expand{
 		// 	display: inline-block;
 		// 	width: 10%;

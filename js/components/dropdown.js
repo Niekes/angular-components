@@ -5,7 +5,7 @@ app.component('dropdown', {
     	data: '<'
   	},
   	controllerAs: '$dropdownCtrl',
-	controller: function($rootScope, $element, $filter, DEFAULTS){
+	controller: function($element, $filter, DEFAULTS){
 
 		var d;
 		var depth = 0;
@@ -46,6 +46,11 @@ app.component('dropdown', {
 				.merge(list);
 
 			generateList(e);
+
+			d3.selectAll('span.selectAll').on('click', function(){
+				selectAll(d3.select(this.parentNode).node().__data__.children);
+				updateList();
+			});
 		}
 
 		function generateList (list) {
@@ -70,17 +75,15 @@ app.component('dropdown', {
 				.each(function(d){
 					d.depth = depth;
 				})
-				.style('border-left', depth === 0 ? '' : '1px solid #503b65')
-				// .style('padding-left', depth === 0 ? '' : '8px')
 				.classed('selected', function(d){
 					return d.selected;
 				})
-				.text(function(d){
-					return d.name.trim();
-				})
+				.html(makeHtmlForItem)
 				.on('click', function(){
-					d3.select(this).node().__data__.selected = !d3.select(this).node().__data__.selected;
-					updateList();
+					if(d3.event.target.tagName === 'LI'){
+						select(this);
+						updateList();
+					}
 				});
 
 			item.exit().remove();
@@ -105,19 +108,41 @@ app.component('dropdown', {
 			}
 		}
 
+		function makeHtmlForItem(d){
+			var _n = document.createElement('span');
+			_n.innerHTML = d.name;
+			var _html = _n.outerHTML;
+			if(d.children){
+				var _t = d.children.every(el => el.selected === true);
+				var _s = document.createElement('span');
+				_s.setAttribute('class', 'selectAll');
+				_s.innerHTML = _t ? sym.deselectAll : sym.selectAll;
+				_html += _s.outerHTML;
+			}
+			return _html;
+		}
+
+		function selectAll(els){
+			var _t = els.every(el => el.selected === true);
+			els.forEach(function(e){
+				e.selected = !_t;
+			});
+		}
+
+		function select(el){
+			d3.select(el).node().__data__.selected = !d3.select(el).node().__data__.selected;
+		}
+
 		function updateList(){
 			depth = 0;
 			update(getData());
 		}
 
 		function getData(){
-			return d.selectAll('.dropdown > ul.list').data();
+			return d.selectAll('div.dropdown > ul.list').data();
 		}
 
 		$dropdownCtrl.init();
 
-		$rootScope.$on('window:resize', function(){
-			$dropdownCtrl.init();
-		});
 	}
 });
