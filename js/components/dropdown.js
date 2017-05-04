@@ -8,7 +8,6 @@ app.component('dropdown', {
 	controller: function($rootScope, $element, $filter, DEFAULTS){
 
 		var d;
-		var __d;
 		var depth = 0;
 		var $dropdownCtrl = this;
 		var el = $element[0];
@@ -24,110 +23,101 @@ app.component('dropdown', {
 
 		$dropdownCtrl.init = function(){
 			angular.element(el).empty();
-			d = d3.select(el).append('div').attr('class', 'dropdown').append('ul');
+			d = d3.select(el).append('div').attr('class', 'dropdown');
 		};
 
 		$dropdownCtrl.$onChanges = function(changes){
-
 			depth = 0;
-			$dropdownCtrl.update(el, changes.data.currentValue);
-
+			update(changes.data.currentValue);
 		};
 
-		$dropdownCtrl.update = function(el, data){
+		function update(data){
 
-			__d = data;
+			var list = d.selectAll('ul.list').data(data, key);
 
-			var parent = d.selectAll('li.item').data(data, key);
-			generateList(parent);
-
-			d3.selectAll('span.it').on('click', function(){
-				select(this);
-			});
-
-			d3.selectAll('span.selectAll').on('click', function(){
-				selectAll(this);
-			});
-
-			d3.selectAll('span.expand').on('click', function(){
-				expandChilds(this);
-			});
-		};
-
-		function generateList (parent) {
-
-			var enterP = parent
-				.enter()
-				.append('li')
-				.attr('class', 'item')
-			.merge(parent)
-				.style('border-left', depth === 0 ? '' : '1px solid #503b65')
-				.style('padding-left', depth === 0 ? '' : '8px')
-				.each(function(d){ d.depth = depth; })
-				.html(function(d){
-					var cssC = d.children !== undefined ? 'it' : 'it sin';
-					var html = '<span data-depth="'+depth+'" class="'+cssC+'">' + d.name + '</span>';
-					var expandSym = hidden ? sym.plus : sym.minus;
-					if(d.children !== undefined){
-						html += '<span class="selectAll">&#9744;</span><span class="expand">'+ expandSym +'</span>';
-					}
-					return html;
-				})
-				.append('ul').attr('class', 'childList').classed('hidden', hidden);
-
-			parent
+			list
 				.exit()
 				.remove();
 
-			var child = parent.select('ul').merge(enterP).selectAll('li.child').data(function(d) {
-				return d.children !== undefined ? d.children : [];
+			var e = list
+				.enter()
+				.append('ul')
+				.attr('class', 'list')
+				.merge(list);
+
+			generateList(e);
+		}
+
+		function generateList (list) {
+
+			var _filtered = list.filter(function(d){
+				return d.children !== undefined;
 			});
 
-			var enterC = child.enter();
+			var item = list.selectAll('li.item').data(function(d) {
+				return [d];
+			});
 
-			if(!enterC.empty()){
+			var itemContainsList = _filtered.selectAll('li.item-contains-list').data(function(d) {
+				return [{children: d.children}];
+			});
+
+			item
+				.enter()
+				.append('li')
+				.attr('class', 'item')
+				.merge(item)
+				.each(function(d){
+					d.depth = depth;
+				})
+				.style('border-left', depth === 0 ? '' : '1px solid #503b65')
+				// .style('padding-left', depth === 0 ? '' : '8px')
+				.classed('selected', function(d){
+					return d.selected;
+				})
+				.text(function(d){
+					return d.name.trim();
+				})
+				.on('click', function(){
+					d3.select(this).node().__data__.selected = !d3.select(this).node().__data__.selected;
+					updateList();
+				});
+
+			item.exit().remove();
+
+			var _i = itemContainsList
+				.enter()
+				.append('li')
+				.attr('class', 'item-contains-list')
+				.merge(itemContainsList)
+				.append('ul')
+				.attr('class', 'list');
+
+			itemContainsList.exit().remove();
+
+			var _l = itemContainsList.select('ul.list').merge(_i).selectAll('li.item').data(function(d) {
+				return d.children;
+			}).enter();
+
+			if(!_l.empty()){
 				depth++;
-				generateList(child);
+				generateList(_l);
 			}
 		}
 
-		function select(el){
-			var _el = d3.select(el);
-			var _hh = _el.classed('selected');
-			_el.classed('selected', !_hh);
+		function updateList(){
+			depth = 0;
+			update(getData());
 		}
 
-		function selectAll(el){
-			var _el = d3.select(el);
-			var _ch = d3.select(_el.node().nextSibling);
-			var _dh = d3.select(_ch.node().nextSibling);
-			var _sp = _dh.node().getElementsByClassName('it');
-			var _de = _dh.node().__data__.depth + 1;
-			var _se = _el.html().charCodeAt(0) === 9744 ? true : false;
-
-			_el.html(_se ? sym.deselectAll : sym.selectAll);
-
-			for (var i = 0; i < _sp.length; ++i) {
-				var _d = +d3.select(_sp[i]).attr('data-depth');
-				if(_d === _de){
-					d3.select(_sp[i]).classed('selected', _se);
-				}
-			}
-		}
-
-		function expandChilds(el){
-			var _el = d3.select(el);
-			var _ch = d3.select(_el.node().nextSibling);
-			var _hh = _ch.classed('hidden');
-			_ch.classed('hidden', !_hh);
-			_el.html(_hh ? sym.minus : sym.plus);
+		function getData(){
+			return d.selectAll('.dropdown > ul.list').data();
 		}
 
 		$dropdownCtrl.init();
 
 		$rootScope.$on('window:resize', function(){
 			$dropdownCtrl.init();
-			$dropdownCtrl.update(el, __d);
 		});
 	}
 });

@@ -12,17 +12,17 @@ app.controller('dropdownCtrl', function($scope, $interval){
 	function updateData(){
 
 		var a = [
-			{expand: true, name: 'A', children: [{expand: true, name: 'a.a'},{expand: true, name: 'a.b'}]},
-			{expand: true, name: 'B', children: [{expand: true, name: 'b.a'},{expand: true, name: 'b.c'}]},
-			{expand: true, name: 'D', children: [{expand: true, name: 'd.a'},{expand: true, name: 'd.b.'},{expand: true, name: 'd.d.'},{expand: true, name: 'd.e.'}]},
+			{selected: false, name: 'A', children: [{selected: false, name: 'a.a'},{selected: false, name: 'a.b'}]},
+			{selected: false, name: 'B', children: [{selected: false, name: 'b.a'},{selected: false, name: 'b.c'}]},
+			{selected: false, name: 'D', children: [{selected: false, name: 'd.a'},{selected: false, name: 'd.b.'},{selected: false, name: 'd.d.'},{selected: true, name: 'd.e.'}]},
 		];
 
 		var b = [
-			{expand: true, name: 'A', children: [{expand: true, name: 'a.a'},{expand: true, name: 'a.b'}]},
-			{expand: true, name: 'B', children: [{expand: true, name: 'b.a'},{expand: true, name: 'b.b'}]},
-			{expand: true, name: 'C', children: [{expand: true, name: 'c.a'},{expand: true, name: 'c.b'}]},
-			{expand: true, name: 'D', children: [{expand: true, name: 'd.a'},{expand: true, name: 'd.e', children: [{expand: true, name: 'harry', children:[{expand: true, name:'Joe'},{expand: true, name:'billy'}]}]}]},
-			{expand: true, name: 'E', children: [{expand: true, name: 'e.a', children: [{expand: true, name:'e.a'}]} ]},
+			{selected: false, name: 'A', children: [{selected: false, name: 'a.a'},{selected: false, name: 'a.b'}]},
+			{selected: true, name: 'B', children: [{selected: false, name: 'b.a'},{selected: false, name: 'b.b'}]},
+			{selected: false, name: 'C', children: [{selected: false, name: 'c.a'},{selected: false, name: 'c.b'}]},
+			{selected: false, name: 'D', children: [{selected: true, name: 'd.a'},{selected: false, name: 'd.e', children: [{selected: false, name: 'harry', children:[{selected: false, name:'Joe'},{selected: false, name:'billy'}]}]}]},
+			{selected: false, name: 'E', children: [{selected: false, name: 'e.a', children: [{selected: false, name:'e.a'}]} ]},
 		];
 
 		$dropdownCtrl.data = count % 2 !== 0 ? a : b;
