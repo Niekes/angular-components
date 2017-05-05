@@ -15,6 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('threed', {
+        url: '/threed',
+        controller: 'threedCtrl',
+        controllerAs: 'threedCtrl',
+        templateUrl: 'partials/threed.html',
+        data : {
+            showInList: true,
+            pageTitle: 'threed',
+            description: '3d projection with d3.js',
+            codeLink: 'threed'
+        }
+    })
     .state('knob', {
         url: '/knob',
         controller: 'knobCtrl',
