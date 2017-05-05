@@ -48,8 +48,10 @@ app.component('dropdown', {
 			generateList(e);
 
 			d3.selectAll('span.selectAll').on('click', function(){
-				selectAll(d3.select(this.parentNode).node().__data__.children);
-				updateList();
+				if(d3.select(this).classed('selectAll')){
+					selectAll(d3.select(this.parentNode).node().__data__.children);
+					updateList();
+				}
 			});
 		}
 
@@ -80,7 +82,7 @@ app.component('dropdown', {
 				})
 				.html(makeHtmlForItem)
 				.on('click', function(){
-					if(d3.event.target.tagName === 'LI'){
+					if(d3.event.target.className !== 'selectAll'){
 						select(this);
 						updateList();
 					}

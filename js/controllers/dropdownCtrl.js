@@ -3,41 +3,54 @@
 app.controller('dropdownCtrl', function($scope, $interval){
 
 	var $dropdownCtrl = this;
-	var count = 0;
+	var al = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
+	var data = [];
+	var count;
 
-	function rnd(min, max){
-		return d3.randomUniform(min, max)();
+	function rndInt(min, max){
+		return Math.floor(d3.randomUniform(min, max)());
 	}
 
 	function updateData(){
-
-		var a = [
-			{selected: false, name: 'A', children: [{selected: false, name: 'a.a'},{selected: false, name: 'a.b'}]},
-			{selected: false, name: 'B', children: [{selected: false, name: 'b.a'},{selected: false, name: 'b.c'}]},
-			{selected: false, name: 'D', children: [{selected: false, name: 'd.a'},{selected: false, name: 'd.b.'},{selected: false, name: 'd.d.'},{selected: true, name: 'd.e.'}]},
-		];
-
-		var b = [
-			{selected: false, name: 'A', children: [{selected: false, name: 'a.a'},{selected: false, name: 'a.b'}]},
-			{selected: true, name: 'B', children: [{selected: false, name: 'b.a'},{selected: false, name: 'b.b'}]},
-			{selected: false, name: 'C', children: [{selected: false, name: 'c.a'},{selected: false, name: 'c.b'}]},
-			{selected: false, name: 'D', children: [{selected: true, name: 'd.a'},{selected: false, name: 'd.e', children: [{selected: false, name: 'harry', children:[{selected: false, name:'Joe'},{selected: false, name:'billy'}]}]}]},
-			{selected: false, name: 'E', children: [{selected: false, name: 'e.a', children: [{selected: false, name:'e.a'}]} ]},
-		];
-
-		$dropdownCtrl.data = count % 2 !== 0 ? a : b;
-		count++;
+		var i = rndInt(1, 3);
+		makeItem(i);
+		$dropdownCtrl.data = data;
 	}
 
+	function makeItem(_i){
+		count = 0;
+		if(_i >= 0){
+			var _j = rndInt(1, 5);
+			var _o = {name: al[_i], children: []};
+			makeChildren(_j, _o);
+			data.push(_o);
+			makeItem(_i - 1);
+		}
+	}
+
+	function makeChildren(_j, _o){
+		if(_j >= 0){
+			count++;
+			var name = '';
+			for (var i = 0; i < count + 1; i++) {
+				name += al[_j];
+			}
+			var _p = {name: name, children: []};
+			var nome = '';
+			for (var k = 0; k < name.length + 1; k++) {
+				nome += name[1];
+			}
+			for (var m = 0; m < rndInt(1, 5); m++) {
+				_p.children.push({name: nome});
+			}
+			_o.children.push(_p);
+			makeChildren(_j - 1, _p);
+		}
+	}
 	updateData();
 
-	// var i = $interval(function(){
-	// 	updateData();
-	// }, 5000);
-
-	// $scope.$on('$destroy', function(){
-	// 	if(i){
-	// 		$interval.cancel(i);
-	// 	}
-	// });
+	$dropdownCtrl.updateData = function(){
+		data = [];
+		updateData();
+	};
 });
