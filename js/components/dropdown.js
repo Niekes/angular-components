@@ -11,7 +11,6 @@ app.component('dropdown', {
 		var depth = 0;
 		var $dropdownCtrl = this;
 		var el = $element[0];
-		var tt = DEFAULTS.TRANSITION.TIME;
 		var sym = {
 			plus: '&#8853',
 			minus: '&#8854',
@@ -19,11 +18,12 @@ app.component('dropdown', {
 			deselectAll: '&#9745;'
 		};
 		var key = function(d){ return d.name; };
-		var hidden = false;
+		var searchTerm = '';
 
 		$dropdownCtrl.init = function(){
 			angular.element(el).empty();
-			d = d3.select(el).append('div').attr('class', 'dropdown');
+			d = d3.select(el).append('div').attr('class', 'dropdown').style('max-height', el.clientHeight - 100 + 'px').style('overflow', 'auto');
+			d.append('input').attr('placeholder', 'Search...').attr('id', 'search').on('keyup', search);
 		};
 
 		$dropdownCtrl.$onChanges = function(changes){
@@ -79,6 +79,12 @@ app.component('dropdown', {
 				})
 				.classed('selected', function(d){
 					return d.selected;
+				})
+				.classed('hidden', function(d){
+					if(searchTerm){
+						return !d.name.toLowerCase().includes(searchTerm);
+					}
+					return false;
 				})
 				.html(makeHtmlForItem)
 				.on('click', function(){
@@ -142,6 +148,24 @@ app.component('dropdown', {
 
 		function getData(){
 			return d.selectAll('div.dropdown > ul.list').data();
+		}
+
+		function search(){
+			searchTerm = d3.event.target.value.toLowerCase();
+			updateList();
+		}
+
+		if (!String.prototype.includes) {
+			String.prototype.includes = function(search, start) {
+				if (typeof start !== 'number') {
+					start = 0;
+				}
+				if (start + search.length > this.length) {
+					return false;
+				} else {
+					return this.indexOf(search, start) !== -1;
+				}
+			};
 		}
 
 		$dropdownCtrl.init();

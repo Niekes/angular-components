@@ -2,7 +2,7 @@ html,body{
 	height: 100% !important;
 	margin: 0;
 	padding: 0;
-	@include scrollbars(1px, darken($body-bg, 15%));
+	@include scrollbars(1px, $body-bg, lighten($body-bg, 10%));
 }
 
 .container {

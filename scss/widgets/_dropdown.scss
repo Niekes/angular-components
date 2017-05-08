@@ -4,6 +4,27 @@ div.dropdown{
 	background-color: darken($body-bg, 5%) !important;
 	position: absoulte;
 	color: darkgrey;
+	input#search{
+		width: 100%;
+		border: none;
+		outline: none;
+		color: darkgrey;
+		font-size: 0.9em;
+		background-color: darken($body-bg, 7%);
+		padding: 5px;
+		::-webkit-input-placeholder {
+			color: lighten($body-bg, 7%);
+		}
+		::-moz-placeholder {
+			color: lighten($body-bg, 7%);
+		}
+		:-ms-input-placeholder {
+			color: lighten($body-bg, 7%);
+		}
+		:-moz-placeholder {
+			color: lighten($body-bg, 7%);
+		}
+	}
 	ul.list{
 		font-size: 18px;
 		position: relative;
@@ -27,6 +48,9 @@ div.dropdown{
 				color: white;
 				background-color: #100d13;
 			}
+			&.hidden{
+				display: none;
+			}
 			&:hover{
 				cursor: pointer;
 				background-color: darken($body-bg, 2%) !important;
@@ -42,7 +66,7 @@ div.dropdown{
 		// 	padding-left: 5px;
 		// 	display: inline-block;
 		// 	width: 80%;
-  //   		&.selected{
+  		//  &.selected{
 		// 		color: white;
 		// 		background-color: #100d13;
 		// 	}
