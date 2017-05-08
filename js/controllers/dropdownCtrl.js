@@ -12,7 +12,7 @@ app.controller('dropdownCtrl', function($scope, $interval){
 	}
 
 	function updateData(){
-		var i = rndInt(1, 3);
+		var i = rndInt(1, al.length);
 		makeItem(i);
 		$dropdownCtrl.data = data;
 	}
