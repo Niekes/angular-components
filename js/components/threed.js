@@ -13,22 +13,17 @@ app.component('threed', {
 		var el = $element[0];
 		var $threedCtrl = this;
 		var tt = DEFAULTS.TRANSITION.TIME;
-		var scale = 50;
-		var distance = 10;
+		var scale = 1500;
+		var distance = 100;
 		var xOffset;
 		var yOffset;
-		var alpha;
-		var beta = Math.PI/2;
-		var gamma = 0;
+		var alpha = 0;
+		var mouse = {};
+		var mouseX;
+		// var beta = Math.PI/2;
+		// var gamma = 0;
 		var cos = function(a){ return Math.cos(a); };
 		var sin = function(a){ return Math.sin(a); };
-		var data = [
-			[-15,15,0],
-			[15,15,0],
-			[15,-15,0],
-			[-15,-15,0],
-			[-15,15,0],
-		];
 
 		document.querySelector('article').style.backgroundColor = 'white';
 
@@ -47,64 +42,97 @@ app.component('threed', {
     		svg = d3.select(el).append('svg')
 				.attr('width', width + margin.left + margin.right)
 				.attr('height', height + margin.top + margin.bottom)
+				.call(d3.drag().on('drag', dragged).on('start', dragStart).on('end', dragEnd))
 				.append('g')
-					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-			svg.append('path').attr('class', 'line');
-
-			var focus =  svg.append('g').attr( 'class', 'focus');
+			var focus = svg.append('g').attr( 'class', 'focus');
 
 			focus.append('path')
-				.attr('stroke', 'black')
+				.attr('stroke', '#aaa')
 				.attr('d', d3.line()([[width/2,height/2+10], [width/2,height/2-10]]));
 
 			focus.append('path')
-				.attr('stroke', 'black')
+				.attr('stroke', '#aaa')
 				.attr('d', d3.line()([[width/2+10,height/2], [width/2-10,height/2]]));
 
 		};
 
-		$threedCtrl.$onChanges = function(changes){
-			$threedCtrl.update(changes.data.currentValue, changes.data.previousValue);
-		};
-
-		$threedCtrl.update = function(angle, previousAngle){
-			previousAngle = angular.equals(previousAngle, {}) ? 0 : previousAngle;
-
-			alpha = angle;
-			var d = rotate(data);
-			var p = transform(d);
-			var line = d3.line();
-
-			svg
-				.select('path.line')
-				.attr('stroke', 'black')
-				.attr('fill', 'none')
-				.attr('d', line(p));
-		};
-
-		function rotate(d){
-			var _d = [];
-			d.forEach(function(_e){
-				_d.push([
-					_e[0]*cos(alpha)+_e[2]*sin(alpha),
-					_e[1],
-					-sin(alpha)*_e[0]+_e[2]*cos(alpha)
-				]);
-			});
-
-			return _d;
+		function dragStart(){
+			mouse = {
+				x: d3.event.x
+			};
 		}
 
-		function transform(d){
-			var _d = [];
-			d.forEach(function(_e){
-				_d.push([
-					xOffset + scale * _e[0] / (_e[2] + distance),
-					yOffset + scale * _e[1] / (_e[2] + distance)
-				]);
-			});
-			return _d;
+		function dragged(){
+			mouseX = mouseX || 0;
+			alpha = (((d3.event.x - mouse.x) + mouseX)) * Math.PI / 180;
+			var _data =  svg.selectAll('path.line').data();
+			$threedCtrl.update(_data);
+		}
+
+		function dragEnd(){
+			mouseX = ((d3.event.x - mouse.x) + mouseX);
+		}
+
+		$threedCtrl.$onChanges = function(changes){
+			$threedCtrl.update(changes.data.currentValue, tt);
+		};
+
+		$threedCtrl.update = function(data, _tt){
+
+			var lines = svg.selectAll('path.line').data(data);
+
+			lines
+				.enter()
+				.append('path')
+				.attr('class', 'line')
+				.merge(lines)
+				.each(function(d){
+					d.rotated 	  = rotate(d);
+					d.projected = project(d.rotated);
+				})
+				.style('stroke', 'black')
+				.attr('stroke-width', 1)
+				.transition().duration(_tt === undefined ? 0 : tt)
+				.attr('d', function(d){
+					return d3.line()([
+						[ d.projected.sp.x, d.projected.sp.y ],
+						[ d.projected.ep.x, d.projected.ep.y ]
+					]);
+				});
+
+			lines
+				.exit()
+				.remove();
+
+		};
+
+		function project(d){
+			var x1 = xOffset + scale * d.sp.x / (d.sp.z + distance);
+			var y1 = yOffset + scale * d.sp.y / (d.sp.z + distance);
+			var x2 = xOffset + scale * d.ep.x / (d.ep.z + distance);
+			var y2 = yOffset + scale * d.ep.y / (d.ep.z + distance);
+
+			return {
+				sp: {x: x1, y: y1},
+				ep: {x: x2, y: y2}
+			};
+		}
+
+		function rotate(d){
+			var x1 = d.sp.x *  cos(alpha) + d.sp.z * sin(alpha);
+			var y1 = d.sp.y;
+			var z1 = d.sp.x * -sin(alpha) + d.sp.z * cos(alpha);
+
+			var x2 = d.ep.x *  cos(alpha) + d.ep.z * sin(alpha);
+			var y2 = d.ep.y;
+			var z2 = d.ep.x * -sin(alpha) + d.ep.z * cos(alpha);
+
+			return {
+				sp: {x: x1, y: y1, z: z1},
+				ep: {x: x2, y: y2, z: z2}
+			};
 		}
 
 		$threedCtrl.init();
