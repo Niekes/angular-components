@@ -66,7 +66,7 @@ app.component('threed', {
 
 		function dragged(){
 			mouseX = mouseX || 0;
-			alpha = (((d3.event.x - mouse.x) + mouseX)) * Math.PI / 180;
+			alpha = -(((d3.event.x - mouse.x) + mouseX)) * Math.PI / 180;
 			var _data =  svg.selectAll('path.line').data();
 			$threedCtrl.update(_data);
 		}
