@@ -20,8 +20,7 @@ app.component('threed', {
 		var alpha = 0;
 		var mouse = {};
 		var mouseX;
-		// var beta = Math.PI/2;
-		// var gamma = 0;
+		var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
 		var cos = function(a){ return Math.cos(a); };
 		var sin = function(a){ return Math.sin(a); };
 
@@ -46,6 +45,17 @@ app.component('threed', {
 				.append('g')
 				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+			d3.select(el).select('svg').append('rect')
+				.attr('class', 'zoom')
+				.attr('fill', 'none')
+				.attr('width', width)
+				.attr('height', height)
+				.call(zoom)
+				.on('mousedown.zoom', null)
+				.on('touchstart.zoom', null)
+				.on('touchmove.zoom', null)
+				.on('touchend.zoom', null);
+
 			var focus = svg.append('g').attr( 'class', 'focus');
 
 			focus.append('path')
@@ -57,6 +67,14 @@ app.component('threed', {
 				.attr('d', d3.line()([[width/2+10,height/2], [width/2-10,height/2]]));
 
 		};
+
+		function zoomed(){
+			if(d3.event.sourceEvent.shiftKey){
+				distance  = d3.event.transform.k;
+				var _data =  svg.selectAll('path.line').data();
+				$threedCtrl.update(_data);
+			}
+		}
 
 		function dragStart(){
 			mouse = {

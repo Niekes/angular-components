@@ -3,7 +3,6 @@
 app.controller('threedCtrl', function($scope, $interval){
 
 	var threedCtrl = this;
-	var count = 0;
 
 	var data = [
 		{ sp: {x: -1, y:  1, z: -1}, ep: {x:  1, y:  1, z: -1} },
@@ -26,7 +25,7 @@ app.controller('threedCtrl', function($scope, $interval){
 
 	function randomizeData(){
 		var e = angular.copy(data);
-		var r = rndInt(10,15);
+		var r = rndInt(5, 15);
 		e.forEach(function(p){
 			p.ep.x *= r;
 			p.ep.y *= r;
