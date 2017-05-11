@@ -20,6 +20,7 @@ app.component('threed', {
 		var alpha = 0;
 		var mouse = {};
 		var mouseX;
+		var color = ['coral', 'green', 'blue', 'yellow'];
 		var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
 		var cos = function(a){ return Math.cos(a); };
 		var sin = function(a){ return Math.sin(a); };
@@ -60,37 +61,38 @@ app.component('threed', {
 
 			focus.append('path')
 				.attr('stroke', '#aaa')
-				.attr('d', d3.line()([[width/2,height/2+10], [width/2,height/2-10]]));
+				.attr('d', d3.line()([[width/2,height/2+5], [width/2,height/2-5]]));
 
 			focus.append('path')
 				.attr('stroke', '#aaa')
-				.attr('d', d3.line()([[width/2+10,height/2], [width/2-10,height/2]]));
+				.attr('d', d3.line()([[width/2+5,height/2], [width/2-5,height/2]]));
 
 		};
 
 		function zoomed(){
+			// d3.select(el).select('rect.zoom').style('cursor', 'move');
 			if(d3.event.sourceEvent.shiftKey){
 				distance  = d3.event.transform.k;
 				var _data =  svg.selectAll('path.line').data();
 				$threedCtrl.update(_data);
+				// d3.select(el).select('rect.zoom').style('cursor', 'crosshair');
 			}
+
 		}
 
 		function dragStart(){
-			mouse = {
-				x: d3.event.x
-			};
+			mouse = { x: d3.event.x };
 		}
 
 		function dragged(){
 			mouseX = mouseX || 0;
-			alpha = -(((d3.event.x - mouse.x) + mouseX)) * Math.PI / 180;
+			alpha = -(d3.event.x - mouse.x + mouseX) * Math.PI / 180;
 			var _data =  svg.selectAll('path.line').data();
 			$threedCtrl.update(_data);
 		}
 
 		function dragEnd(){
-			mouseX = ((d3.event.x - mouse.x) + mouseX);
+			mouseX = d3.event.x - mouse.x + mouseX;
 		}
 
 		$threedCtrl.$onChanges = function(changes){
@@ -105,18 +107,28 @@ app.component('threed', {
 				.enter()
 				.append('path')
 				.attr('class', 'line')
+				.style('fill', function(d, i){ return color[i]; })
 				.merge(lines)
 				.each(function(d){
-					d.rotated 	  = rotate(d);
+					d.rotated 	= rotate(d);
+					d.midPoint  = midPoint(d.rotated);
+					console.log(d.midPoint);
 					d.projected = project(d.rotated);
 				})
 				.style('stroke', 'black')
 				.attr('stroke-width', 1)
+				.sort(function(d, e){
+					return d3.descending(d.midPoint.z, e.midPoint.z);
+				})
 				.transition().duration(_tt === undefined ? 0 : tt)
 				.attr('d', function(d){
 					return d3.line()([
-						[ d.projected.sp.x, d.projected.sp.y ],
-						[ d.projected.ep.x, d.projected.ep.y ]
+						[ d.projected.tl.x, d.projected.tl.y ],
+						[ d.projected.tr.x, d.projected.tr.y ],
+						[ d.projected.br.x, d.projected.br.y ],
+						[ d.projected.bl.x, d.projected.bl.y ],
+						[ d.projected.tl.x, d.projected.tl.y ],
+						[ d.projected.tr.x, d.projected.tr.y ]
 					]);
 				});
 
@@ -126,30 +138,52 @@ app.component('threed', {
 
 		};
 
-		function project(d){
-			var x1 = xOffset + scale * d.sp.x / (d.sp.z + distance);
-			var y1 = yOffset + scale * d.sp.y / (d.sp.z + distance);
-			var x2 = xOffset + scale * d.ep.x / (d.ep.z + distance);
-			var y2 = yOffset + scale * d.ep.y / (d.ep.z + distance);
+		function midPoint(d){
+			var mx = (d.tl.x + d.br.x)/2;
+			var my = (d.tl.y + d.br.y)/2;
+			var mz = (d.tl.z + d.br.z)/2;
+			return {x: mx, y: my, z: mz};
+		}
 
+		function project(d){
+			var x1 = xOffset + scale * d.tl.x / (d.tl.z + distance);
+			var y1 = yOffset + scale * d.tl.y / (d.tl.z + distance);
+			var x2 = xOffset + scale * d.tr.x / (d.tr.z + distance);
+			var y2 = yOffset + scale * d.tr.y / (d.tr.z + distance);
+
+			var x3 = xOffset + scale * d.bl.x / (d.bl.z + distance);
+			var y3 = yOffset + scale * d.bl.y / (d.bl.z + distance);
+			var x4 = xOffset + scale * d.br.x / (d.br.z + distance);
+			var y4 = yOffset + scale * d.br.y / (d.br.z + distance);
 			return {
-				sp: {x: x1, y: y1},
-				ep: {x: x2, y: y2}
+				tl: {x: x1, y: y1},
+				tr: {x: x2, y: y2},
+				bl: {x: x3, y: y3},
+				br: {x: x4, y: y4}
 			};
 		}
 
 		function rotate(d){
-			var x1 = d.sp.x *  cos(alpha) + d.sp.z * sin(alpha);
-			var y1 = d.sp.y;
-			var z1 = d.sp.x * -sin(alpha) + d.sp.z * cos(alpha);
+			var x1 = d.tl.x *  cos(alpha) + d.tl.z * sin(alpha);
+			var y1 = d.tl.y;
+			var z1 = d.tl.x * -sin(alpha) + d.tl.z * cos(alpha);
 
-			var x2 = d.ep.x *  cos(alpha) + d.ep.z * sin(alpha);
-			var y2 = d.ep.y;
-			var z2 = d.ep.x * -sin(alpha) + d.ep.z * cos(alpha);
+			var x2 = d.tr.x *  cos(alpha) + d.tr.z * sin(alpha);
+			var y2 = d.tr.y;
+			var z2 = d.tr.x * -sin(alpha) + d.tr.z * cos(alpha);
 
+			var x3 = d.bl.x *  cos(alpha) + d.bl.z * sin(alpha);
+			var y3 = d.bl.y;
+			var z3 = d.bl.x * -sin(alpha) + d.bl.z * cos(alpha);
+
+			var x4 = d.br.x *  cos(alpha) + d.br.z * sin(alpha);
+			var y4 = d.br.y;
+			var z4 = d.br.x * -sin(alpha) + d.br.z * cos(alpha);
 			return {
-				sp: {x: x1, y: y1, z: z1},
-				ep: {x: x2, y: y2, z: z2}
+				tl: {x: x1, y: y1, z: z1},
+				tr: {x: x2, y: y2, z: z2},
+				bl: {x: x3, y: y3, z: z3},
+				br: {x: x4, y: y4, z: z4}
 			};
 		}
 

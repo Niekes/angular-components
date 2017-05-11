@@ -1,22 +1,41 @@
 'use strict';
 
-app.controller('threedCtrl', function($scope, $interval){
+app.controller('threedCtrl', function(){
 
 	var threedCtrl = this;
 
+	// var data = [
+	// 	{ sp: {x: -1, y:  1, z: -1}, ep: {x:  1, y:  1, z: -1} },
+	// 	{ sp: {x: -1, y: -1, z: -1}, ep: {x:  1, y: -1, z: -1} },
+	// 	{ sp: {x:  1, y: -1, z: -1}, ep: {x:  1, y:  1, z: -1} },
+	// 	{ sp: {x: -1, y: -1, z: -1}, ep: {x: -1, y:  1, z: -1} },
+	// 	{ sp: {x: -1, y:  1, z:  1}, ep: {x:  1, y:  1, z:  1} },
+	// 	{ sp: {x: -1, y: -1, z:  1}, ep: {x:  1, y: -1, z:  1} },
+	// 	{ sp: {x:  1, y: -1, z:  1}, ep: {x:  1, y:  1, z:  1} },
+	// 	{ sp: {x: -1, y: -1, z:  1}, ep: {x: -1, y:  1, z:  1} },
+	// 	{ sp: {x: -1, y: -1, z:  1}, ep: {x: -1, y: -1, z: -1} },
+	// 	{ sp: {x:  1, y: -1, z:  1}, ep: {x:  1, y: -1, z: -1} },
+	// 	{ sp: {x: -1, y:  1, z:  1}, ep: {x: -1, y:  1, z: -1} },
+	// 	{ sp: {x:  1, y:  1, z:  1}, ep: {x:  1, y:  1, z: -1} }
+	// ];
+
 	var data = [
-		{ sp: {x: -1, y:  1, z: -1}, ep: {x:  1, y:  1, z: -1} },
-		{ sp: {x: -1, y: -1, z: -1}, ep: {x:  1, y: -1, z: -1} },
-		{ sp: {x:  1, y: -1, z: -1}, ep: {x:  1, y:  1, z: -1} },
-		{ sp: {x: -1, y: -1, z: -1}, ep: {x: -1, y:  1, z: -1} },
-		{ sp: {x: -1, y:  1, z:  1}, ep: {x:  1, y:  1, z:  1} },
-		{ sp: {x: -1, y: -1, z:  1}, ep: {x:  1, y: -1, z:  1} },
-		{ sp: {x:  1, y: -1, z:  1}, ep: {x:  1, y:  1, z:  1} },
-		{ sp: {x: -1, y: -1, z:  1}, ep: {x: -1, y:  1, z:  1} },
-		{ sp: {x: -1, y: -1, z:  1}, ep: {x: -1, y: -1, z: -1} },
-		{ sp: {x:  1, y: -1, z:  1}, ep: {x:  1, y: -1, z: -1} },
-		{ sp: {x: -1, y:  1, z:  1}, ep: {x: -1, y:  1, z: -1} },
-		{ sp: {x:  1, y:  1, z:  1}, ep: {x:  1, y:  1, z: -1} }
+		{
+			tl: {x: -1, y:  1, z: -1}, tr: {x:  1, y:  1, z: -1},
+		  	bl: {x: -1, y: -1, z: -1}, br: {x:  1, y: -1, z: -1}
+		},
+		{
+			tl: {x: -1, y:  1, z:  1}, tr: {x:  1, y:  1, z:  1},
+		  	bl: {x: -1, y: -1, z:  1}, br: {x:  1, y: -1, z:  1}
+		},
+		{
+			tl: {x: -1, y:  1, z: -1}, tr: {x:  1, y:  1, z: -1},
+		  	bl: {x: -1, y:  1, z:  1}, br: {x:  1, y:  1, z:  1}
+		},
+		{
+			tl: {x: -1, y: -1, z: -1}, tr: {x:  1, y: -1, z: -1},
+		  	bl: {x: -1, y: -1, z:  1}, br: {x:  1, y: -1, z:  1}
+		},
 	];
 
 	function updateData(){
@@ -27,12 +46,21 @@ app.controller('threedCtrl', function($scope, $interval){
 		var e = angular.copy(data);
 		var r = rndInt(5, 15);
 		e.forEach(function(p){
-			p.ep.x *= r;
-			p.ep.y *= r;
-			p.ep.z *= r;
-			p.sp.x *= r;
-			p.sp.y *= r;
-			p.sp.z *= r;
+			p.tl.x *= r;
+			p.tl.y *= r;
+			p.tl.z *= r;
+
+			p.tr.x *= r;
+			p.tr.y *= r;
+			p.tr.z *= r;
+
+			p.bl.x *= r;
+			p.bl.y *= r;
+			p.bl.z *= r;
+
+			p.br.x *= r;
+			p.br.y *= r;
+			p.br.z *= r;
 		});
 		return e;
 	}
