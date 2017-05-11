@@ -13,17 +13,29 @@ app.component('threed', {
 		var el = $element[0];
 		var $threedCtrl = this;
 		var tt = DEFAULTS.TRANSITION.TIME;
-		var scale = 1500;
+		var ortho = 'ortho'; // Orthographic projection
+		var persp = 'persp'; // Weak perspective projection
+		var scale = 1000;
 		var distance = 100;
 		var xOffset;
 		var yOffset;
 		var alpha = 0;
 		var mouse = {};
 		var mouseX;
-		var color = ['coral', 'green', 'blue', 'yellow'];
-		var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
+		var color = d3.scaleOrdinal(d3.schemeDark2);
+		// var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
 		var cos = function(a){ return Math.cos(a); };
 		var sin = function(a){ return Math.sin(a); };
+
+		// var yMatrix = [
+		// 	 cos, 0, sin,
+		// 	0,	  1, 0,
+		// 	-sin, 0, cos
+		// ];
+
+		var defauls = {
+			projection: persp // 'ortho' || 'persp'
+		};
 
 		document.querySelector('article').style.backgroundColor = 'white';
 
@@ -46,16 +58,16 @@ app.component('threed', {
 				.append('g')
 				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-			d3.select(el).select('svg').append('rect')
-				.attr('class', 'zoom')
-				.attr('fill', 'none')
-				.attr('width', width)
-				.attr('height', height)
-				.call(zoom)
-				.on('mousedown.zoom', null)
-				.on('touchstart.zoom', null)
-				.on('touchmove.zoom', null)
-				.on('touchend.zoom', null);
+			// d3.select(el).select('svg').append('rect')
+			// 	.attr('class', 'zoom')
+			// 	.attr('fill', 'none')
+			// 	.attr('width', width)
+			// 	.attr('height', height)
+			// 	.call(zoom)
+			// 	.on('mousedown.zoom', null)
+			// 	.on('touchstart.zoom', null)
+			// 	.on('touchmove.zoom', null)
+			// 	.on('touchend.zoom', null);
 
 			var focus = svg.append('g').attr( 'class', 'focus');
 
@@ -69,16 +81,16 @@ app.component('threed', {
 
 		};
 
-		function zoomed(){
-			// d3.select(el).select('rect.zoom').style('cursor', 'move');
-			if(d3.event.sourceEvent.shiftKey){
-				distance  = d3.event.transform.k;
-				var _data =  svg.selectAll('path.line').data();
-				$threedCtrl.update(_data);
-				// d3.select(el).select('rect.zoom').style('cursor', 'crosshair');
-			}
+		// function zoomed(){
+		// 	// d3.select(el).select('rect.zoom').style('cursor', 'move');
+		// 	if(d3.event.sourceEvent.shiftKey){
+		// 		distance  = d3.event.transform.k;
+		// 		var _data =  svg.selectAll('path.line').data();
+		// 		$threedCtrl.update(_data);
+		// 		// d3.select(el).select('rect.zoom').style('cursor', 'crosshair');
+		// 	}
 
-		}
+		// }
 
 		function dragStart(){
 			mouse = { x: d3.event.x };
@@ -107,16 +119,15 @@ app.component('threed', {
 				.enter()
 				.append('path')
 				.attr('class', 'line')
-				.style('fill', function(d, i){ return color[i]; })
+				.style('fill', function(d, i){ return color(i); })
+				.style('stroke', function(d, i){ return d3.color(color(i)).darker(1); })
 				.merge(lines)
+				.attr('stroke-width', 1)
 				.each(function(d){
 					d.rotated 	= rotate(d);
 					d.midPoint  = midPoint(d.rotated);
-					console.log(d.midPoint);
 					d.projected = project(d.rotated);
 				})
-				.style('stroke', 'black')
-				.attr('stroke-width', 1)
 				.sort(function(d, e){
 					return d3.descending(d.midPoint.z, e.midPoint.z);
 				})
@@ -132,6 +143,7 @@ app.component('threed', {
 					]);
 				});
 
+
 			lines
 				.exit()
 				.remove();
@@ -146,15 +158,29 @@ app.component('threed', {
 		}
 
 		function project(d){
-			var x1 = xOffset + scale * d.tl.x / (d.tl.z + distance);
-			var y1 = yOffset + scale * d.tl.y / (d.tl.z + distance);
-			var x2 = xOffset + scale * d.tr.x / (d.tr.z + distance);
-			var y2 = yOffset + scale * d.tr.y / (d.tr.z + distance);
 
-			var x3 = xOffset + scale * d.bl.x / (d.bl.z + distance);
-			var y3 = yOffset + scale * d.bl.y / (d.bl.z + distance);
-			var x4 = xOffset + scale * d.br.x / (d.br.z + distance);
-			var y4 = yOffset + scale * d.br.y / (d.br.z + distance);
+			if(defauls.projection === ortho){
+				var x1 = xOffset + scale * d.tl.x;
+				var y1 = yOffset + scale * d.tl.y;
+				var x2 = xOffset + scale * d.tr.x;
+				var y2 = yOffset + scale * d.tr.y;
+				var x3 = xOffset + scale * d.bl.x;
+				var y3 = yOffset + scale * d.bl.y;
+				var x4 = xOffset + scale * d.br.x;
+				var y4 = yOffset + scale * d.br.y;
+			}
+
+			if(defauls.projection === persp){
+				var x1 = xOffset + scale * d.tl.x / (d.tl.z + distance);
+				var y1 = yOffset + scale * d.tl.y / (d.tl.z + distance);
+				var x2 = xOffset + scale * d.tr.x / (d.tr.z + distance);
+				var y2 = yOffset + scale * d.tr.y / (d.tr.z + distance);
+				var x3 = xOffset + scale * d.bl.x / (d.bl.z + distance);
+				var y3 = yOffset + scale * d.bl.y / (d.bl.z + distance);
+				var x4 = xOffset + scale * d.br.x / (d.br.z + distance);
+				var y4 = yOffset + scale * d.br.y / (d.br.z + distance);
+			}
+
 			return {
 				tl: {x: x1, y: y1},
 				tr: {x: x2, y: y2},
