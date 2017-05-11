@@ -4,73 +4,25 @@ app.controller('threedCtrl', function(){
 
 	var threedCtrl = this;
 
-	// var data = [
-	// 	{ sp: {x: -1, y:  1, z: -1}, ep: {x:  1, y:  1, z: -1} },
-	// 	{ sp: {x: -1, y: -1, z: -1}, ep: {x:  1, y: -1, z: -1} },
-	// 	{ sp: {x:  1, y: -1, z: -1}, ep: {x:  1, y:  1, z: -1} },
-	// 	{ sp: {x: -1, y: -1, z: -1}, ep: {x: -1, y:  1, z: -1} },
-	// 	{ sp: {x: -1, y:  1, z:  1}, ep: {x:  1, y:  1, z:  1} },
-	// 	{ sp: {x: -1, y: -1, z:  1}, ep: {x:  1, y: -1, z:  1} },
-	// 	{ sp: {x:  1, y: -1, z:  1}, ep: {x:  1, y:  1, z:  1} },
-	// 	{ sp: {x: -1, y: -1, z:  1}, ep: {x: -1, y:  1, z:  1} },
-	// 	{ sp: {x: -1, y: -1, z:  1}, ep: {x: -1, y: -1, z: -1} },
-	// 	{ sp: {x:  1, y: -1, z:  1}, ep: {x:  1, y: -1, z: -1} },
-	// 	{ sp: {x: -1, y:  1, z:  1}, ep: {x: -1, y:  1, z: -1} },
-	// 	{ sp: {x:  1, y:  1, z:  1}, ep: {x:  1, y:  1, z: -1} }
-	// ];
-
-	var data = [
-		{
-			tl: {x: -1, y:  1, z: -1}, tr: {x:  1, y:  1, z: -1},
-		  	bl: {x: -1, y: -1, z: -1}, br: {x:  1, y: -1, z: -1}
-		},
-		{
-			tl: {x: -1, y:  1, z:  1}, tr: {x:  1, y:  1, z:  1},
-		  	bl: {x: -1, y: -1, z:  1}, br: {x:  1, y: -1, z:  1}
-		},
-		{
-			tl: {x: -1, y:  1, z: -1}, tr: {x: -1, y:  1, z:  1},
-		  	bl: {x: -1, y: -1, z: -1}, br: {x: -1, y: -1, z:  1}
-		},
-		{
-			tl: {x:  1, y:  1, z: -1}, tr: {x:  1, y:  1, z:  1},
-		  	bl: {x:  1, y: -1, z: -1}, br: {x:  1, y: -1, z:  1}
-		},
-		{
-			tl: {x: -1, y:  1, z: -1}, tr: {x:  1, y:  1, z: -1},
-		  	bl: {x: -1, y:  1, z:  1}, br: {x:  1, y:  1, z:  1}
-		},
-		{
-			tl: {x: -1, y: -1, z: -1}, tr: {x:  1, y: -1, z: -1},
-		  	bl: {x: -1, y: -1, z:  1}, br: {x:  1, y: -1, z:  1}
-		},
-	];
-
 	function updateData(){
-		threedCtrl.data = randomizeData();
-	}
 
-	function randomizeData(){
-		var e = angular.copy(data);
-		var r = 18;
-		e.forEach(function(p){
-			p.tl.x *= r;
-			p.tl.y *= r;
-			p.tl.z *= r;
+		var cube0 = {key: 0, values: [cube(rndInt(2,30), -45)]};
+		var cube1 = {key: 1, values: [cube(rndInt(2,30), -30)]};
+		var cube2 = {key: 2, values: [cube(rndInt(2,30), -15)]};
+		var cube3 = {key: 3, values: [cube(rndInt(2,30),  0)]};
+		var cube4 = {key: 4, values: [cube(rndInt(2,30),  15)]};
+		var cube5 = {key: 5, values: [cube(rndInt(2,30),  30)]};
+		var cube6 = {key: 6, values: [cube(rndInt(2,30),  45)]};
 
-			p.tr.x *= r;
-			p.tr.y *= r;
-			p.tr.z *= r;
-
-			p.bl.x *= r;
-			p.bl.y *= r;
-			p.bl.z *= r;
-
-			p.br.x *= r;
-			p.br.y *= r;
-			p.br.z *= r;
-		});
-		return e;
+		threedCtrl.data = [
+			cube0,
+			cube1,
+			cube2,
+			cube3,
+			cube4,
+			cube5,
+			cube6,
+		];
 	}
 
 	function rndInt(min, max){
@@ -82,4 +34,40 @@ app.controller('threedCtrl', function(){
 	threedCtrl.updateData = function(){
 		updateData();
 	};
+
+	function cube(h, x){
+
+		var m  =  5;
+		var	n  = -5;
+		var xn = n+x;
+		var xm = m+x;
+
+		return [
+			{
+				name: 'front',
+				tl: {x: xn, y: h, z: n}, tr: {x: xm, y: h, z: n},
+			  	bl: {x: xn, y: n, z: n}, br: {x: xm, y: n, z: n}
+			},
+			{
+				name: 'back',
+				tl: {x: xn, y: h, z: m}, tr: {x: xm, y: h, z: m},
+			  	bl: {x: xn, y: n, z: m}, br: {x: xm, y: n, z: m}
+			},
+			{
+				name: 'left',
+				tl: {x: xn, y: h, z: n}, tr: {x: xn, y: h, z: m},
+			  	bl: {x: xn, y: n, z: n}, br: {x: xn, y: n, z:  m}
+			},
+			{
+				name: 'right',
+				tl: {x: xm, y: h, z: n}, tr: {x: xm, y: h, z: m},
+			  	bl: {x: xm, y: n, z: n}, br: {x: xm, y: n, z: m}
+			},
+			{
+				name: 'top',
+				tl: {x: xn, y: h, z: n}, tr: {x: xm, y: h, z: n},
+			  	bl: {x: xn, y: h, z: m}, br: {x: xm, y: h, z: m}
+			},
+		];
+	}
 });

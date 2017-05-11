@@ -13,24 +13,14 @@ app.component('threed', {
 		var el = $element[0];
 		var $threedCtrl = this;
 		var tt = DEFAULTS.TRANSITION.TIME;
-		var ortho = 'ortho'; // Orthographic projection
-		var persp = 'persp'; // Weak perspective projection
-		var scale = 1000;
-		var distance = 100;
-		var xOffset;
-		var yOffset;
-		var gamma = 0; // X
-		var beta = 0; // Y
-		var alpha = 0; // Z
+		var gamma = 0;
+		var beta = 0;
 		var mouse = {};
 		var mouseX;
 		var mouseY;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
+		var cube;
 		// var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
-
-		var defauls = {
-			projection: persp // 'ortho' || 'persp'
-		};
 
 		document.querySelector('article').style.backgroundColor = 'white';
 
@@ -42,9 +32,6 @@ app.component('threed', {
 
 			width = el.clientWidth - margin.left - margin.right;
 			height = el.clientHeight - margin.top - margin.bottom;
-
- 			xOffset = width/2;
-			yOffset = height/2;
 
     		svg = d3.select(el).append('svg')
 				.attr('width', width + margin.left + margin.right)
@@ -96,7 +83,7 @@ app.component('threed', {
 			mouseY = mouseY || 0;
 			beta   = (d3.event.x - mouse.x + mouseX) * Math.PI / 720 * (-1);
 			gamma  = (d3.event.y - mouse.y + mouseY) * Math.PI / 720;
-			$threedCtrl.update(svg.selectAll('path.line').data());
+			$threedCtrl.update(svg.selectAll('g.group').data());
 		}
 
 		function dragEnd(){
@@ -110,35 +97,46 @@ app.component('threed', {
 
 		$threedCtrl.update = function(data, _tt){
 
-			var lines = svg.selectAll('path.line').data(data);
+			var result = barChart3d.processData(data, width/2, height/2, 0, beta, gamma);
+
+			var g = svg.selectAll('g.group').data(result, function(d){ return d.key; });
+
+			var gEnter = g
+				.enter()
+				.append('g')
+				.attr('class', 'group')
+				.style('fill', function(d, i){
+					return color(i);
+				})
+				.style('stroke', function(d, i){
+					return d3.color(color(i)).darker(1);
+				})
+				.merge(g)
+				.sort(function(d, e){
+					var dz = (d.values[0][4].rotated.tl.z + d.values[0][4].rotated.br.z)/2;
+					var ez = (e.values[0][4].rotated.tl.z + e.values[0][4].rotated.br.z)/2;
+					return d3.descending(dz, ez);
+				});
+
+			g.exit().remove();
+
+			var lines = g.merge(gEnter).selectAll('path.line').data(function(d) { return d.values[0]; }, function(d){
+				return d.name;
+			});
 
 			lines
 				.enter()
 				.append('path')
 				.attr('class', 'line')
-				.style('fill', function(d, i){ return color(i); })
-				.style('stroke', function(d, i){ return d3.color(color(i)).darker(1); })
 				.merge(lines)
 				.attr('stroke-width', 1)
-				.each(function(d){
-					d.rotated 	= rotate(d);
-					d.midPoint  = midPoint(d.rotated);
-					d.projected = project(d.rotated);
-				})
 				.sort(function(d, e){
-					return d3.descending(d.midPoint.z, e.midPoint.z);
+					var dz = (d.rotated.tl.z + d.rotated.br.z)/2;
+					var ez = (e.rotated.tl.z + e.rotated.br.z)/2;
+					return d3.descending(dz, ez);
 				})
 				.transition().duration(_tt === undefined ? 0 : tt)
-				.attr('d', function(d){
-					return d3.line()([
-						[ d.projected.tl.x, d.projected.tl.y ],
-						[ d.projected.tr.x, d.projected.tr.y ],
-						[ d.projected.br.x, d.projected.br.y ],
-						[ d.projected.bl.x, d.projected.bl.y ],
-						[ d.projected.tl.x, d.projected.tl.y ],
-						[ d.projected.tr.x, d.projected.tr.y ]
-					]);
-				});
+				.attr('d', barChart3d.draw);
 
 
 			lines
@@ -147,86 +145,6 @@ app.component('threed', {
 
 		};
 
-		function midPoint(d){
-			var mx = (d.tl.x + d.br.x)/2;
-			var my = (d.tl.y + d.br.y)/2;
-			var mz = (d.tl.z + d.br.z)/2;
-			return {x: mx, y: my, z: mz};
-		}
-
-		function project(d){
-
-			var x1, x2, x3, x4, y1, y2, y3, y4;
-
-			if(defauls.projection === ortho){
-				x1 = xOffset + scale * d.tl.x;
-				y1 = yOffset + scale * d.tl.y;
-				x2 = xOffset + scale * d.tr.x;
-				y2 = yOffset + scale * d.tr.y;
-				x3 = xOffset + scale * d.bl.x;
-				y3 = yOffset + scale * d.bl.y;
-				x4 = xOffset + scale * d.br.x;
-				y4 = yOffset + scale * d.br.y;
-			}
-
-			if(defauls.projection === persp){
-				x1 = xOffset + scale * d.tl.x / (d.tl.z + distance);
-				y1 = yOffset + scale * d.tl.y / (d.tl.z + distance);
-				x2 = xOffset + scale * d.tr.x / (d.tr.z + distance);
-				y2 = yOffset + scale * d.tr.y / (d.tr.z + distance);
-				x3 = xOffset + scale * d.bl.x / (d.bl.z + distance);
-				y3 = yOffset + scale * d.bl.y / (d.bl.z + distance);
-				x4 = xOffset + scale * d.br.x / (d.br.z + distance);
-				y4 = yOffset + scale * d.br.y / (d.br.z + distance);
-			}
-
-			return {
-				tl: {x: x1, y: y1},
-				tr: {x: x2, y: y2},
-				bl: {x: x3, y: y3},
-				br: {x: x4, y: y4}
-			};
-		}
-
-		function rotate(d){
-
-		 	var r = { tl: {}, tr: {}, bl: {}, br: {} };
-
-			Object.entries(r).forEach(([key]) => rotateRxRyRz(d, key, r));
-
-			return r;
-		}
-
-		function rotateRxRyRz(d, k, r){
-			var _d = d[k];
-			var _r = r[k];
-
-			var cosa = Math.cos(alpha);
-			var sina = Math.sin(alpha);
-
-			var cosb = Math.cos(beta);
-			var sinb = Math.sin(beta);
-
-			var cosc = Math.cos(gamma);
-			var sinc = Math.sin(gamma);
-
-		    var a1 = cosa * cosb;
-		    var a2 = cosa * sinb * sinc - sina * cosc;
-		    var a3 = cosa * sinb * cosc + sina * sinc;
-
-		    var b1 = sina * cosb;
-		    var b2 = sina * sinb * sinc + cosa * cosc;
-		    var b3 = sina * sinb * cosc - cosa * sinc;
-
-		    var c1 = -sinb;
-		    var c2 = cosb * sinc;
-		    var c3 = cosb * cosc;
-
-			_r.x = a1 * _d.x + a2 * _d.y + a3 * _d.z;
-			_r.y = b1 * _d.x + b2 * _d.y + b3 * _d.z;
-			_r.z = c1 * _d.x + c2 * _d.y + c3 * _d.z;
-		}
-
 		$threedCtrl.init();
 
 		$rootScope.$on('window:resize', function(){
@@ -234,3 +152,102 @@ app.component('threed', {
 		});
 	}
 });
+
+var barChart3d = {
+	persp: 'persp', // Weak perspective projection
+	ortho: 'ortho', // Orthographic projection
+	projection: function(){
+		return this.persp;
+	},
+	processData: function(data, xO, yO, alpha, beta, gamma){
+		var that = this;
+		data.forEach(function(d){
+			d.values[0].forEach(function(_d){
+				_d.rotated   = that.rotate(_d, alpha, beta, gamma);
+				_d.projected = that.project(_d.rotated, xO, yO);
+			});
+		});
+		return data;
+	},
+	rotate: function(d, alpha, beta, gamma){
+	 	var r = { tl: {}, tr: {}, bl: {}, br: {} };
+		Object.entries(r).forEach(([key]) => this.rotateRxRyRz(d, key, r, alpha, beta, gamma));
+		return r;
+	},
+	project: function(d, xO, yO){
+		var x1, x2, x3, x4, y1, y2, y3, y4;
+		var scale = 10000;
+		var distance = 1000;
+
+		if(this.projection() === this.ortho){
+			x1 = xO + scale * d.tl.x;
+			y1 = yO + scale * d.tl.y;
+			x2 = xO + scale * d.tr.x;
+			y2 = yO + scale * d.tr.y;
+			x3 = xO + scale * d.bl.x;
+			y3 = yO + scale * d.bl.y;
+			x4 = xO + scale * d.br.x;
+			y4 = yO + scale * d.br.y;
+		}
+
+		if(this.projection() === this.persp){
+			x1 = xO + scale * d.tl.x / (d.tl.z + distance);
+			y1 = yO + scale * d.tl.y / (d.tl.z + distance);
+			x2 = xO + scale * d.tr.x / (d.tr.z + distance);
+			y2 = yO + scale * d.tr.y / (d.tr.z + distance);
+			x3 = xO + scale * d.bl.x / (d.bl.z + distance);
+			y3 = yO + scale * d.bl.y / (d.bl.z + distance);
+			x4 = xO + scale * d.br.x / (d.br.z + distance);
+			y4 = yO + scale * d.br.y / (d.br.z + distance);
+		}
+
+		return {
+			tl: {x: x1, y: y1},
+			tr: {x: x2, y: y2},
+			bl: {x: x3, y: y3},
+			br: {x: x4, y: y4}
+		};
+	},
+	rotateRxRyRz: function(d, k, r, alpha, beta, gamma){
+		var _d = d[k];
+		var _r = r[k];
+
+		alpha = alpha || 0; // Z
+		beta  = beta  || 0;	// Y
+		gamma = gamma || 0; // X
+
+		var cosa = Math.cos(alpha);
+		var sina = Math.sin(alpha);
+
+		var cosb = Math.cos(beta);
+		var sinb = Math.sin(beta);
+
+		var cosc = Math.cos(gamma);
+		var sinc = Math.sin(gamma);
+
+	    var a1 = cosa * cosb;
+	    var a2 = cosa * sinb * sinc - sina * cosc;
+	    var a3 = cosa * sinb * cosc + sina * sinc;
+
+	    var b1 = sina * cosb;
+	    var b2 = sina * sinb * sinc + cosa * cosc;
+	    var b3 = sina * sinb * cosc - cosa * sinc;
+
+	    var c1 = -sinb;
+	    var c2 = cosb * sinc;
+	    var c3 = cosb * cosc;
+
+		_r.x = a1 * _d.x + a2 * -_d.y + a3 * _d.z;
+		_r.y = b1 * _d.x + b2 * -_d.y + b3 * _d.z;
+		_r.z = c1 * _d.x + c2 * -_d.y + c3 * _d.z;
+	},
+	draw: function(d){
+		return d3.line()([
+			[ d.projected.tl.x, d.projected.tl.y ],
+			[ d.projected.tr.x, d.projected.tr.y ],
+			[ d.projected.br.x, d.projected.br.y ],
+			[ d.projected.bl.x, d.projected.bl.y ],
+			[ d.projected.tl.x, d.projected.tl.y ],
+		]);
+	}
+};
