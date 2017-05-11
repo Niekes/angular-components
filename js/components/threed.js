@@ -19,19 +19,14 @@ app.component('threed', {
 		var distance = 100;
 		var xOffset;
 		var yOffset;
-		var alpha = 0;
+		var gamma = 0; // X
+		var beta = 0; // Y
+		var alpha = 0; // Z
 		var mouse = {};
 		var mouseX;
+		var mouseY;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
 		// var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
-		var cos = function(a){ return Math.cos(a); };
-		var sin = function(a){ return Math.sin(a); };
-
-		// var yMatrix = [
-		// 	 cos, 0, sin,
-		// 	0,	  1, 0,
-		// 	-sin, 0, cos
-		// ];
 
 		var defauls = {
 			projection: persp // 'ortho' || 'persp'
@@ -93,18 +88,20 @@ app.component('threed', {
 		// }
 
 		function dragStart(){
-			mouse = { x: d3.event.x };
+			mouse = { x: d3.event.x, y: d3.event.y };
 		}
 
 		function dragged(){
 			mouseX = mouseX || 0;
-			alpha = -(d3.event.x - mouse.x + mouseX) * Math.PI / 180;
-			var _data =  svg.selectAll('path.line').data();
-			$threedCtrl.update(_data);
+			mouseY = mouseY || 0;
+			beta   = (d3.event.x - mouse.x + mouseX) * Math.PI / 720 * (-1);
+			gamma  = (d3.event.y - mouse.y + mouseY) * Math.PI / 720;
+			$threedCtrl.update(svg.selectAll('path.line').data());
 		}
 
 		function dragEnd(){
 			mouseX = d3.event.x - mouse.x + mouseX;
+			mouseY = d3.event.y - mouse.y + mouseY;
 		}
 
 		$threedCtrl.$onChanges = function(changes){
@@ -192,27 +189,42 @@ app.component('threed', {
 		}
 
 		function rotate(d){
-			var x1 =  d.tl.x *  cos(alpha) + d.tl.z * sin(alpha);
-			var y1 = -d.tl.y;
-			var z1 =  d.tl.x * -sin(alpha) + d.tl.z * cos(alpha);
 
-			var x2 =  d.tr.x *  cos(alpha) + d.tr.z * sin(alpha);
-			var y2 = -d.tr.y;
-			var z2 =  d.tr.x * -sin(alpha) + d.tr.z * cos(alpha);
+		 	var r = { tl: {}, tr: {}, bl: {}, br: {} };
 
-			var x3 =  d.bl.x *  cos(alpha) + d.bl.z * sin(alpha);
-			var y3 = -d.bl.y;
-			var z3 =  d.bl.x * -sin(alpha) + d.bl.z * cos(alpha);
+			Object.entries(r).forEach(([key]) => rotateRxRyRz(d, key, r));
 
-			var x4 =  d.br.x *  cos(alpha) + d.br.z * sin(alpha);
-			var y4 = -d.br.y;
-			var z4 =  d.br.x * -sin(alpha) + d.br.z * cos(alpha);
-			return {
-				tl: {x: x1, y: y1, z: z1},
-				tr: {x: x2, y: y2, z: z2},
-				bl: {x: x3, y: y3, z: z3},
-				br: {x: x4, y: y4, z: z4}
-			};
+			return r;
+		}
+
+		function rotateRxRyRz(d, k, r){
+			var _d = d[k];
+			var _r = r[k];
+
+			var cosa = Math.cos(alpha);
+			var sina = Math.sin(alpha);
+
+			var cosb = Math.cos(beta);
+			var sinb = Math.sin(beta);
+
+			var cosc = Math.cos(gamma);
+			var sinc = Math.sin(gamma);
+
+		    var a1 = cosa * cosb;
+		    var a2 = cosa * sinb * sinc - sina * cosc;
+		    var a3 = cosa * sinb * cosc + sina * sinc;
+
+		    var b1 = sina * cosb;
+		    var b2 = sina * sinb * sinc + cosa * cosc;
+		    var b3 = sina * sinb * cosc - cosa * sinc;
+
+		    var c1 = -sinb;
+		    var c2 = cosb * sinc;
+		    var c3 = cosb * cosc;
+
+			_r.x = a1 * _d.x + a2 * _d.y + a3 * _d.z;
+			_r.y = b1 * _d.x + b2 * _d.y + b3 * _d.z;
+			_r.z = c1 * _d.x + c2 * _d.y + c3 * _d.z;
 		}
 
 		$threedCtrl.init();
