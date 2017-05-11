@@ -29,6 +29,14 @@ app.controller('threedCtrl', function(){
 		  	bl: {x: -1, y: -1, z:  1}, br: {x:  1, y: -1, z:  1}
 		},
 		{
+			tl: {x: -1, y:  1, z: -1}, tr: {x: -1, y:  1, z:  1},
+		  	bl: {x: -1, y: -1, z: -1}, br: {x: -1, y: -1, z:  1}
+		},
+		{
+			tl: {x:  1, y:  1, z: -1}, tr: {x:  1, y:  1, z:  1},
+		  	bl: {x:  1, y: -1, z: -1}, br: {x:  1, y: -1, z:  1}
+		},
+		{
 			tl: {x: -1, y:  1, z: -1}, tr: {x:  1, y:  1, z: -1},
 		  	bl: {x: -1, y:  1, z:  1}, br: {x:  1, y:  1, z:  1}
 		},
@@ -44,7 +52,7 @@ app.controller('threedCtrl', function(){
 
 	function randomizeData(){
 		var e = angular.copy(data);
-		var r = rndInt(5, 15);
+		var r = 18;
 		e.forEach(function(p){
 			p.tl.x *= r;
 			p.tl.y *= r;

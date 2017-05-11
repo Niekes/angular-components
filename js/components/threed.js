@@ -159,26 +159,28 @@ app.component('threed', {
 
 		function project(d){
 
+			var x1, x2, x3, x4, y1, y2, y3, y4;
+
 			if(defauls.projection === ortho){
-				var x1 = xOffset + scale * d.tl.x;
-				var y1 = yOffset + scale * d.tl.y;
-				var x2 = xOffset + scale * d.tr.x;
-				var y2 = yOffset + scale * d.tr.y;
-				var x3 = xOffset + scale * d.bl.x;
-				var y3 = yOffset + scale * d.bl.y;
-				var x4 = xOffset + scale * d.br.x;
-				var y4 = yOffset + scale * d.br.y;
+				x1 = xOffset + scale * d.tl.x;
+				y1 = yOffset + scale * d.tl.y;
+				x2 = xOffset + scale * d.tr.x;
+				y2 = yOffset + scale * d.tr.y;
+				x3 = xOffset + scale * d.bl.x;
+				y3 = yOffset + scale * d.bl.y;
+				x4 = xOffset + scale * d.br.x;
+				y4 = yOffset + scale * d.br.y;
 			}
 
 			if(defauls.projection === persp){
-				var x1 = xOffset + scale * d.tl.x / (d.tl.z + distance);
-				var y1 = yOffset + scale * d.tl.y / (d.tl.z + distance);
-				var x2 = xOffset + scale * d.tr.x / (d.tr.z + distance);
-				var y2 = yOffset + scale * d.tr.y / (d.tr.z + distance);
-				var x3 = xOffset + scale * d.bl.x / (d.bl.z + distance);
-				var y3 = yOffset + scale * d.bl.y / (d.bl.z + distance);
-				var x4 = xOffset + scale * d.br.x / (d.br.z + distance);
-				var y4 = yOffset + scale * d.br.y / (d.br.z + distance);
+				x1 = xOffset + scale * d.tl.x / (d.tl.z + distance);
+				y1 = yOffset + scale * d.tl.y / (d.tl.z + distance);
+				x2 = xOffset + scale * d.tr.x / (d.tr.z + distance);
+				y2 = yOffset + scale * d.tr.y / (d.tr.z + distance);
+				x3 = xOffset + scale * d.bl.x / (d.bl.z + distance);
+				y3 = yOffset + scale * d.bl.y / (d.bl.z + distance);
+				x4 = xOffset + scale * d.br.x / (d.br.z + distance);
+				y4 = yOffset + scale * d.br.y / (d.br.z + distance);
 			}
 
 			return {
@@ -190,21 +192,21 @@ app.component('threed', {
 		}
 
 		function rotate(d){
-			var x1 = d.tl.x *  cos(alpha) + d.tl.z * sin(alpha);
-			var y1 = d.tl.y;
-			var z1 = d.tl.x * -sin(alpha) + d.tl.z * cos(alpha);
+			var x1 =  d.tl.x *  cos(alpha) + d.tl.z * sin(alpha);
+			var y1 = -d.tl.y;
+			var z1 =  d.tl.x * -sin(alpha) + d.tl.z * cos(alpha);
 
-			var x2 = d.tr.x *  cos(alpha) + d.tr.z * sin(alpha);
-			var y2 = d.tr.y;
-			var z2 = d.tr.x * -sin(alpha) + d.tr.z * cos(alpha);
+			var x2 =  d.tr.x *  cos(alpha) + d.tr.z * sin(alpha);
+			var y2 = -d.tr.y;
+			var z2 =  d.tr.x * -sin(alpha) + d.tr.z * cos(alpha);
 
-			var x3 = d.bl.x *  cos(alpha) + d.bl.z * sin(alpha);
-			var y3 = d.bl.y;
-			var z3 = d.bl.x * -sin(alpha) + d.bl.z * cos(alpha);
+			var x3 =  d.bl.x *  cos(alpha) + d.bl.z * sin(alpha);
+			var y3 = -d.bl.y;
+			var z3 =  d.bl.x * -sin(alpha) + d.bl.z * cos(alpha);
 
-			var x4 = d.br.x *  cos(alpha) + d.br.z * sin(alpha);
-			var y4 = d.br.y;
-			var z4 = d.br.x * -sin(alpha) + d.br.z * cos(alpha);
+			var x4 =  d.br.x *  cos(alpha) + d.br.z * sin(alpha);
+			var y4 = -d.br.y;
+			var z4 =  d.br.x * -sin(alpha) + d.br.z * cos(alpha);
 			return {
 				tl: {x: x1, y: y1, z: z1},
 				tr: {x: x2, y: y2, z: z2},
