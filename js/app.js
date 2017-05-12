@@ -15,6 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
+    .state('barchart3d', {
+        url: '/barchart3d',
+        controller: 'barchart3dCtrl',
+        controllerAs: 'barchart3dCtrl',
+        templateUrl: 'partials/barchart3d.html',
+        data : {
+            showInList: true,
+            pageTitle: '3D bar chart',
+            description: '3D projection with d3.js',
+            codeLink: 'barchart3d'
+        }
+    })
     .state('knob', {
         url: '/knob',
         controller: 'knobCtrl',

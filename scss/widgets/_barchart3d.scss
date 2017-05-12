@@ -1,0 +1,12 @@
+barchart3d{
+	svg{
+		shape-rendering: auto;
+	}
+
+	rect.zoom {
+		cursor: move;
+		fill: none;
+		pointer-events: all;
+	}
+
+}
