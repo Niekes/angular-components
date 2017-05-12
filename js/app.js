@@ -15,16 +15,16 @@ app.config(function($stateProvider, $urlRouterProvider){
             description: 'by niekes'
         }
     })
-    .state('threed', {
-        url: '/threed',
-        controller: 'threedCtrl',
-        controllerAs: 'threedCtrl',
-        templateUrl: 'partials/threed.html',
+    .state('barchart3d', {
+        url: '/barchart3d',
+        controller: 'barchart3dCtrl',
+        controllerAs: 'barchart3dCtrl',
+        templateUrl: 'partials/barchart3d.html',
         data : {
             showInList: true,
-            pageTitle: 'threed',
-            description: '3d projection with d3.js',
-            codeLink: 'threed'
+            pageTitle: '3D bar chart',
+            description: '3D projection with d3.js',
+            codeLink: 'barchart3d'
         }
     })
     .state('knob', {

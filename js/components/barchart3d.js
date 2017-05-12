@@ -1,17 +1,17 @@
 'use strict';
 
-app.component('threed', {
+app.component('barchart3d', {
 	bindings: {
     	data: '<'
   	},
-  	controllerAs: '$threedCtrl',
+  	controllerAs: '$barchart3dCtrl',
 	controller: function($rootScope, $element, $filter, DEFAULTS){
 
 		var svg;
 		var width;
 		var height;
 		var el = $element[0];
-		var $threedCtrl = this;
+		var $barchart3dCtrl = this;
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var gamma = 0;
 		var beta = 0;
@@ -25,7 +25,7 @@ app.component('threed', {
 
 		d3.select('article').classed('white-background', true);
 
-		$threedCtrl.init = function(){
+		$barchart3dCtrl.init = function(){
 
 			angular.element(el).empty();
 
@@ -71,7 +71,7 @@ app.component('threed', {
 		// 	if(d3.event.sourceEvent.shiftKey){
 		// 		distance  = d3.event.transform.k;
 		// 		var _data =  svg.selectAll('path.line').data();
-		// 		$threedCtrl.update(_data);
+		// 		$barchart3dCtrl.update(_data);
 		// 		// d3.select(el).select('rect.zoom').style('cursor', 'crosshair');
 		// 	}
 
@@ -86,7 +86,7 @@ app.component('threed', {
 			mouseY = mouseY || 0;
 			beta   = (d3.event.x - mouse.x + mouseX) * Math.PI / 720 * (-1);
 			gamma  = (d3.event.y - mouse.y + mouseY) * Math.PI / 720;
-			$threedCtrl.update(svg.selectAll('g.group').data());
+			$barchart3dCtrl.update(svg.selectAll('g.group').data());
 		}
 
 		function dragEnd(){
@@ -94,11 +94,11 @@ app.component('threed', {
 			mouseY = d3.event.y - mouse.y + mouseY;
 		}
 
-		$threedCtrl.$onChanges = function(changes){
-			$threedCtrl.update(changes.data.currentValue, tt);
+		$barchart3dCtrl.$onChanges = function(changes){
+			$barchart3dCtrl.update(changes.data.currentValue, tt);
 		};
 
-		$threedCtrl.update = function(data, _tt){
+		$barchart3dCtrl.update = function(data, _tt){
 			// var gridData = [
 			// 	{
 			// 		startPoint: {x:  0, y: -5, z:   0},
@@ -174,14 +174,14 @@ app.component('threed', {
 				.style('stroke', function(d, i){ return d3.color(color(i)).darker(1); })
 				.merge(g)
 				.sort(function(d, e){
-					var dz = (d.values[0][3].rotated.bl.z + d.values[0][3].rotated.br.z)/2;
-					var ez = (e.values[0][3].rotated.bl.z + e.values[0][3].rotated.br.z)/2;
+					var dz = (d.values[3].rotated.bl.z + d.values[3].rotated.br.z)/2;
+					var ez = (e.values[3].rotated.bl.z + e.values[3].rotated.br.z)/2;
 					return d3.descending(dz, ez);
 				});
 
 			g.exit().remove();
 
-			var lines = g.merge(gEnter).selectAll('path.line').data(function(d) { return d.values[0]; }, function(d){
+			var lines = g.merge(gEnter).selectAll('path.line').data(function(d) { return d.values; }, function(d){
 				return d.name;
 			});
 
@@ -206,10 +206,10 @@ app.component('threed', {
 
 		};
 
-		$threedCtrl.init();
+		$barchart3dCtrl.init();
 
 		$rootScope.$on('window:resize', function(){
-			$threedCtrl.init();
+			$barchart3dCtrl.init();
 		});
 	}
 });
@@ -223,7 +223,7 @@ var barChart3d = {
 	processData: function(data, xO, yO, alpha, beta, gamma){
 		var that = this;
 		data.forEach(function(d){
-			d.values[0].forEach(function(_d){
+			d.values.forEach(function(_d){
 				_d.rotated   = that.rotate(_d, alpha, beta, gamma);
 				_d.projected = that.project(_d.rotated, xO, yO);
 			});
