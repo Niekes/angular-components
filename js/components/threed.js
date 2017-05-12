@@ -237,7 +237,7 @@ var barChart3d = {
 	},
 	project: function(d, xO, yO){
 		var x1, x2, x3, x4, y1, y2, y3, y4;
-		var scale = 10000;
+		var scale = 5000;
 		var distance = 1000;
 
 		if(this.projection() === this.ortho){

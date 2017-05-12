@@ -6,28 +6,35 @@ app.controller('threedCtrl', function(){
 
 	function updateData(){
 
-		var cube0  = {key:  0, values: [cube(rndInt(-10,50), -33,  0)]};
-		var cube1  = {key:  1, values: [cube(rndInt(-10,50), -22,  0)]};
-		var cube2  = {key:  2, values: [cube(rndInt(-10,50), -11,  0)]};
-		var cube3  = {key:  3, values: [cube(rndInt(-10,50),   0,  0)]};
-		var cube4  = {key:  4, values: [cube(rndInt(-10,50),  11,  0)]};
-		var cube5  = {key:  5, values: [cube(rndInt(-10,50),  22,  0)]};
-		var cube6  = {key:  6, values: [cube(rndInt(-10,50),  33,  0)]};
-		var cube7  = {key:  7, values: [cube(rndInt(-10,50), -33, 11)]};
-		var cube8  = {key:  8, values: [cube(rndInt(-10,50), -22, 11)]};
-		var cube9  = {key:  9, values: [cube(rndInt(-10,50), -11, 11)]};
-		var cube10 = {key: 10, values: [cube(rndInt(-10,50),   0, 11)]};
-		var cube11 = {key: 11, values: [cube(rndInt(-10,50),  11, 11)]};
-		var cube12 = {key: 12, values: [cube(rndInt(-10,50),  22, 11)]};
-		var cube13 = {key: 13, values: [cube(rndInt(-10,50),  33, 11)]};
+		var cube0  = {key:  0, values: [cube(rndInt(-10,50), -60,  0)]};
+		var cube1  = {key:  1, values: [cube(rndInt(-10,50), -40,  0)]};
+		var cube2  = {key:  2, values: [cube(rndInt(-10,50), -20,  0)]};
 
-		var cube14 = {key: 14, values: [cube(rndInt(-10,50), -33,-11)]};
-		var cube15 = {key: 15, values: [cube(rndInt(-10,50), -22,-11)]};
-		var cube16 = {key: 16, values: [cube(rndInt(-10,50), -11,-11)]};
-		var cube17 = {key: 17, values: [cube(rndInt(-10,50),   0,-11)]};
-		var cube18 = {key: 18, values: [cube(rndInt(-10,50),  11,-11)]};
-		var cube19 = {key: 19, values: [cube(rndInt(-10,50),  22,-11)]};
-		var cube20 = {key: 20, values: [cube(rndInt(-10,50),  33,-11)]};
+		var cube3  = {key:  3, values: [cube(rndInt(-10,50),   0,  0)]};
+
+		var cube4  = {key:  4, values: [cube(rndInt(-10,50),  20,  0)]};
+		var cube5  = {key:  5, values: [cube(rndInt(-10,50),  40,  0)]};
+		var cube6  = {key:  6, values: [cube(rndInt(-10,50),  60,  0)]};
+
+		var cube7  = {key:  7, values: [cube(rndInt(-10,50), -60, 22)]};
+		var cube8  = {key:  8, values: [cube(rndInt(-10,50), -40, 22)]};
+		var cube9  = {key:  9, values: [cube(rndInt(-10,50), -20, 22)]};
+
+		var cube10 = {key: 10, values: [cube(rndInt(-10,50),   0, 22)]};
+
+		var cube11 = {key: 11, values: [cube(rndInt(-10,50),  20, 22)]};
+		var cube12 = {key: 12, values: [cube(rndInt(-10,50),  40, 22)]};
+		var cube13 = {key: 13, values: [cube(rndInt(-10,50),  60, 22)]};
+
+		var cube14 = {key: 14, values: [cube(rndInt(-10,50), -60,-22)]};
+		var cube15 = {key: 15, values: [cube(rndInt(-10,50), -40,-22)]};
+		var cube16 = {key: 16, values: [cube(rndInt(-10,50), -20,-22)]};
+
+		var cube17 = {key: 17, values: [cube(rndInt(-10,50),   0,-22)]};
+
+		var cube18 = {key: 18, values: [cube(rndInt(-10,50),  20,-22)]};
+		var cube19 = {key: 19, values: [cube(rndInt(-10,50),  40,-22)]};
+		var cube20 = {key: 20, values: [cube(rndInt(-10,50),  60,-22)]};
 
 		threedCtrl.data = [
 			cube0,
