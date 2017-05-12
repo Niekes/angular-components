@@ -23,6 +23,8 @@ app.component('threed', {
 
 		document.querySelector('article').style.backgroundColor = 'white';
 
+		d3.select('article').classed('white-background', true);
+
 		$threedCtrl.init = function(){
 
 			angular.element(el).empty();
@@ -172,8 +174,8 @@ app.component('threed', {
 				.style('stroke', function(d, i){ return d3.color(color(i)).darker(1); })
 				.merge(g)
 				.sort(function(d, e){
-					var dz = (d.values[0][3].rotated.tl.z + d.values[0][3].rotated.br.z)/2;
-					var ez = (e.values[0][3].rotated.tl.z + e.values[0][3].rotated.br.z)/2;
+					var dz = (d.values[0][3].rotated.bl.z + d.values[0][3].rotated.br.z)/2;
+					var ez = (e.values[0][3].rotated.bl.z + e.values[0][3].rotated.br.z)/2;
 					return d3.descending(dz, ez);
 				});
 
