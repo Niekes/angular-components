@@ -19,11 +19,6 @@ app.component('barchart3d', {
 		var mouseX;
 		var mouseY;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
-		// var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
-
-		document.querySelector('article').style.backgroundColor = 'white';
-
-		d3.select('article').classed('white-background', true);
 
 		$barchart3dCtrl.init = function(){
 
@@ -40,42 +35,7 @@ app.component('barchart3d', {
 				.call(d3.drag().on('drag', dragged).on('start', dragStart).on('end', dragEnd))
 				.append('g')
 				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-			// d3.select(el).select('svg').append('rect')
-			// 	.attr('class', 'zoom')
-			// 	.attr('fill', 'none')
-			// 	.attr('width', width)
-			// 	.attr('height', height)
-			// 	.call(zoom)
-			// 	.on('mousedown.zoom', null)
-			// 	.on('touchstart.zoom', null)
-			// 	.on('touchmove.zoom', null)
-			// 	.on('touchend.zoom', null);
-
-			// svg.append('g').attr('class', 'grid');
-
-			// var focus = svg.append('g').attr('class', 'focus');
-
-			// focus.append('path')
-			// 	.attr('stroke', '#aaa')
-			// 	.attr('d', d3.line()([[width/2,height/2+5], [width/2,height/2-5]]));
-
-			// focus.append('path')
-			// 	.attr('stroke', '#aaa')
-			// 	.attr('d', d3.line()([[width/2+5,height/2], [width/2-5,height/2]]));
-
 		};
-
-		// function zoomed(){
-		// 	// d3.select(el).select('rect.zoom').style('cursor', 'move');
-		// 	if(d3.event.sourceEvent.shiftKey){
-		// 		distance  = d3.event.transform.k;
-		// 		var _data =  svg.selectAll('path.line').data();
-		// 		$barchart3dCtrl.update(_data);
-		// 		// d3.select(el).select('rect.zoom').style('cursor', 'crosshair');
-		// 	}
-
-		// }
 
 		function dragStart(){
 			mouse = { x: d3.event.x, y: d3.event.y };
@@ -99,67 +59,6 @@ app.component('barchart3d', {
 		};
 
 		$barchart3dCtrl.update = function(data, _tt){
-			// var gridData = [
-			// 	{
-			// 		startPoint: {x:  0, y: -5, z:   0},
-			// 		endPoint: 	{x:  0, y: -5, z: 100}
-			// 	},
-			// 	{
-			// 		startPoint: {x:  15, y: -5, z:   0},
-			// 		endPoint: 	{x:  15, y: -5, z: 100}
-			// 	},
-			// 	{
-			// 		startPoint: {x:  30, y: -5, z:   0},
-			// 		endPoint: 	{x:  30, y: -5, z: 100}
-			// 	},
-			// 	{
-			// 		startPoint: {x:  45, y: -5, z:   0},
-			// 		endPoint: 	{x:  45, y: -5, z: 100}
-			// 	},
-			// 	{
-			// 		startPoint: {x: -15, y: -5, z:   0},
-			// 		endPoint: 	{x: -15, y: -5, z: 100}
-			// 	},
-			// 	{
-			// 		startPoint: {x: -30, y: -5, z:   0},
-			// 		endPoint: 	{x: -30, y: -5, z: 100}
-			// 	},
-			// 	{
-			// 		startPoint: {x: -45, y: -5, z:   0},
-			// 		endPoint: 	{x: -45, y: -5, z: 100}
-			// 	}
-			// ];
-
-			// var scale = 10000;
-			// var distance = 1000;
-			// var xO = width/2;
-			// var yO = height*0.75;
-
-
-			// var grid = svg.select('g.grid').selectAll('path.gridLine').data(gridData);
-
-			// grid
-			// 	.enter()
-			// 	.append('path')
-			// 	.attr('class', 'gridLine')
-			// 	.attr('stroke', 'white')
-			// 	.merge(grid)
-			// 	.attr('d', function(d){
-			// 		var s = {};
-			// 		var e = {};
-			// 		barChart3d.rotateRxRyRz(d.startPoint, s, 0, beta, gamma);
-			// 		barChart3d.rotateRxRyRz(d.endPoint	, e, 0, beta, gamma);
-			// 		var sx = xO + scale * s.x / (s.z + distance);
-			// 		var sy = yO + scale * s.y / (s.z + distance);
-			// 		var ex = xO + scale * e.x / (e.z + distance);
-			// 		var ey = yO + scale * e.y / (e.z + distance);
-			// 		return d3.line()([
-			// 			[sx, sy],
-			// 			[ex, ey],
-			// 		]);
-			// 	});
-
-			// 	grid.exit().remove();
 
 			var result = barChart3d.processData(data, width/2, height*0.75, 0, beta, gamma);
 
@@ -170,8 +69,8 @@ app.component('barchart3d', {
 				.append('g')
 				.attr('class', 'group')
 				.style('fill', function(d, i){ return color(i);	})
-				.style('fill-opacity', 0.9)
-				.style('stroke', function(d, i){ return d3.color(color(i)).darker(1); })
+				.style('fill-opacity', 0.8)
+				.style('stroke', function(d, i){ return d3.color(color(i)).darker(2); })
 				.merge(g)
 				.sort(function(d, e){
 					var dz = (d.values[3].rotated.bl.z + d.values[3].rotated.br.z)/2;
@@ -198,7 +97,6 @@ app.component('barchart3d', {
 				})
 				.transition().duration(_tt === undefined ? 0 : tt)
 				.attr('d', barChart3d.draw);
-
 
 			lines
 				.exit()

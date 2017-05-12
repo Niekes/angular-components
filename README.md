@@ -2,6 +2,8 @@
 
 <br>
 
+[3D Bar chart][16] 3D projection with d3.js
+
 [Knob][15] with animated indicators
 
 [Gauge Pie][14] with extending arcs on start
@@ -43,3 +45,4 @@
 [13]: https://niekes.github.io/d3/#/datatable
 [14]: https://niekes.github.io/d3/#/gaugepie
 [15]: https://niekes.github.io/d3/#/knob
+[16]: https://niekes.github.io/d3/#/barchart3d
