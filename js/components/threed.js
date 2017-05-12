@@ -19,7 +19,6 @@ app.component('threed', {
 		var mouseX;
 		var mouseY;
 		var color = d3.scaleOrdinal(d3.schemeDark2);
-		var cube;
 		// var zoom = d3.zoom().scaleExtent([distance, distance*10]).on('zoom', zoomed);
 
 		document.querySelector('article').style.backgroundColor = 'white';
@@ -51,15 +50,17 @@ app.component('threed', {
 			// 	.on('touchmove.zoom', null)
 			// 	.on('touchend.zoom', null);
 
-			var focus = svg.append('g').attr( 'class', 'focus');
+			// svg.append('g').attr('class', 'grid');
 
-			focus.append('path')
-				.attr('stroke', '#aaa')
-				.attr('d', d3.line()([[width/2,height/2+5], [width/2,height/2-5]]));
+			// var focus = svg.append('g').attr('class', 'focus');
 
-			focus.append('path')
-				.attr('stroke', '#aaa')
-				.attr('d', d3.line()([[width/2+5,height/2], [width/2-5,height/2]]));
+			// focus.append('path')
+			// 	.attr('stroke', '#aaa')
+			// 	.attr('d', d3.line()([[width/2,height/2+5], [width/2,height/2-5]]));
+
+			// focus.append('path')
+			// 	.attr('stroke', '#aaa')
+			// 	.attr('d', d3.line()([[width/2+5,height/2], [width/2-5,height/2]]));
 
 		};
 
@@ -96,8 +97,69 @@ app.component('threed', {
 		};
 
 		$threedCtrl.update = function(data, _tt){
+			// var gridData = [
+			// 	{
+			// 		startPoint: {x:  0, y: -5, z:   0},
+			// 		endPoint: 	{x:  0, y: -5, z: 100}
+			// 	},
+			// 	{
+			// 		startPoint: {x:  15, y: -5, z:   0},
+			// 		endPoint: 	{x:  15, y: -5, z: 100}
+			// 	},
+			// 	{
+			// 		startPoint: {x:  30, y: -5, z:   0},
+			// 		endPoint: 	{x:  30, y: -5, z: 100}
+			// 	},
+			// 	{
+			// 		startPoint: {x:  45, y: -5, z:   0},
+			// 		endPoint: 	{x:  45, y: -5, z: 100}
+			// 	},
+			// 	{
+			// 		startPoint: {x: -15, y: -5, z:   0},
+			// 		endPoint: 	{x: -15, y: -5, z: 100}
+			// 	},
+			// 	{
+			// 		startPoint: {x: -30, y: -5, z:   0},
+			// 		endPoint: 	{x: -30, y: -5, z: 100}
+			// 	},
+			// 	{
+			// 		startPoint: {x: -45, y: -5, z:   0},
+			// 		endPoint: 	{x: -45, y: -5, z: 100}
+			// 	}
+			// ];
 
-			var result = barChart3d.processData(data, width/2, height/2, 0, beta, gamma);
+			// var scale = 10000;
+			// var distance = 1000;
+			// var xO = width/2;
+			// var yO = height*0.75;
+
+
+			// var grid = svg.select('g.grid').selectAll('path.gridLine').data(gridData);
+
+			// grid
+			// 	.enter()
+			// 	.append('path')
+			// 	.attr('class', 'gridLine')
+			// 	.attr('stroke', 'white')
+			// 	.merge(grid)
+			// 	.attr('d', function(d){
+			// 		var s = {};
+			// 		var e = {};
+			// 		barChart3d.rotateRxRyRz(d.startPoint, s, 0, beta, gamma);
+			// 		barChart3d.rotateRxRyRz(d.endPoint	, e, 0, beta, gamma);
+			// 		var sx = xO + scale * s.x / (s.z + distance);
+			// 		var sy = yO + scale * s.y / (s.z + distance);
+			// 		var ex = xO + scale * e.x / (e.z + distance);
+			// 		var ey = yO + scale * e.y / (e.z + distance);
+			// 		return d3.line()([
+			// 			[sx, sy],
+			// 			[ex, ey],
+			// 		]);
+			// 	});
+
+			// 	grid.exit().remove();
+
+			var result = barChart3d.processData(data, width/2, height*0.75, 0, beta, gamma);
 
 			var g = svg.selectAll('g.group').data(result, function(d){ return d.key; });
 
@@ -105,16 +167,13 @@ app.component('threed', {
 				.enter()
 				.append('g')
 				.attr('class', 'group')
-				.style('fill', function(d, i){
-					return color(i);
-				})
-				.style('stroke', function(d, i){
-					return d3.color(color(i)).darker(1);
-				})
+				.style('fill', function(d, i){ return color(i);	})
+				.style('fill-opacity', 0.9)
+				.style('stroke', function(d, i){ return d3.color(color(i)).darker(1); })
 				.merge(g)
 				.sort(function(d, e){
-					var dz = (d.values[0][4].rotated.tl.z + d.values[0][4].rotated.br.z)/2;
-					var ez = (e.values[0][4].rotated.tl.z + e.values[0][4].rotated.br.z)/2;
+					var dz = (d.values[0][3].rotated.tl.z + d.values[0][3].rotated.br.z)/2;
+					var ez = (e.values[0][3].rotated.tl.z + e.values[0][3].rotated.br.z)/2;
 					return d3.descending(dz, ez);
 				});
 
@@ -171,7 +230,7 @@ var barChart3d = {
 	},
 	rotate: function(d, alpha, beta, gamma){
 	 	var r = { tl: {}, tr: {}, bl: {}, br: {} };
-		Object.entries(r).forEach(([key]) => this.rotateRxRyRz(d, key, r, alpha, beta, gamma));
+		Object.entries(r).forEach(([key]) => this.rotateRxRyRz(d[key], r[key], alpha, beta, gamma));
 		return r;
 	},
 	project: function(d, xO, yO){
@@ -208,9 +267,7 @@ var barChart3d = {
 			br: {x: x4, y: y4}
 		};
 	},
-	rotateRxRyRz: function(d, k, r, alpha, beta, gamma){
-		var _d = d[k];
-		var _r = r[k];
+	rotateRxRyRz: function(d, r, alpha, beta, gamma){
 
 		alpha = alpha || 0; // Z
 		beta  = beta  || 0;	// Y
@@ -237,9 +294,9 @@ var barChart3d = {
 	    var c2 = cosb * sinc;
 	    var c3 = cosb * cosc;
 
-		_r.x = a1 * _d.x + a2 * -_d.y + a3 * _d.z;
-		_r.y = b1 * _d.x + b2 * -_d.y + b3 * _d.z;
-		_r.z = c1 * _d.x + c2 * -_d.y + c3 * _d.z;
+		r.x = a1 * d.x + a2 * -d.y + a3 * d.z;
+		r.y = b1 * d.x + b2 * -d.y + b3 * d.z;
+		r.z = c1 * d.x + c2 * -d.y + c3 * d.z;
 	},
 	draw: function(d){
 		return d3.line()([

@@ -6,13 +6,13 @@ app.controller('threedCtrl', function(){
 
 	function updateData(){
 
-		var cube0 = {key: 0, values: [cube(rndInt(2,30), -45)]};
-		var cube1 = {key: 1, values: [cube(rndInt(2,30), -30)]};
-		var cube2 = {key: 2, values: [cube(rndInt(2,30), -15)]};
-		var cube3 = {key: 3, values: [cube(rndInt(2,30),  0)]};
-		var cube4 = {key: 4, values: [cube(rndInt(2,30),  15)]};
-		var cube5 = {key: 5, values: [cube(rndInt(2,30),  30)]};
-		var cube6 = {key: 6, values: [cube(rndInt(2,30),  45)]};
+		var cube0 = {key: 0, values: [cube(rndInt(-10,50), -45)]};
+		var cube1 = {key: 1, values: [cube(rndInt(-10,50), -30)]};
+		var cube2 = {key: 2, values: [cube(rndInt(-10,50), -15)]};
+		var cube3 = {key: 3, values: [cube(rndInt(-10,50),  0)]};
+		var cube4 = {key: 4, values: [cube(rndInt(-10,50),  15)]};
+		var cube5 = {key: 5, values: [cube(rndInt(-10,50),  30)]};
+		var cube6 = {key: 6, values: [cube(rndInt(-10,50),  45)]};
 
 		threedCtrl.data = [
 			cube0,
