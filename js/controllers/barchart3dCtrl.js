@@ -4,17 +4,19 @@ app.controller('barchart3dCtrl', function(){
 
 	var barchart3dCtrl = this;
 
-	var min 	= -10;
-	var max 	=  50;
+	var min 	= -25;
+	var max 	=  75;
+
 	var row1 	= 	0;
-	var row2 	=  20;
-	var row3 	= -20;
+	var row2 	=  30;
+	var row3 	= -row2;
 	var zero 	= 	0;
-	var offset1 =  30;
-	var offset2 =  60;
-	var offset3 =  90;
+	var offset1;
 
 	function updateData(){
+		offset1 =  rndInt(15,50);
+		var offset2 =  offset1*2;
+		var offset3 =  offset1*3;
 
 		var cube0  = {key:  0, values: cube(rndInt(min,max), -offset3, row1)};
 		var cube1  = {key:  1, values: cube(rndInt(min,max), -offset2, row1)};
@@ -76,6 +78,7 @@ app.controller('barchart3dCtrl', function(){
 	};
 
 	function cube(h, x, z){
+		var g  = 0;
 		var m  =  5;
 		var	n  = -5;
 		var xn = n+x;
@@ -83,31 +86,54 @@ app.controller('barchart3dCtrl', function(){
 		var zn = n+z;
 		var zm = m+z;
 
+		var f = offset1/2-m;
+		var r = row2/12*m < m/2 ? 0 : row2/12*m;
+
 		return [
 			{
 				name: 'front',
 				tl: {x: xn, y: h, z: zn}, tr: {x: xm, y: h, z: zn},
-			  	bl: {x: xn, y: n, z: zn}, br: {x: xm, y: n, z: zn}
+			  	bl: {x: xn, y: g, z: zn}, br: {x: xm, y: g, z: zn}
 			},
 			{
 				name: 'back',
 				tl: {x: xn, y: h, z: zm}, tr: {x: xm, y: h, z: zm},
-			  	bl: {x: xn, y: n, z: zm}, br: {x: xm, y: n, z: zm}
+			  	bl: {x: xn, y: g, z: zm}, br: {x: xm, y: g, z: zm}
 			},
 			{
 				name: 'left',
 				tl: {x: xn, y: h, z: zn}, tr: {x: xn, y: h, z: zm},
-			  	bl: {x: xn, y: n, z: zn}, br: {x: xn, y: n, z: zm}
+			  	bl: {x: xn, y: g, z: zn}, br: {x: xn, y: g, z: zm}
 			},
 			{
 				name: 'right',
 				tl: {x: xm, y: h, z: zn}, tr: {x: xm, y: h, z: zm},
-			  	bl: {x: xm, y: n, z: zn}, br: {x: xm, y: n, z: zm}
+			  	bl: {x: xm, y: g, z: zn}, br: {x: xm, y: g, z: zm}
 			},
 			{
 				name: 'top',
 				tl: {x: xn, y: h, z: zn}, tr: {x: xm, y: h, z: zn},
 			  	bl: {x: xn, y: h, z: zm}, br: {x: xm, y: h, z: zm}
+			},
+			{
+				name: 'vgrid1',
+				tl: {x: xn - f, y: g, z: z}, tr: {x: xm - m*2, y: g, z: z},
+			  	bl: {x: xn - f, y: g, z: z}, br: {x: xm - m*2, y: g, z: z}
+			},
+			{
+				name: 'vgrid2',
+				tl: {x: xn - n*2, y: g, z: z}, tr: {x: xm + f, y: g, z: z},
+			  	bl: {x: xn - n*2, y: g, z: z}, br: {x: xm + f, y: g, z: z}
+			},
+			{
+				name: 'hgrid1',
+				tl: {x: x, y: g, z: zn + n}, tr: {x: x, y: g, z: zn + n},
+			  	bl: {x: x, y: g, z: z  - r}, br: {x: x, y: g, z: z  - m}
+			},
+			{
+				name: 'hgrid2',
+				tl: {x: x, y: g, z: z  - n}, tr: {x: x, y: g, z: z  - n},
+			  	bl: {x: x, y: g, z: zm + r}, br: {x: x, y: g, z: zm + m}
 			},
 		];
 	}

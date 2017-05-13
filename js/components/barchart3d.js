@@ -91,6 +91,7 @@ app.component('barchart3d', {
 				.attr('class', 'line')
 				.merge(lines)
 				.attr('stroke-width', 1)
+				.attr('stroke', function(d){ if(d.name.includes('grid')){ return '#555'; } })
 				.sort(function(d, e){
 					var dz = (d.rotated.tl.z + d.rotated.br.z)/2;
 					var ez = (e.rotated.tl.z + e.rotated.br.z)/2;
