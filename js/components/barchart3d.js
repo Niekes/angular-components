@@ -15,6 +15,7 @@ app.component('barchart3d', {
 		var tt = DEFAULTS.TRANSITION.TIME;
 		var gamma = 0;
 		var beta = 0;
+		var alpha = 0;
 		var mouse = {};
 		var mouseX;
 		var mouseY;
@@ -60,7 +61,7 @@ app.component('barchart3d', {
 
 		$barchart3dCtrl.update = function(data, _tt){
 
-			var result = barChart3d.processData(data, width/2, height*0.75, 0, beta, gamma);
+			var result = barChart3d.processData(data, width/2, height*0.75, alpha, beta, gamma);
 
 			var g = svg.selectAll('g.group').data(result, function(d){ return d.key; });
 
