@@ -76,6 +76,7 @@ app.controller('barchart3dCtrl', function(){
 	};
 
 	function cube(h, x, z){
+		var g  = 0;
 		var m  =  5;
 		var	n  = -5;
 		var xn = n+x;
@@ -87,27 +88,47 @@ app.controller('barchart3dCtrl', function(){
 			{
 				name: 'front',
 				tl: {x: xn, y: h, z: zn}, tr: {x: xm, y: h, z: zn},
-			  	bl: {x: xn, y: n, z: zn}, br: {x: xm, y: n, z: zn}
+			  	bl: {x: xn, y: g, z: zn}, br: {x: xm, y: g, z: zn}
 			},
 			{
 				name: 'back',
 				tl: {x: xn, y: h, z: zm}, tr: {x: xm, y: h, z: zm},
-			  	bl: {x: xn, y: n, z: zm}, br: {x: xm, y: n, z: zm}
+			  	bl: {x: xn, y: g, z: zm}, br: {x: xm, y: g, z: zm}
 			},
 			{
 				name: 'left',
 				tl: {x: xn, y: h, z: zn}, tr: {x: xn, y: h, z: zm},
-			  	bl: {x: xn, y: n, z: zn}, br: {x: xn, y: n, z: zm}
+			  	bl: {x: xn, y: g, z: zn}, br: {x: xn, y: g, z: zm}
 			},
 			{
 				name: 'right',
 				tl: {x: xm, y: h, z: zn}, tr: {x: xm, y: h, z: zm},
-			  	bl: {x: xm, y: n, z: zn}, br: {x: xm, y: n, z: zm}
+			  	bl: {x: xm, y: g, z: zn}, br: {x: xm, y: g, z: zm}
 			},
 			{
 				name: 'top',
 				tl: {x: xn, y: h, z: zn}, tr: {x: xm, y: h, z: zn},
 			  	bl: {x: xn, y: h, z: zm}, br: {x: xm, y: h, z: zm}
+			},
+			{
+				name: 'vgrid1',
+				tl: {x: xn + n*2, y: g, z: z}, tr: {x: xm - m*2, y: g, z: z},
+			  	bl: {x: xn + n*2, y: g, z: z}, br: {x: xm - m*2, y: g, z: z}
+			},
+			{
+				name: 'vgrid2',
+				tl: {x: xn - n*2, y: g, z: z}, tr: {x: xm + m*2, y: g, z: z},
+			  	bl: {x: xn - n*2, y: g, z: z}, br: {x: xm + m*2, y: g, z: z}
+			},
+			{
+				name: 'hgrid1',
+				tl: {x: x, y: g, z: zn + n}, tr: {x: x, y: g, z: zn + n},
+			  	bl: {x: x, y: g, z: z  - m}, br: {x: x, y: g, z: z  - m}
+			},
+			{
+				name: 'hgrid2',
+				tl: {x: x, y: g, z: z  - n}, tr: {x: x, y: g, z: z  - n},
+			  	bl: {x: x, y: g, z: zm + m}, br: {x: x, y: g, z: zm + m}
 			},
 		];
 	}
