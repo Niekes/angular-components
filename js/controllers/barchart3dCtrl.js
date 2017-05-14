@@ -8,13 +8,15 @@ app.controller('barchart3dCtrl', function(){
 	var max 	=  75;
 
 	var row1 	= 	0;
-	var row2 	=  30;
-	var row3 	= -row2;
 	var zero 	= 	0;
+	var row2;
+	var row3;
 	var offset1;
 
 	function updateData(){
 		offset1 =  rndInt(15,50);
+		row2 =  rndInt(15,50);
+		row3 = -row2;
 		var offset2 =  offset1*2;
 		var offset3 =  offset1*3;
 
@@ -87,7 +89,7 @@ app.controller('barchart3dCtrl', function(){
 		var zm = m+z;
 
 		var f = offset1/2-m;
-		var r = row2/12*m < m/2 ? 0 : row2/12*m;
+		var r = row2/2;
 
 		return [
 			{
@@ -127,13 +129,13 @@ app.controller('barchart3dCtrl', function(){
 			},
 			{
 				name: 'hgrid1',
-				tl: {x: x, y: g, z: zn + n}, tr: {x: x, y: g, z: zn + n},
+				tl: {x: x, y: g, z: z  - r}, tr: {x: x, y: g, z: z  - m},
 			  	bl: {x: x, y: g, z: z  - r}, br: {x: x, y: g, z: z  - m}
 			},
 			{
 				name: 'hgrid2',
-				tl: {x: x, y: g, z: z  - n}, tr: {x: x, y: g, z: z  - n},
-			  	bl: {x: x, y: g, z: zm + r}, br: {x: x, y: g, z: zm + m}
+				tl: {x: x, y: g, z: z - n}, tr: {x: x, y: g, z: z  - n},
+			  	bl: {x: x, y: g, z: z + r}, br: {x: x, y: g, z: zm + m}
 			},
 		];
 	}
