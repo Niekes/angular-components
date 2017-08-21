@@ -4,7 +4,7 @@ app.controller('barchart3dCtrl', function(){
 
 	var barchart3dCtrl = this;
 
-	var min 	= -25;
+	var min 	=   0;
 	var max 	=  75;
 
 	var row1 	= 	0;
